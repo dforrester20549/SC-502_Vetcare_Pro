@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Animal | Template </title>
+    <title>VetCare Pro </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="View/css/slick.css">
     <link rel="stylesheet" href="View/css/nice-select.css">
     <link rel="stylesheet" href="View/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -69,7 +71,7 @@
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="#" class="header-btn">Login</a>
+                                    <a href="/SC-502_Vetcare_Pro/View/admin.php" class="header-btn">Login</a>
                                 </div>
                             </div>
                         </div>   
@@ -92,12 +94,7 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-8 col-md-10 ">
-                                <!-- Video icon -->
-                                <div class="video-icon">
-                                    <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=up68UAfH0d0" data-animation="bounceIn" data-delay=".4s">
-                                        <i class="fas fa-play"></i>
-                                    </a>
-                                </div>
+                                
                                 <div class="hero__caption">
                                     <span data-animation="fadeInUp" data-delay=".3s">We help to groom your pet</span>
                                     <h1 data-animation="fadeInUp" data-delay=".3s">We Care Your Pets.</h1>
@@ -397,68 +394,7 @@
             </div>
         </div>
         <!-- Testimonial End -->
-        <!--? Blog start -->
-        <div class="home_blog-area section-padding30">
-            <div class="container">
-                <div class="row justify-content-sm-center">
-                    <div class="cl-xl-7 col-lg-8 col-md-10">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-70">
-                            <span>Oure recent news</span>
-                            <h2>Our Recent Blog</h2>
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blogs mb-30">
-                            <div class="blog-img">
-                                <img src="View/img/gallery/blog1.png" alt="">
-                            </div>
-                            <div class="blogs-cap">
-                                <div class="date-info">
-                                    <span>Pet food</span>
-                                    <p>Nov 30, 2020</p>
-                                </div>
-                                <h4>Amazing Places To Visit In Summer</h4>
-                                <a href="blog_details.html" class="read-more1">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blogs mb-30">
-                            <div class="blog-img">
-                                <img src="View/img/gallery/blog2.png" alt="">
-                            </div>
-                            <div class="blogs-cap">
-                                <div class="date-info">
-                                    <span>Pet food</span>
-                                    <p>Nov 30, 2020</p>
-                                </div>
-                                <h4>Developing Creativithout Losing Visual</h4>
-                                <a href="blog_details.html" class="read-more1">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blogs mb-30">
-                            <div class="blog-img">
-                                <img src="View/img/gallery/blog3.png" alt="">
-                            </div>
-                            <div class="blogs-cap">
-                                <div class="date-info">
-                                    <span>Pet food</span>
-                                    <p>Nov 30, 2020</p>
-                                </div>
-                                <h4>Winter Photography Tips from Glenn</h4>
-                                <a href="blog_details.html" class="read-more1">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Blog End -->
+        
         <!--? contact-animal-owner Start -->
         <div class="contact-animal-owner section-bg" data-background="View/img/gallery/section_bg04.png">
             <div class="container">
