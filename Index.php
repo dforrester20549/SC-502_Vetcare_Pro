@@ -56,9 +56,9 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav> 
                                         <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="index.html">Inicio</a></li>
+                                            <li><a href="about.html">Sobre nosotros</a></li>
+                                            <li><a href="services.html">Servicios</a></li>
                                             <li><a href="blog.html">Blog</a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">Blog</a></li>
@@ -66,12 +66,12 @@
                                                     <li><a href="elements.html">Element</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="contact.html">Contactenos</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="/SC-502_Vetcare_Pro/View/admin.php" class="header-btn">Login</a>
+                                    <a href="/SC-502_Vetcare_Pro/View/admin.php" class="header-btn">Inicio de Sesión</a>
                                 </div>
                             </div>
                         </div>   
@@ -96,10 +96,10 @@
                             <div class="col-xl-7 col-lg-8 col-md-10 ">
                                 
                                 <div class="hero__caption">
-                                    <span data-animation="fadeInUp" data-delay=".3s">We help to groom your pet</span>
-                                    <h1 data-animation="fadeInUp" data-delay=".3s">We Care Your Pets.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".6s">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna sectetur adipisci.</p>
-                                    <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contact Now<i class="ti-arrow-right"></i> </a>
+                                    <span data-animation="fadeInUp" data-delay=".3s">Te ayudaremos a sanar tu mascota</span>
+                                    <h1 data-animation="fadeInUp" data-delay=".3s">Nos importa su bienestar</h1>
+                                    <p data-animation="fadeInUp" data-delay=".6s">.No dude en contactarnos para consultas y agendar citas</p>
+                                    <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contactar ahora<i class="ti-arrow-right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                 <div class="hero__caption">
                                     <span data-animation="fadeInUp" data-delay=".3s">We help to groom your pet</span>
                                     <h1 data-animation="fadeInUp" data-delay=".3s">We Care Your Pets.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".6s">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna sectetur adipisci.</p>
+                                    <p data-animation="fadeInUp" data-delay=".6s">Don't headsite to contact us</p>
                                     <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contact Now<i class="ti-arrow-right"></i> </a>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                     </svg>
                     <h3>354</h3>
                 </div>
-                    <p>Success<br>Treatment</p>
+                    <p>Tratamientos<br>Exitosos</p>
                 </div>
                 <div class="info-man info-man2 text-center">
                 <div class="head-cap">
@@ -156,7 +156,7 @@
                         </svg>
                         <h3>354</h3>
                 </div>
-                    <p>Success<br>Treatment</p>
+                    <p>Tratamientos<br>Exitosos</p>
                 </div>
             </div>
             <!-- left Contents -->
@@ -164,12 +164,12 @@
                 <div class="right-caption">
                     <!-- Section Tittle -->
                     <div class="section-tittle mb-50">
-                        <h2>We are commited for<br> better service</h2>
+                        <h2>Estamos comprometidos a ofrecer<br> el mejor servicio</h2>
                     </div>
                     <div class="about-more">
-                        <p class="pera-top">Mollit anim laborum duis adseu dolor iuyn voluptcate velit ess <br>cillum dolore egru lofrre dsu.</p>
-                        <p class="mb-65 pera-bottom">Mollit anim laborum.Dvcuis aute serunt  iruxvfg dhjkolohr indd re voluptate velit esscillumlore eu quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg dhjinulpadeserunt moll.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <p class="pera-top">La veterinaria se ubica en San Pedro con diferentes especialidades <br>ofrecemos precios con comodidad</p>
+                        <p class="mb-65 pera-bottom">Cada animal recibe un trato excelente y se le recomiendan los mejores medicamentos para su padecimiento</p>
+                        <a href="#" class="btn">Leer más</a>
                     </div>
                 </div>
             </div>
@@ -182,8 +182,8 @@
                     <div class="cl-xl-7 col-lg-8 col-md-10">
                         <!-- Section Tittle -->
                         <div class="section-tittle text-center mb-70">
-                            <span>Our Recent Photos</span>
-                            <h2>Pets Photo Gallery</h2>
+                            <span>Fotos recientes</span>
+                            <h2>Galeria de nuestras mascotas</h2>
                         </div> 
                     </div>
                 </div>
@@ -214,125 +214,9 @@
         </div>
         <!-- Gallery Area End -->
         <!--? Contact form Start -->
-        <div class="contact-form-main pb-top">
-            <div class="container">
-                <div class="row justify-content-md-end">
-                    <div class="col-xl-7 col-lg-7">
-                        <div class="form-wrapper">
-                            <!--Section Tittle  -->
-                            <div class="form-tittle">
-                                <div class="row ">
-                                    <div class="col-xl-12">
-                                        <div class="section-tittle section-tittle2 mb-70">
-                                            <h2>World's Leading Law Consultency Agency !</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Section Tittle  -->
-                            <form id="contact-form" action="#" method="POST">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-box user-icon mb-30">
-                                            <input type="text" name="name" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-box email-icon mb-30">
-                                            <input type="text" name="email" placeholder="Phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 mb-30">
-                                        <div class="select-itms">
-                                            <select name="select" id="select2">
-                                                <option value="">Health Law</option>
-                                                <option value="">saiful islam</option>
-                                                <option value="">Arafath Miya</option>
-                                                <option value="">Shakil Miya</option>
-                                                <option value="">Tamim Sharker</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-box subject-icon mb-30">
-                                            <input type="Email" name="subject" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-box message-icon mb-65">
-                                            <textarea name="message" id="message" placeholder="Message"></textarea>
-                                        </div>
-                                        <div class="submit-info">
-                                            <button class="btn submit-btn2" type="submit">Submit Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- shape-dog -->
-                                <div class="shape-dog">
-                                    <img src="View/img/gallery/shape1.png" alt="">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- contact left Img-->
-            <div class="from-left d-none d-lg-block">
-                <img src="View/img/gallery/contact_form.png" alt="">
-            </div>
-        </div>
+       
         <!-- Contact form End -->
-        <!--? Team Start -->
-        <div class="team-area section-padding30">
-            <div class="container">
-                <div class="row justify-content-sm-center">
-                    <div class="cl-xl-7 col-lg-8 col-md-10">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-70">
-                            <span>Our Professional members </span>
-                            <h2>Our Team Mambers</h2>
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- single Tem -->
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                        <div class="single-team mb-30">
-                            <div class="team-img">
-                                <img src="View/img/gallery/team1.png" alt="">
-                            </div>
-                            <div class="team-caption">
-                                <span>Mike Janathon</span>
-                                <h3><a href="#">Doctor</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                        <div class="single-team mb-30">
-                            <div class="team-img">
-                                <img src="View/img/gallery/team2.png" alt="">
-                            </div>
-                            <div class="team-caption">
-                                <span>Mike J Smith</span>
-                                <h3><a href="#">Doctor</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                        <div class="single-team mb-30">
-                            <div class="team-img">
-                                <img src="View/img/gallery/team3.png" alt="">
-                            </div>
-                            <div class="team-caption">
-                                <span>Pule W Smith</span>
-                                <h3><a href="#">Doctor</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team End -->
+        
         <!--? Testimonial Start -->
         <div class="testimonial-area testimonial-padding section-bg" data-background="View/img/gallery/section_bg03.png">
             <div class="container">
@@ -352,7 +236,7 @@
                                         </div>
                                     </div>
                                     <div class="testimonial-top-cap">
-                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our responsibility! So start caring for your body and it will care for you. Eat clean it will care for you and workout hard.”</p>
+                                        <p>“Estoy en una edad en la que sólo quiero estar en forma y sana, ¡nuestros cuerpos son nuestra responsabilidad! Así que empieza a cuidar de tu cuerpo y él cuidará de ti. Come limpio, él cuidará de ti y entrena duro.”</p>
                                     </div>
                                 </div>
                             </div>
@@ -368,7 +252,7 @@
                                         </div>
                                     </div>
                                     <div class="testimonial-top-cap">
-                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our responsibility! So start caring for your body and it will care for you. Eat clean it will care for you and workout hard.”</p>
+                                        <p>“Estoy en una edad en la que sólo quiero estar en forma y sana, ¡nuestros cuerpos son nuestra responsabilidad! Así que empieza a cuidar de tu cuerpo y él cuidará de ti. Come limpio, él cuidará de ti y entrena duro..”</p>
                                     </div>
                                 </div>
                             </div>
@@ -395,26 +279,7 @@
         </div>
         <!-- Testimonial End -->
         
-        <!--? contact-animal-owner Start -->
-        <div class="contact-animal-owner section-bg" data-background="View/img/gallery/section_bg04.png">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="contact_text text-center">
-                            <div class="section_title text-center">
-                                <h3>Any time you can call us!</h3>
-                                <p>Because we know that even the best technology is only as good as the people behind it. 24/7 tech support.</p>
-                            </div>
-                            <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.html" class="btn white-btn">Contact Us</a>
-                                <p>Or<a href="#"> +880 4664 216</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- contact-animal-owner End -->
+       
     </main>
     <footer>
         <!-- Footer Start-->
@@ -430,7 +295,7 @@
                              </div>
                              <div class="footer-tittle">
                                  <div class="footer-pera">
-                                     <p>Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor elit. </p>
+                                     <p>Puedes encontrarnos en nuestras redes sociales </p>
                                 </div>
                              </div>
                              <!-- social -->
@@ -446,13 +311,13 @@
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Company</h4>
+                                <h4>Compañia</h4>
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="single-blog.html">Services</a></li>
-                                    <li><a href="#">Cases</a></li>
-                                    <li><a href="contact.html">  Contact Us</a></li>
+                                    <li><a href="index.html">Inicio</a></li>
+                                    <li><a href="about.html">Sobre nosotros</a></li>
+                                    <li><a href="single-blog.html">Servicios</a></li>
+                                    <li><a href="#">Casos</a></li>
+                                    <li><a href="contact.html">Contactenos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -462,11 +327,11 @@
                             <div class="footer-tittle">
                                 <h4>Services</h4>
                                 <ul>
-                                    <li><a href="#">Commercial Cleaning</a></li>
-                                    <li><a href="#">Office Cleaning</a></li>
-                                    <li><a href="#">Building Cleaning</a></li>
-                                    <li><a href="#">Floor Cleaning</a></li>
-                                    <li><a href="#">Apartment Cleaning</a></li>
+                                    <li><a href="#">Cardiologia</a></li>
+                                    <li><a href="#">Aseo y cuido personal de tu mascota</a></li>
+                                    <li><a href="#">Castración</a></li>
+                                    <li><a href="#">Emergencias</a></li>
+                                    <li><a href="#">Medicamentos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -474,11 +339,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Get in Touch</h4>
+                                <h4>Ponte en contacto</h4>
                                 <ul>
                                  <li><a href="#">152-515-6565</a></li>
                                  <li><a href="#"> Demomail@gmail.com</a></li>
-                                 <li><a href="#">New Orleans, USA</a></li>
+                                 <li><a href="#">San Pedro, Costa Rica</a></li>
                              </ul>
                             </div>
                         </div>
