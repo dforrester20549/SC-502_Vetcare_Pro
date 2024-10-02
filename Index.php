@@ -47,7 +47,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="View/img/logo/logo.png" alt=""></a>
+                                <a href="index.php"><img src="View/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -56,17 +56,10 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav> 
                                         <ul id="navigation">
-                                            <li><a href="index.html">Inicio</a></li>
-                                            <li><a href="about.html">Sobre nosotros</a></li>
-                                            <li><a href="services.html">Servicios</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contactenos</a></li>
+                                            <li><a href="index.php">Inicio</a></li>
+                                            <li><a href="View/nosotros.php">Sobre nosotros</a></li>
+                                            <li><a href="View/servicios.php">Servicios</a></li>
+                                            <li><a href="View/contacto.php">Contactenos</a></li>
                                         </ul>
                                     </nav>
                                 </div>
