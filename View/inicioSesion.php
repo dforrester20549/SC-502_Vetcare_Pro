@@ -63,8 +63,8 @@
                                     <label class="sr-only" for="form-password">Contraseña</label>
                                     <input type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
                                 </div>
-                                <button type="submit" class="btn">Inicie sesión</button>
-                                <div class="d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="btn">Inicie sesión</button>
+                                <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;"> 
                                     <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="registrarUsuario.php" style="margin-bottom: 20px;">Crear una cuenta</a>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -73,22 +73,6 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3 social-login">
-                        <h3>...o utilice:</h3>
-                        <div class="social-login-buttons">
-                            <a class="btn btn-link-2" href="https://www.facebook.com/">
-                                <i class="fa fa-facebook"></i> Facebook
-                            </a>
-                            <a class="btn btn-link-2" href="https://x.com/">
-                                <i class="fa fa-twitter"></i> Twitter
-                            </a>
-                            <a class="btn btn-link-2" href="https://myaccount.google.com/">
-                                <i class="fa fa-google-plus"></i> Google
-                            </a>
                         </div>
                     </div>
                 </div>
