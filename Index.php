@@ -38,46 +38,49 @@
         </div>
     </div>
     <!-- Preloader Start -->
-    <header>
-        <!--? Header Start -->
-        <div class="header-area header-transparent">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="index.php"><img src="View/img/logo/logo.png" alt=""></a>
+<header>
+    <!--? Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="logo">
+                            <a href="index.php"><img src="View/img/logo/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" >
+                        <div class="menu-main d-flex align-items-center justify-content-end">
+                            <!-- Main-menu -->
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav> 
+                                    <ul id="navigation">
+                                        <li><a href="index.php">Inicio</a></li>
+                                        <li><a href="View/nosotros.php">Sobre nosotros</a></li>
+                                        <li><a href="View/servicios.php">Servicios</a></li>
+                                        <li><a href="View/contacto.php">Contáctenos</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                <a href="/SC-502_Vetcare_Pro/View/Login/inicioSesion.php" class="header-btn" style="font-size: 24px; display: flex; align-items: center;">
+                                    <i class="bi bi-person" style="margin-right: 5px;"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="menu-main d-flex align-items-center justify-content-end">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav> 
-                                        <ul id="navigation">
-                                            <li><a href="index.php">Inicio</a></li>
-                                            <li><a href="View/nosotros.php">Sobre nosotros</a></li>
-                                            <li><a href="View/servicios.php">Servicios</a></li>
-                                            <li><a href="View/contacto.php">Contactenos</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="/SC-502_Vetcare_Pro/View/inicioSesion.php" class="header-btn">Inicio de Sesión</a>
-                                </div>
-                            </div>
-                        </div>   
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
+                    </div>   
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Header End -->
-    </header>
+    </div>
+    <!-- Header End -->
+</header>
+
     <main> 
         <!--? Slider Area Start-->
         <div class="slider-area">
@@ -103,17 +106,11 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-8 col-md-10 ">
-                                <!-- Video icon -->
-                                <div class="video-icon">
-                                    <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=1aP-TXUpNoU" data-animation="bounceIn" data-delay=".4s">
-                                        <i class="fas fa-play"></i>
-                                    </a>
-                                </div>
                                 <div class="hero__caption">
-                                    <span data-animation="fadeInUp" data-delay=".3s">We help to groom your pet</span>
-                                    <h1 data-animation="fadeInUp" data-delay=".3s">We Care Your Pets.</h1>
-                                    <p data-animation="fadeInUp" data-delay=".6s">Don't headsite to contact us</p>
-                                    <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contact Now<i class="ti-arrow-right"></i> </a>
+                                <span data-animation="fadeInUp" data-delay=".3s">Te ayudaremos a sanar tu mascota</span>
+                                    <h1 data-animation="fadeInUp" data-delay=".3s">Nos importa su bienestar</h1>
+                                    <p data-animation="fadeInUp" data-delay=".6s">.No dude en contactarnos para consultas y agendar citas</p>
+                                    <a href="#" class="hero-btn" data-animation="fadeInLeft" data-delay=".3s">Contactar ahora<i class="ti-arrow-right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -367,36 +364,23 @@
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
 
-    <!-- JS here -->
-    
     <script src="./View/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
     <script src="./View/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="./View/js/popper.min.js"></script>
     <script src="./View/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
     <script src="./View/js/jquery.slicknav.min.js"></script>
-
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
     <script src="./View/js/owl.carousel.min.js"></script>
     <script src="./View/js/slick.min.js"></script>
-    <!-- One Page, Animated-HeadLin -->
     <script src="./View/js/wow.min.js"></script>
     <script src="./View/js/animated.headline.js"></script>
     <script src="./View/js/jquery.magnific-popup.js"></script>
-
-    <!-- Nice-select, sticky -->
     <script src="./View/js/jquery.nice-select.min.js"></script>
     <script src="./View/js/jquery.sticky.js"></script>
-    
-    <!-- contact js -->
     <script src="./View/js/contact.js"></script>
     <script src="./View/js/jquery.form.js"></script>
     <script src="./View/js/jquery.validate.min.js"></script>
     <script src="./View/js/mail-script.js"></script>
     <script src="./View/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
     <script src="./View/js/plugins.js"></script>
     <script src="./View/js/main.js"></script>
         
