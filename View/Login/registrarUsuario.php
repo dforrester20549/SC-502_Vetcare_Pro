@@ -6,32 +6,31 @@
     <title>Registrar Usuario - VetCare Pro</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="View/img/favicon.ico">
 
-    <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
-    <!-- Header Start -->
     <header>
         <div class="header-area header-transparent">
             <div class="main-header header-sticky">
                 <div class="container-fluid">
                     <div class="row align-items-center">
-                        <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="View/img/logo/logo.png" alt="Logo VetCare Pro"></a>
+                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
                             <div class="menu-main d-flex align-items-center justify-content-end">
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="/SC-502_Vetcare_Pro/View/inicioSesion.php" class="header-btn">Inicio de Sesión</a>
+                                    <a href="/SC-502_Vetcare_Pro/View/Login/inicioSesion.php" class="header-btn" style="font-size: 24px; display: flex; align-items: center;">
+                                        <i class="bi bi-person" style="margin-right: 5px;"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>   
@@ -107,7 +106,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-xl-12">
                             <div class="footer-logo text-center mb-3">
-                                <a href="index.html"><img src="img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
+                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
                             </div>
                             <div class="footer-copy-right text-center">
                                 <p>&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
@@ -120,7 +119,7 @@
     </footer>
 
     <!-- JS here -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperación de Acceso - VetCare Pro</title>
-    <link rel="stylesheet" href="css/all.min.css"> <!-- Asegúrate de tener la hoja de estilos FontAwesome -->
-    <link rel="stylesheet" href="css/adminlte.min.css"> <!-- Asegúrate de tener la hoja de estilos AdminLTE -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Asegúrate de tener esta hoja de estilos -->
+    <link rel="stylesheet" href="../css/all.min.css"> <!-- Asegúrate de tener la hoja de estilos FontAwesome -->
+    <link rel="stylesheet" href="../css/adminlte.min.css"> <!-- Asegúrate de tener la hoja de estilos AdminLTE -->
+    <link rel="stylesheet" href="../css/style.css"> <!-- Asegúrate de tener esta hoja de estilos -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="recovery-container">
-            <img src="img/logo/logo.png" alt="VetCare Pro" class="logo">
+            <img src="../img/logo/logo.png" alt="VetCare Pro" class="logo">
             <h1>Recupera tu Contraseña</h1>
             <p class="description">¿Olvidaste tu contraseña? No te preocupes, te ayudaremos a recuperarla.</p>
             <form class="recovery-form">
@@ -21,7 +21,7 @@
                 </div>
                 <button type="submit" class="btn-recover">Recuperar Contraseña</button>
             </form>
-            <p class="back-link"><a href="login.html">Volver al inicio de sesión</a></p>
+            <p class="back-link"><a href="/SC-502_Vetcare_Pro/Index.php">Volver al inicio de sesión</a></p>
         </div>
     </div>
 

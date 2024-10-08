@@ -60,7 +60,7 @@
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="/SC-502_Vetcare_Pro/View/inicioSesion.php" class="header-btn">Inicio de Sesión</a>
+                                <a href="/SC-502_Vetcare_Pro/View/Login/inicioSesion.php" class="header-btn">Inicio de Sesión</a>
                                 </div>
                             </div>
                         </div>   
