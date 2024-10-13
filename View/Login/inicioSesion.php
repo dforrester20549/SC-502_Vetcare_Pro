@@ -40,28 +40,28 @@
                                 <i class="fa fa-lock"></i>
                             </div>
                         </div>
-                        <div class="form-bottom">
-                            <form role="form" action="" method="post" class="login-form">
-                                <div class="form-group">
-                                    <label class="sr-only" for="form-username">Usuario</label>
-                                    <input type="text" name="form-username" placeholder="Usuario..." class="form-username form-control" id="form-username">
-                                </div>
-                                <div class="form-group">
-                                    <label class="sr-only" for="form-password">Contraseña</label>
-                                    <input type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
-                                </div>
-                                    <button type="submit" class="btn">Inicie sesión</button>
-                                <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;"> 
-                                    <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="registrarUsuario.php" style="margin-bottom: 20px;">Crear una cuenta</a>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="form-check">
-                                        <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="recuperarAcceso.php">Recuperar acceso</a>
+                            <div class="form-bottom">
+                                <form role="form" action="" method="post" class="login-form">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-username">Usuario</label>
+                                        <input type="text" name="form-username" placeholder="Usuario..." class="form-username form-control" id="form-username">
                                     </div>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-password">Contraseña</label>
+                                        <input type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
+                                    </div>
+                                        <button type="submit" class="btn">Inicie sesión</button>
+                                    <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;"> 
+                                        <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="registrarUsuario.php" style="margin-bottom: 20px;">Crear una cuenta</a>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div class="form-check">
+                                            <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="recuperarAcceso.php">Recuperar acceso</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                 </div>
          </div>
     </div>

@@ -44,53 +44,44 @@
     <main>
         <div class="container my-5">
             <div class="row justify-content-center">
+                
                 <div class="col-lg-8">
                     <div class="form-wrapper bg-light p-5 rounded shadow">
                         <h2 class="text-center mb-4">Registrar Usuario</h2>
+
+                        <?php
+                            if(isset($_POST["txtMensaje"]))
+                            {
+                                echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                            }
+                        ?>
+
                         <form action="procesarRegistro.php" method="POST">
+
                             <div class="form-group mb-3">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese sus apellidos" required>
+                                <input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Ingrese su nombre" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="identificacion">Identificación</label>
-                                <input type="text" class="form-control" id="identificacion" name="identificacion" placeholder="Ingrese su identificación" required>
+                                <input type="text" class="form-control" id="txtIdentificacion" name="txtIdentificacion" placeholder="Ingrese su identificación" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="correo">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo electrónico" required>
+                                <input type="email" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Ingrese su correo electrónico" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="telefono">Número Telefónico</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su número telefónico" required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="provincia">Provincia</label>
-                                <select class="form-control" id="provincia" name="provincia" required>
-                                    <option value="" selected disabled>Seleccione una provincia</option>
-                                    <option value="San José">San José</option>
-                                    <option value="Alajuela">Alajuela</option>
-                                    <option value="Cartago">Cartago</option>
-                                    <option value="Heredia">Heredia</option>
-                                    <option value="Guanacaste">Guanacaste</option>
-                                    <option value="Puntarenas">Puntarenas</option>
-                                    <option value="Limón">Limón</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="canton">Cantón</label>
-                                <input type="text" class="form-control" id="canton" name="canton" placeholder="Ingrese el cantón" required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="distrito">Distrito</label>
-                                <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Ingrese el distrito" required>
+                                <label for="telefono">Contraseña</label>
+                                <input type="tel" class="form-control" id="txtContasenna" name="txtContasenna" placeholder="Ingrese su contraseña" required>
                             </div>
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary w-100">Registrar</button>
+                                <button type="submit" class="btn btn-primary w-100"
+                                    id="btnRegistrarUsuario" name="btnRegistrarUsuario">Registrar</button>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center">
+                                        <p class="fs-4 mb-0 fw-bold">Ya tienes una cuenta?</p>
+                                        <a class="text-primary fw-bold ms-2" href="inicioSesion.php">Inicia sesión</a>
                             </div>
                         </form>
                     </div>
