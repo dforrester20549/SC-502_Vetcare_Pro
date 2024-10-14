@@ -1,3 +1,7 @@
+<?php
+    include_once '../../Controller/LoginController.php';
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -22,7 +26,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro"></a>
+                                <!--<a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro"></a>-->
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -56,7 +60,7 @@
                             }
                         ?>
 
-                        <form action="procesarRegistro.php" method="POST">
+                        <form action="registrarUsuario.php" method="POST">
 
                             <div class="form-group mb-3">
                                 <label for="nombre">Nombre</label>
@@ -72,7 +76,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefono">Contraseña</label>
-                                <input type="tel" class="form-control" id="txtContasenna" name="txtContasenna" placeholder="Ingrese su contraseña" required>
+                                <input type="tel" class="form-control" id="txtContrasenna" name="txtContrasenna" placeholder="Ingrese su contraseña" required>
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary w-100"

@@ -34,7 +34,7 @@
                         <div class="form-top">
                             <div class="form-top-left">
                                 <h3>Inicie sesión en nuestra pagina</h3>
-                                <p>Ingrese su nombre y contraseña:</p>
+                                <p>Ingrese su Correo Electrónico y contraseña:</p>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-lock"></i>
@@ -43,12 +43,12 @@
                             <div class="form-bottom">
                                 <form role="form" action="" method="post" class="login-form">
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-username">Usuario</label>
-                                        <input type="text" name="form-username" placeholder="Usuario..." class="form-username form-control" id="form-username">
+                                        <label class="sr-only" for="form-username">Correo Electrónico</label>
+                                        <input type="text" name="txtCorreo" class="form-control" id="txtCorreo"placeholder="Correo Electrónico">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password">Contraseña</label>
-                                        <input type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
+                                        <input type="password" name="txtContrasenna" placeholder="Contraseña..." class="form-control" id="txtContrasenna">
                                     </div>
                                         <button type="submit" class="btn">Inicie sesión</button>
                                     <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;"> 

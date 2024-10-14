@@ -1,7 +1,7 @@
 <?php
     include_once 'BaseDatos.php';
 
-    function InicioSesionModel($correo, $contrasenna)
+    function InicioSesionModel($Correo, $Contrasenna)
     {
         $enlace = AbrirBD();
 
@@ -10,12 +10,12 @@
         CerrarBD($enlace);
     }
 
-    function RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna)
+    function RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna)
     {
         try
         {
             $enlace = AbrirBD();
-            $sentencia = "CALL RegistrarUsuario('$identificacion','$nombre','$correo','$contrasenna')";
+            $sentencia = "CALL sp_insertar_usuario('$Identificacion','$Nombre','$Correo','$Contrasenna')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);
@@ -27,7 +27,7 @@
         }
     }
 
-    function RecuperarAccesoModel($correo)
+    function RecuperarAccesoModel($Correo)
     {
         $enlace = AbrirBD();
 

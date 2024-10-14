@@ -11,16 +11,16 @@
 
     if(isset($_POST["btnRegistrarUsuario"]))
     {
-        $identificacion = $_POST["txtIdentificacion"];
-        $nombre = $_POST["txtNombre"];
-        $correo = $_POST["txtCorreo"];
-        $contrasenna = $_POST["txtContrasenna"];
+        $Identificacion = $_POST["txtIdentificacion"];
+        $Nombre = $_POST["txtNombre"];
+        $Correo = $_POST["txtCorreo"];
+        $Contrasenna = $_POST["txtContrasenna"];
 
-        $resultado = RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
+        $resultado = RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna);
 
         if($resultado == true)
         {
-            header('location: ../Login/inicioSesion.php');
+            header('location: ../../Login/inicioSesion.php');
         }
         else
         {
