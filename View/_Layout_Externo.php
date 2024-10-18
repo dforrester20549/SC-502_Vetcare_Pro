@@ -64,7 +64,7 @@
                                 </nav>
                             </div>
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                <a href="/SC-502_Vetcare_Pro/../Login/inicioSesion.php" class="header-btn" style="font-size: 24px; display: flex; align-items: center;">
+                                <a href="../Login/inicioSesion.php" class="header-btn" style="font-size: 24px; display: flex; align-items: center;">
                                     <i class="bi bi-person" style="margin-right: 5px;"></i>
                                 </a>
                             </div>

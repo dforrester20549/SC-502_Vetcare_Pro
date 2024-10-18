@@ -20,7 +20,8 @@
 
         if($resultado == true)
         {
-            header('location: ../../Login/inicioSesion.php');
+            header('location: ../Login/inicioSesion.php');
+            $_POST["txtMensaje"] = "Su información se ha registrado correctamente";
         }
         else
         {
