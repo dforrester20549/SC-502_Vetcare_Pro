@@ -1,3 +1,7 @@
+<?php
+    include_once '../../Controller/LoginController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +13,13 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/form-elements1.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/style1.css">
-    <link rel="stylesheet" href="../css/style2.css">
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../root/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../root/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../root/css/form-elements1.css">
+    <link rel="stylesheet" href="../root/css/style.css">
+    <link rel="stylesheet" href="../root/css/style1.css">
+    <link rel="stylesheet" href="../root/css/style2.css">
+    <link rel="shortcut icon" href="../root/img/favicon.ico">
 
 
 </head>
@@ -50,7 +54,7 @@
                                         <label class="sr-only" for="form-password">Contraseña</label>
                                         <input type="password" name="txtContrasenna" placeholder="Contraseña..." class="form-control" id="txtContrasenna">
                                     </div>
-                                        <button type="submit" class="btn">Inicie sesión</button>
+                                        <button type="submit" class="btn" id="btnIniciarSesion" name="btnIniciarSesion">Inicie sesión</button>
                                     <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;"> 
                                         <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="registrarUsuario.php" style="margin-bottom: 20px;">Crear una cuenta</a>
                                     </div>
@@ -74,7 +78,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-xl-12">
                             <div class="footer-logo text-center mb-3">
-                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
+                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../root/img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
                             </div>
                             <div class="footer-copy-right text-center">
                                 <p>&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
@@ -86,8 +90,8 @@
         </div>
     </footer>
 
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../root/js/jquery-1.11.1.min.js"></script>
+    <script src="../root/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
