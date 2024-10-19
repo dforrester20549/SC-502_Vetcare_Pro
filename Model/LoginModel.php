@@ -1,13 +1,22 @@
 <?php
     include_once 'BaseDatos.php';
 
-    function InicioSesionModel($Correo, $Contrasenna)
+    function IniciarSesionModel($correo, $contrasenna)
     {
-        $enlace = AbrirBD();
+        try
+        {
+            $enlace = AbrirBD();
 
-        //Ejecutar el procedimiento almacenado
+            $sentencia = "CALL sp_iniciarSesion('$correo','$contrasenna')";
+            $resultado = $enlace -> query($sentencia);
 
-        CerrarBD($enlace);
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
     }
 
     function RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna)

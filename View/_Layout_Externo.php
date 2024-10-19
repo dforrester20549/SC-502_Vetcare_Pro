@@ -7,20 +7,20 @@
     <meta name="description" content="">
     <meta name="..port" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../root/img/favicon.ico">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/slicknav.css">
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/animate.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
-    <link rel="stylesheet" href="../css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../css/themify-icons.css">
-    <link rel="stylesheet" href="../css/slick.css">
-    <link rel="stylesheet" href="../css/nice-select.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../root/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../root/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../root/css/slicknav.css">
+    <link rel="stylesheet" href="../root/css/flaticon.css">
+    <link rel="stylesheet" href="../root/css/animate.min.css">
+    <link rel="stylesheet" href="../root/css/magnific-popup.css">
+    <link rel="stylesheet" href="../root/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../root/css/themify-icons.css">
+    <link rel="stylesheet" href="../root/css/slick.css">
+    <link rel="stylesheet" href="../root/css/nice-select.css">
+    <link rel="stylesheet" href="../root/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 </head>
@@ -32,7 +32,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="../img/logo/logo.png" alt="">
+                    <img src="../root/img/logo/logo.png" alt="">
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2 col-md-1">
                         <div class="logo">
-                            <a href="index.php"><img src="../img/logo/logo.png" alt="Logo" class="responsive-logo"></a>
+                            <a href="index.php"><img src="../root/img/logo/logo.png" alt="Logo" class="responsive-logo"></a>
                         </div>
                     </div>
                     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" >

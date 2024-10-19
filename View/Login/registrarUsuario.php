@@ -12,9 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../root/img/favicon.ico">
+    <link rel="stylesheet" href="../root/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../root/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
@@ -26,7 +26,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <!--<a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro"></a>-->
+                                <!--<a href="/SC-502_Vetcare_Pro/index.php"><img src="../root/img/logo/logo.png" alt="Logo VetCare Pro"></a>-->
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -101,7 +101,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-xl-12">
                             <div class="footer-logo text-center mb-3">
-                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
+                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../root/img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
                             </div>
                             <div class="footer-copy-right text-center">
                                 <p>&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
@@ -114,7 +114,7 @@
     </footer>
 
     <!-- JS here -->
-    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../root/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../root/js/bootstrap.min.js"></script>
 </body>
 </html>

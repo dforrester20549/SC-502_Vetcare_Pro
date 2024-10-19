@@ -1,3 +1,4 @@
+
 <?php
     include_once '../_Layout_Externo.php';
 ?>
@@ -197,5 +198,3 @@
     <?php
         include_once '../_Footer.php';
     ?> 
-
-</html>

@@ -2,7 +2,7 @@
 
     function AbrirBD()
     {
-        return mysqli_connect("127.0.0.1:3308","root","vetcaredb");
+        return mysqli_connect("127.0.0.1:3308","system","","vetcaredb");
     }
 
     function CerrarBD($enlace)
