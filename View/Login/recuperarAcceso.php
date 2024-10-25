@@ -1,100 +1,90 @@
+<?php
+    include_once '../../Controller/LoginController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperación de Acceso - VetCare Pro</title>
-    <link rel="stylesheet" href="../root/css/all.min.css"> <!-- Asegúrate de tener la hoja de estilos FontAwesome -->
-    <link rel="stylesheet" href="../root/css/adminlte.min.css"> <!-- Asegúrate de tener la hoja de estilos AdminLTE -->
-    <link rel="stylesheet" href="../root/css/style.css"> <!-- Asegúrate de tener esta hoja de estilos -->
+
+    <!-- Importamos los estilos de la primera vista -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="../root/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../root/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../root/css/form-elements1.css">
+    <link rel="stylesheet" href="../root/css/style.css">
+    <link rel="stylesheet" href="../root/css/style1.css">
+    <link rel="stylesheet" href="../root/css/style2.css">
+    <link rel="shortcut icon" href="../root/img/favicon.ico">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <div class="recovery-container">
-            <img src="../root/img/logo/logo.png" alt="VetCare Pro" class="logo">
-            <h1>Recupera tu Contraseña</h1>
-            <p class="description">¿Olvidaste tu contraseña? No te preocupes, te ayudaremos a recuperarla.</p>
-            <form class="recovery-form">
-                <div class="form-group">
-                    <label for="email">Ingresa tu correo electrónico:</label>
-                    <input type="email" id="email" placeholder="tu-email@ejemplo.com" required>
+<body>
+    <div class="top_content">
+        <div class="container">
+
+            <?php
+                if(isset($_POST["txtMensaje"]))
+                {
+                echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                }
+            ?>
+            
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Recupera tu Contraseña</strong></h1>
                 </div>
-                <button type="submit" class="btn-recover">Recuperar Contraseña</button>
-            </form>
-            <p class="back-link"><a href="/SC-502_Vetcare_Pro/Index.php">Volver al inicio de sesión</a></p>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Recuperación de acceso</h3>
+                            <p>Ingrese su correo electrónico para recuperar la contraseña:</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="../../Controller/LoginController.php" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="email">Correo Electrónico</label>
+                                <input type="email" name="txtCorreo" class="form-control" id="txtCorreo" placeholder="Correo Electrónico" required>
+                            </div>
+                            <button type="submit" class="btn" id="btnRecuperar" name="btnRecuperar">Recuperar Contraseña</button>
+                        </form>
+                        <div class="d-flex align-items-center justify-content-center" style="margin-top: 20px;">
+                            <a class="btn btn-primary w-100 py-8 fs-4 mb-4" href="../Login/inicioSesion.php" style="margin-bottom: 20px;">Volver al inicio de sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <style>
-        body {
-            font-family: 'Source Sans Pro', sans-serif; /* Cambiado a la fuente de la plantilla */
-            background-color: #f4f6f9; /* Color de fondo similar al de la plantilla */
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .recovery-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-        .logo {
-            width: 100px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #4CAF50; /* Color verde para dar sensación de cuidado */
-            font-size: 1.5em; /* Tamaño de fuente similar al de la plantilla */
-        }
-        .description {
-            margin: 10px 0 20px;
-            font-size: 1.1em;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold; /* Negrita para etiquetas */
-        }
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .btn-recover {
-            background-color: #4CAF50; /* Botón verde */
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s;
-            width: 100%; /* Asegurarse de que el botón ocupe todo el ancho */
-        }
-        .btn-recover:hover {
-            background-color: #45a049; /* Color más oscuro al pasar el ratón */
-        }
-        .back-link {
-            margin-top: 20px;
-        }
-        .back-link a {
-            color: #007BFF; /* Color azul para el enlace */
-            text-decoration: none;
-        }
-        .back-link a:hover {
-            text-decoration: underline; /* Subrayar al pasar el ratón */
-        }
-    </style>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-12">
+                            <div class="footer-logo text-center mb-3">
+                                <a href="/SC-502_Vetcare_Pro/index.php"><img src="../root/img/logo/logo.png" alt="Logo VetCare Pro" width="100"></a>
+                            </div>
+                            <div class="footer-copy-right text-center">
+                                <p>&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../root/js/jquery-1.11.1.min.js"></script>
+    <script src="../root/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -32,6 +32,14 @@
                     <div class="col-sm-8 col-sm-offset-2 text">
                         <h1><strong>Inicio de sesión</strong></h1>
                     </div>
+
+                    <?php
+                        if(isset($_POST["txtMensaje"]))
+                        {
+                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                        }
+                    ?>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 form-box">
