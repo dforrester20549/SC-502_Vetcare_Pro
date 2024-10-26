@@ -91,22 +91,22 @@
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
 
-    <script src="./../js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="./../js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./../js/popper.min.js"></script>
-    <script src="./../js/bootstrap.min.js"></script>
-    <script src="./../js/jquery.slicknav.min.js"></script>
-    <script src="./../js/owl.carousel.min.js"></script>
-    <script src="./../js/slick.min.js"></script>
-    <script src="./../js/wow.min.js"></script>
-    <script src="./../js/animated.headline.js"></script>
-    <script src="./../js/jquery.magnific-popup.js"></script>
-    <script src="./../js/jquery.nice-select.min.js"></script>
-    <script src="./../js/jquery.sticky.js"></script>
-    <script src="./../js/contact.js"></script>
-    <script src="./../js/jquery.form.js"></script>
-    <script src="./../js/jquery.validate.min.js"></script>
-    <script src="./../js/mail-script.js"></script>
-    <script src="./../js/jquery.ajaxchimp.min.js"></script>
-    <script src="./../js/plugins.js"></script>
-    <script src="./../js/main.js"></script>
+    <script src="../root/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../root/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../root/js/popper.min.js"></script>
+    <script src="../root/js/bootstrap.min.js"></script>
+    <script src="../root/js/jquery.slicknav.min.js"></script>
+    <script src="../root/js/owl.carousel.min.js"></script>
+    <script src="../root/js/slick.min.js"></script>
+    <script src="../root/js/wow.min.js"></script>
+    <script src="../root/js/animated.headline.js"></script>
+    <script src="../root/js/jquery.magnific-popup.js"></script>
+    <script src="../root/js/jquery.nice-select.min.js"></script>
+    <script src="../root/js/jquery.sticky.js"></script>
+    <script src="../root/js/contact.js"></script>
+    <script src="../root/js/jquery.form.js"></script>
+    <script src="../root/js/jquery.validate.min.js"></script>
+    <script src="../root/js/mail-script.js"></script>
+    <script src="../root/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../root/js/plugins.js"></script>
+    <script src="../root/js/main.js"></script>
