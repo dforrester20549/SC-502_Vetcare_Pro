@@ -5,23 +5,41 @@
         session_start();
     }
 
-    if(isset($_POST["btnIniciarSesion"]))
-    {
+    if (isset($_POST["btnIniciarSesion"])) {
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
-
+    
         $resultado = IniciarSesionModel($correo, $contrasenna);
-
-
-        if($resultado != null && $resultado -> num_rows > 0)
-        {
+    
+        if ($resultado != null && $resultado->num_rows > 0) {
             $datos = mysqli_fetch_array($resultado);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["Rol"] = $datos["RolId"];
+    
 
-            header('location: ../../View/System/home.php');
-        }
-        else
-        {
+            if ($datos["ContrasennaTemporal"] == 1) {
+
+                header('location: ../../View/Login/cambiarContrasenna.php');
+            } else {
+
+                if($_SESSION["Rol"] == 1){
+
+                    header('location: ../../View/System/home.php');
+                }
+                if($_SESSION["Rol"] == 2){
+
+                    header('location: ../../View/System/home.php');
+                }
+                if($_SESSION["Rol"] == 3){
+
+                    header('location: ../../View/System/home.php');
+                }
+                if($_SESSION["Rol"] == 4){
+
+                    header('location: ../../View/System/home.php');
+                }
+            }
+        } else {
             session_destroy();
             $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
         }
@@ -76,6 +94,29 @@
         {
             $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
             header('location: ../View/Login/inicioSesion.php');
+        }
+    }
+
+    if (isset($_POST["btnCambiarContrasenna"])) {
+        $idUsuario = $_POST["idUsuario"];
+        $nuevaContrasenna = $_POST["new_password"];
+        $confirmarContrasenna = $_POST["confirm_password"];
+    
+        // Verificar que las contraseñas coincidan
+        if ($nuevaContrasenna === $confirmarContrasenna) {
+            // Cambiar la contraseña del usuario
+            $resultado = CambiarContrasennaConUsuarioModel($idUsuario, $nuevaContrasenna);
+    
+            if ($resultado) {
+                $_POST["txtMensaje"] = "Contraseña cambiada correctamente.";
+                header('location: ../View/Login/inicioSesion.php');
+            } else {
+                $_POST["txtMensaje"] = "Hubo un problema al cambiar su contraseña.";
+                header('location: ../View/Login/cambiarContrasenna.php');
+            }
+        } else {
+            $_POST["txtMensaje"] = "Las contraseñas no coinciden.";
+            header('location: ../View/Login/cambiarContrasenna.php');
         }
     }
 

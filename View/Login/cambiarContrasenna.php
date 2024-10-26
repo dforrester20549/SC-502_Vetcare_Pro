@@ -1,13 +1,12 @@
 <?php
     include_once '../../Controller/LoginController.php';
 
-    // Verifica si el token es válido (esto es opcional y depende de cómo manejes el flujo)
-    if (!isset($_GET['token']) || empty($_GET['token'])) {
-        echo "Token no válido o faltante.";
+    // Verifica si el usuario tiene una sesión válida
+    if (!isset($_SESSION["IdUsuario"])) {
+        echo "Acceso no autorizado.";
         exit();
     }
-
-    $token = $_GET['token'];
+    $idUsuario = $_SESSION["IdUsuario"];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,7 @@
                 <div class="form-box">
                     <h2>Cambiar Contraseña</h2>
                     <form action="../../Controller/LoginController.php" method="post">
-                        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+                        <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
                         
                         <div class="form-group">
                             <label for="new_password">Nueva Contraseña:</label>
@@ -38,7 +37,7 @@
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
                         </div>
 
-                        <button type="submit" name="btnChangePassword" class="btn btn-primary w-100">Cambiar Contraseña</button>
+                        <button type="submit" name="btnCambiarContrasenna" class="btn btn-primary w-100">Cambiar Contraseña</button>
                     </form>
                 </div>
             </div>
