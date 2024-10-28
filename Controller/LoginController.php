@@ -13,7 +13,10 @@
     
         if ($resultado != null && $resultado->num_rows > 0) {
             $datos = mysqli_fetch_array($resultado);
+            $_SESSION["IdSession"] = $datos["Id"];
+            $_SESSION["Correo"] = $datos["Correo"];
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["NombreRol"] = $datos["NombreRol"];
             $_SESSION["Rol"] = $datos["RolId"];
     
 
@@ -24,19 +27,19 @@
 
                 if($_SESSION["Rol"] == 1){
 
-                    header('location: ../../View/System/home.php');
+                    header('location: ../../View/System/Index_System.php');
                 }
                 if($_SESSION["Rol"] == 2){
 
-                    header('location: ../../View/System/home.php');
+                    header('location: ../../View/System/Index_Admin.php');
                 }
                 if($_SESSION["Rol"] == 3){
 
-                    header('location: ../../View/System/home.php');
+                    header('location: ../../View/System/Index_Veterinario.php');
                 }
                 if($_SESSION["Rol"] == 4){
 
-                    header('location: ../../View/System/home.php');
+                    header('location: ../../View/System/Index_Cliente.php');
                 }
             }
         } else {
@@ -102,9 +105,9 @@
         $nuevaContrasenna = $_POST["new_password"];
         $confirmarContrasenna = $_POST["confirm_password"];
     
-        // Verificar que las contraseñas coincidan
+
         if ($nuevaContrasenna === $confirmarContrasenna) {
-            // Cambiar la contraseña del usuario
+
             $resultado = CambiarContrasennaConUsuarioModel($idUsuario, $nuevaContrasenna);
     
             if ($resultado) {
@@ -118,6 +121,12 @@
             $_POST["txtMensaje"] = "Las contraseñas no coinciden.";
             header('location: ../View/Login/cambiarContrasenna.php');
         }
+    }
+
+    if(isset($_POST["btnCerrarSesion"]))
+    {
+        session_destroy();
+        header('location: ../../View/Home/home.php');
     }
 
 
