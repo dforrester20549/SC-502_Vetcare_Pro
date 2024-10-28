@@ -38,6 +38,7 @@ CREATE TABLE tUsuarios (
     tRol_id bigint(11)
 );
 
+
 -- Tabla: Dueños
 CREATE TABLE tDuenos (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
