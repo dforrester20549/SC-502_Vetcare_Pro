@@ -10,5 +10,3 @@ INSERT INTO tRoles (NombreRol) VALUES
 ('admin'),
 ('veterinario'),
 ('cliente');
-
-

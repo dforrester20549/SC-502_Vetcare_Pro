@@ -14,6 +14,22 @@
         
     }
 
+    if (isset($_GET["ConsultarUsuarioActivo"])) 
+    {
+        $consultar = ConsultarUsuarioActivo();
+
+        $Datos = $consultar;
+        
+    }
+
+    if (isset($_GET["ConsultarUsuarioInactivo"])) 
+    {
+        $consultar = ConsultarUsuarioInactivo();
+
+        $Datos = $consultar;
+        
+    }
+
     
 
 ?>

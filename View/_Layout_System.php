@@ -29,12 +29,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="../root/img/logo/logo.png" alt="VetCare Pro" height="60" width="60">
-  </div>
-
-  <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
@@ -103,6 +97,20 @@
                 Usuarios
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Usuarios/ConsultarUsuarioActivo.php?ConsultarUsuarioActivo=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Activos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Usuarios/ConsultarUsuarioInactivo.php?ConsultarUsuarioInactivo=1" class="nav-link">
+                <i class="bi bi-person-dash"></i>
+                  <p>Inactivos</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">

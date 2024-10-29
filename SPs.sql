@@ -111,15 +111,28 @@ DELIMITER ;
 
 -- SP_GET_TUSUARIOS
 DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuarios(
-    IN pIdSession BIGINT
-)
+CREATE PROCEDURE sp_GET_consultarUsuarios()
 BEGIN
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+    -- Selección de la información de todos los usuarios y sus roles
+    SELECT 
+        u.Id,
+        u.Identificacion,
+        u.Nombre,
+        u.Correo,
+        u.Activo,
+        u.tRol_id,
+        r.NombreRol
+    FROM 
+        tUsuarios u
+        JOIN tRoles r ON u.tRol_id = r.Id;
+END ;;
+DELIMITER ;
 
-    -- Selección de la información del usuario y el nombre del rol
+-- SP_GET_TUSUARIOS_ACTIVOS
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarUsuariosActivos()
+BEGIN
+    -- Selección de la información de los usuarios activos y el nombre del rol
     SELECT 
         u.Id,
         u.Identificacion,
@@ -132,6 +145,27 @@ BEGIN
         tUsuarios u
         JOIN tRoles r ON u.tRol_id = r.Id
     WHERE 
-        u.Id = pIdSession;
+        u.Activo = 1;
+END ;;
+DELIMITER ;
+
+-- SP_GET_TUSUARIOS_INACTIVOS
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarUsuariosInactivos()
+BEGIN
+    -- Selección de la información de los usuarios activos y el nombre del rol
+    SELECT 
+        u.Id,
+        u.Identificacion,
+        u.Nombre,
+        u.Correo,
+        u.Activo,
+        u.tRol_id,
+        r.NombreRol
+    FROM 
+        tUsuarios u
+        JOIN tRoles r ON u.tRol_id = r.Id
+    WHERE 
+        u.Activo = 0;
 END ;;
 DELIMITER ;

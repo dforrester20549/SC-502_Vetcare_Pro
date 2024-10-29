@@ -2,7 +2,7 @@
 include_once '../../Controller/UsuariosController.php';
 
 
-$title = "Consultar Usuarios";
+$title = "Consultar Usuarios Activos";
 $content = __FILE__;
 
 include('../../View/_Layout_System.php');
@@ -17,7 +17,7 @@ include('../../View/_Layout_System.php');
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h3 class="h4 text-gray-900 mb-4">Consultar Usuarios</h3>
+                                    <h3 class="h4 text-gray-900 mb-4">Consultar Usuarios Activos</h3>
                                 </div>
 
                                 <div class="table-responsive">
@@ -28,16 +28,17 @@ include('../../View/_Layout_System.php');
                                                 <th>Nombre</th>
                                                 <th>Correo Electrónico</th>
                                                 <th>Rol</th>
+                                                <th>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($Datos)) : ?>
-                                                <?php foreach ($Datos as $usuarios) : ?>
+                                                <?php foreach ($Datos as $usuariosActivos) : ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($usuarios['Identificacion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['Nombre']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['Correo']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['NombreRol']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosActivos['Identificacion']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosActivos['Nombre']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosActivos['Correo']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosActivos['NombreRol']); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
