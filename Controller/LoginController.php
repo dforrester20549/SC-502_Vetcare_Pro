@@ -48,14 +48,14 @@
         }
     }
 
-    if(isset($_POST["btnRegistrarUsuario"]))
+    if(isset($_POST["btnRegistrar"]))
     {
         $Identificacion = $_POST["txtIdentificacion"];
         $Nombre = $_POST["txtNombre"];
         $Correo = $_POST["txtCorreo"];
         $Contrasenna = $_POST["txtContrasenna"];
 
-        $resultado = RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna);
+        $resultado = RegistrarModel($Identificacion,$Nombre,$Correo,$Contrasenna);
 
         if($resultado == true)
         {

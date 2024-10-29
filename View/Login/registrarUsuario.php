@@ -80,7 +80,7 @@
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary w-100"
-                                    id="btnRegistrarUsuario" name="btnRegistrarUsuario">Registrar</button>
+                                    id="btnRegistrar" name="btnRegistrar">Registrar</button>
                             </div>
 
                             <div class="d-flex align-items-center justify-content-center">

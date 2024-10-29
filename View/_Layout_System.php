@@ -91,7 +91,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="../Usuarios/ConsultarUsuario.php?ConsultarUsuario=1" class="nav-link">
+            <a href="../Usuarios/consultarUsuario.php?ConsultarUsuario=1" class="nav-link">
             <i class="bi bi-people"></i>
               <p>
                 Usuarios
@@ -99,15 +99,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../Usuarios/ConsultarUsuarioActivo.php?ConsultarUsuarioActivo=1" class="nav-link">
+                <a href="../Usuarios/consultarUsuarioActivo.php?ConsultarUsuarioActivo=1" class="nav-link">
                 <i class="bi bi-person-check"></i>
-                  <p>Activos</p>
+                  <p>Usuarios Activos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../Usuarios/ConsultarUsuarioInactivo.php?ConsultarUsuarioInactivo=1" class="nav-link">
+                <a href="../Usuarios/consultarUsuarioInactivo.php?ConsultarUsuarioInactivo=1" class="nav-link">
                 <i class="bi bi-person-dash"></i>
-                  <p>Inactivos</p>
+                  <p>Usuarios Inactivos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Usuarios/registrarUsuario.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Usuario</p>
                 </a>
               </li>
             </ul>

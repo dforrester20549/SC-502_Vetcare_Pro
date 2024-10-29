@@ -1,11 +1,11 @@
 <?php
-include_once '../../Controller/UsuariosController.php';
+    include_once '../../Controller/UsuariosController.php';
 
 
-$title = "Consultar Usuarios Inactivos";
-$content = __FILE__;
+    $title = "Consultar Usuarios Inactivos";
+    $content = __FILE__;
 
-include('../../View/_Layout_System.php');
+    include('../../View/_Layout_System.php');
 ?>
 
 <div class="container">

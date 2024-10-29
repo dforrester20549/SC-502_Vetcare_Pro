@@ -19,7 +19,7 @@
         }
     }
 
-    function RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna)
+    function RegistrarModel($Identificacion,$Nombre,$Correo,$Contrasenna)
     {
         try
         {

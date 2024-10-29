@@ -3,6 +3,7 @@ USE VETCAREDB;
 -- Eliminar procedimientos
 DROP PROCEDURE IF EXISTS sp_GET_consultarUsuarios;
 
+-- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
 CREATE PROCEDURE sp_LOGIN_insertarUsuario (
     IN p_Identificacion VARCHAR(20),
@@ -23,7 +24,7 @@ BEGIN
 END // -- Cerrar el procedimiento
 DELIMITER ;
 
-
+-- ________________________________________________sp_LOGIN_iniciarSesion___________________________________________________________________02
 DELIMITER ;;
 CREATE PROCEDURE sp_LOGIN_iniciarSesion(pCorreo varchar(80),
                                     pContrasenna varchar(10))
@@ -48,6 +49,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
+-- ________________________________________________sp_LOGIN_recuperarAcceso___________________________________________________________________03
 DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_recuperarAcceso(IN p_correo VARCHAR(255))
 BEGIN
@@ -74,8 +76,23 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- ________________________________________________sp_LOGIN_actualizarContrasenna______________________________________________________________04
 DELIMITER $$
+CREATE PROCEDURE sp_LOGIN_actualizarContrasenna(
+    IN pId BIGINT,
+    IN pCodigo VARCHAR(10)
+)
+BEGIN
+    UPDATE vetcaredb.tUsuarios
+    SET Contrasenna = pCodigo,
+        ContrasennaTemporal = TRUE,
+        CodigoRecuperacion = pCodigo
+    WHERE Id = pId;
+END
+DELIMITER ;
 
+-- ________________________________________________sp_LOGIN_cambiarContrasenna________________________________________________________________05
+DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_cambiarContrasenna(
     IN p_token VARCHAR(255),
     IN p_nuevaContrasennaHash VARCHAR(255)
@@ -107,13 +124,19 @@ END $$
 
 DELIMITER ;
 
--- TUSUARIOS
+-- _________________________________________________TUSUARIOS______________________________________________________________________________
 
--- SP_GET_TUSUARIOS
+-- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________________06
 DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuarios()
+CREATE PROCEDURE sp_GET_consultarUsuarios(
+    IN pIdSession BIGINT
+)
 BEGIN
-    -- Selección de la información de todos los usuarios y sus roles
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+
+    -- Selección de la información del usuario y el nombre del rol
     SELECT 
         u.Id,
         u.Identificacion,
@@ -124,11 +147,13 @@ BEGIN
         r.NombreRol
     FROM 
         tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id;
+        JOIN tRoles r ON u.tRol_id = r.Id
+    WHERE 
+        u.Id = pIdSession;
 END ;;
 DELIMITER ;
 
--- SP_GET_TUSUARIOS_ACTIVOS
+-- ________________________________________________sp_GET_consultarUsuariosActivos_____________________________________________________________07
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuariosActivos()
 BEGIN
@@ -146,10 +171,10 @@ BEGIN
         JOIN tRoles r ON u.tRol_id = r.Id
     WHERE 
         u.Activo = 1;
-END ;;
+END
 DELIMITER ;
 
--- SP_GET_TUSUARIOS_INACTIVOS
+-- ________________________________________________sp_GET_consultarUsuariosInactivos___________________________________________________________08
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuariosInactivos()
 BEGIN
@@ -167,5 +192,40 @@ BEGIN
         JOIN tRoles r ON u.tRol_id = r.Id
     WHERE 
         u.Activo = 0;
-END ;;
+END
+DELIMITER ;
+
+-- ________________________________________________sp_INSERT_registrarUsuario_________________________________________________________________09
+DELIMITER ;;
+CREATE PROCEDURE sp_INSERT_registrarUsuario(
+    IN pIdentificacion VARCHAR(20),
+    IN pNombre VARCHAR(100),
+    IN pCorreo VARCHAR(100),
+    IN pContrasenna VARCHAR(255),
+    IN pActivo BIT,
+    IN pTRol_id BIGINT,
+    IN pIdSession BIGINT
+)
+BEGIN
+    -- Inserción del nuevo usuario
+    INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id)
+    VALUES (pIdentificacion, pNombre, pCorreo, pContrasenna, pActivo, pTRol_id);
+    
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Registrar Usuario', CONCAT('Usuario registrado: ', pNombre, ', por el usuario con ID: ', pIdSession), pIdSession);
+END
+DELIMITER ;
+
+-- ________________________________________________sp_GET_tRoles____________________________________________________________________________10
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_tRoles()
+BEGIN
+    -- Selección de todos los roles
+    SELECT 
+        Id,
+        NombreRol
+    FROM 
+        tRoles;
+END
 DELIMITER ;
