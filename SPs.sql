@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_INSERT_registrarUsuario;
+DROP PROCEDURE IF EXISTS sp_LOGIN_insertarUsuario;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
@@ -19,7 +19,7 @@ BEGIN
     ELSE
         -- Insertar nuevo usuario
         INSERT INTO tusuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id)
-        VALUES (p_Identificacion, p_Nombre, p_Correo, p_Contrasenna, 1, 3);
+        VALUES (p_Identificacion, p_Nombre, p_Correo, p_Contrasenna, 1, 4);
     END IF; -- Cerrar el bloque IF
 END // -- Cerrar el procedimiento
 DELIMITER ;
@@ -228,4 +228,18 @@ BEGIN
     FROM 
         tRoles;
 END
+DELIMITER ;
+
+-- ________________________________________________sp_UPDATE_CambiarEstadoUsuario____________________________________________________________11
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_CambiarEstadoUsuario(
+    IN pUserId BIGINT,
+    IN pNuevoEstado BIT
+)
+BEGIN
+    -- Actualización del estado del usuario
+    UPDATE tUsuarios 
+    SET Activo = pNuevoEstado
+    WHERE Id = pUserId;
+END ;;
 DELIMITER ;

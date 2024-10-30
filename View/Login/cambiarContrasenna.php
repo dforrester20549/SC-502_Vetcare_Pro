@@ -2,11 +2,11 @@
     include_once '../../Controller/LoginController.php';
 
     // Verifica si el usuario tiene una sesión válida
-    if (!isset($_SESSION["IdUsuario"])) {
+    if (!isset($_SESSION["IdSession"])) {
         echo "Acceso no autorizado.";
         exit();
     }
-    $idUsuario = $_SESSION["IdUsuario"];
+    $idUsuario = $_SESSION["IdSession"];
 ?>
 
 <!DOCTYPE html>

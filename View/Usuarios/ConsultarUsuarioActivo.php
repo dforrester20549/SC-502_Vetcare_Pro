@@ -19,7 +19,6 @@
                                 <div class="text-center">
                                     <h3 class="h4 text-gray-900 mb-4">Consultar Usuarios Activos</h3>
                                 </div>
-
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
@@ -39,6 +38,11 @@
                                                         <td><?php echo htmlspecialchars($usuariosActivos['Nombre']); ?></td>
                                                         <td><?php echo htmlspecialchars($usuariosActivos['Correo']); ?></td>
                                                         <td><?php echo htmlspecialchars($usuariosActivos['NombreRol']); ?></td>
+                                                        <td><?php if ($usuariosActivos['tRol_id'] !== '1') : ?>
+                                                                <a href="actualizarUsuario.php?id=<?php echo $usuariosActivos['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-person-gear"></i></a>
+                                                                <a href="eliminarUsuario.php?id=<?php echo $usuariosActivos['Id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');"><i class="bi bi-person-fill-x"></i></a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
@@ -49,7 +53,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -58,3 +61,4 @@
         </div>
     </div>
 </div>
+

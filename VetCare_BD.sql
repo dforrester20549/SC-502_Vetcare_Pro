@@ -37,7 +37,9 @@ CREATE TABLE tUsuarios (
     ContrasennaTemporal BOOLEAN DEFAULT FALSE, 
     CodigoRecuperacion VARCHAR(10) DEFAULT NULL,  
     Activo BIT(1) NOT NULL,
-    tRol_id BIGINT(11)
+    tRol_id BIGINT(11),
+    ImagePath VARCHAR(400) NOT NULL,
+    Destacado BIT(1) NOT NULL
 );
 
 -- Tabla: Dueños
