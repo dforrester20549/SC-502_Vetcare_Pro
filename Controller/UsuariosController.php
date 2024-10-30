@@ -1,5 +1,6 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/UsuariosModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     $Roles = ObtenerRol();
 
@@ -52,25 +53,20 @@
     
     }
 
-    if(isset($_POST["btnRegistrarUsuario"]))
-    {
-
+    if (isset($_POST["btnRegistrarUsuario"])) {
         $Nombre = $_POST["Nombre"];
         $Correo = $_POST["Correo"];
         $Cedula = $_POST["Cedula"];
-        $Activo = $_POST["Activo"];
+        $Activo = 1;  
         $Rol = $_POST["NombreRol"];
-
-        $resultado = RegistrarUsuarioModel($Nombre,$Correo,$Cedula,$Activo,$Rol);
-
+        $IdSession = $_SESSION['IdSession'];  
+    
+        $resultado = RegistrarUsuarioModel($Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession);
+    
         if ($resultado) { 
-
-            $_SESSION['txtMensaje'] = "Su información se ha registrado correctamente.";
-
+            $_SESSION['txtMensaje'] = "Su información se ha registrado correctamente y se ha enviado un correo con su contraseña temporal.";
         } else {
-
             $_SESSION['txtMensaje'] = "Ocurrió un error al registrar la información.";
-
         }
         
         header('Location: registrarUsuario.php'); 

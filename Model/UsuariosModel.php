@@ -1,5 +1,6 @@
 <?php
     include_once 'BaseDatos.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     // -------------------------------------- Consultar Usuario ---------------------------------
 
@@ -67,20 +68,35 @@
     }
 
 
-    function RegistrarUsuarioModel($Nombre,$Correo,$Cedula,$Activo,$Rol)
+    function RegistrarUsuarioModel($Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession)
     {
-        try
-        {
+        try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_INSERT_registrarUsuario('$Nombre','$Correo','$Cedula','$Activo','$Rol')";
-            $resultado = $enlace -> query($sentencia);
+            
+            $Contrasenna = GenerarCodigo();
+
+            $sentencia = "CALL sp_INSERT_registrarUsuario('$Cedula', '$Nombre', '$Correo', '$Contrasenna', '$Activo', '$Rol', '$IdSession')";
+            $resultado = $enlace->query($sentencia);
 
             CerrarBD($enlace);
+
+            if ($resultado) {
+                $asunto = "Bienvenido a VetCare Pro - Acceso Temporal";
+                $contenido = "<html><body>
+                            Hola, $Nombre,<br/><br/>
+                            Se ha creado tu cuenta en VetCare Pro. <br/>
+                            Tu contraseña temporal es: <b>$Contrasenna</b><br/><br/>
+                            Te recomendamos cambiar esta contraseña cuando inicies sesión.<br/><br/>
+                            Atentamente,<br/>
+                            El equipo de VetCare Pro
+                            </body></html>";
+                EnviarCorreo($asunto, $contenido, $Correo);
+            }
+
             return $resultado;
-        }
-        catch(Exception $ex)
-        {
+        } catch (Exception $ex) {
             return false;
         }
     }
+
 ?>

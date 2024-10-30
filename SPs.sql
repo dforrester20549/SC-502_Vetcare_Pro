@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_GET_consultarUsuarios;
+DROP PROCEDURE IF EXISTS sp_INSERT_registrarUsuario;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
@@ -201,7 +201,7 @@ CREATE PROCEDURE sp_INSERT_registrarUsuario(
     IN pIdentificacion VARCHAR(20),
     IN pNombre VARCHAR(100),
     IN pCorreo VARCHAR(100),
-    IN pContrasenna VARCHAR(255),
+    IN pContrasenna VARCHAR(255), 
     IN pActivo BIT,
     IN pTRol_id BIGINT,
     IN pIdSession BIGINT
@@ -214,7 +214,7 @@ BEGIN
     -- Registro de la acción en la tabla de Log
     INSERT INTO Log (accion, descripcion, usuario_id)
     VALUES ('Registrar Usuario', CONCAT('Usuario registrado: ', pNombre, ', por el usuario con ID: ', pIdSession), pIdSession);
-END
+END ;;
 DELIMITER ;
 
 -- ________________________________________________sp_GET_tRoles____________________________________________________________________________10
