@@ -2,7 +2,7 @@
     include_once '../../Controller/UsuariosController.php';
 
 
-    $title = "Consultar Usuarios";
+    $title = "Consultar Usuarios Inactivos";
     $content = __FILE__;
 
     include('../../View/_Layout_System.php');
@@ -17,7 +17,7 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h3 class="h4 text-gray-900 mb-4">Consultar Usuarios</h3>
+                                    <h3 class="h4 text-gray-900 mb-4">Consultar Usuarios Inactivos</h3>
                                 </div>
 
                                 <div class="table-responsive">
@@ -28,16 +28,21 @@
                                                 <th>Nombre</th>
                                                 <th>Correo Electrónico</th>
                                                 <th>Rol</th>
+                                                <th>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($Datos)) : ?>
-                                                <?php foreach ($Datos as $usuarios) : ?>
+                                                <?php foreach ($Datos as $usuariosInactivos) : ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($usuarios['Identificacion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['Nombre']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['Correo']); ?></td>
-                                                        <td><?php echo htmlspecialchars($usuarios['NombreRol']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosInactivos['Identificacion']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosInactivos['Nombre']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosInactivos['Correo']); ?></td>
+                                                        <td><?php echo htmlspecialchars($usuariosInactivos['NombreRol']); ?></td>
+                                                        <td><?php if ($usuariosActivos['tRol_id'] !== '1') : ?>
+                                                                <a href="actualizarUsuario.php?id=<?php echo $usuariosActivos['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-person-gear"></i></a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>

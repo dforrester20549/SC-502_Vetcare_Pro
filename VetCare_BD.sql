@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 
 
 -- Eliminar tablas
-DROP TABLE tRecuperacion;
+DROP TABLE tUsuarios;
 
 
 -- Se crean las tablas
@@ -29,13 +29,17 @@ CREATE TABLE tRoles (
 
 -- Tabla: Usuarios
 CREATE TABLE tUsuarios (
-    Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Identificacion varchar(20) NOT NULL,
+    Id BIGINT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Identificacion VARCHAR(20) NOT NULL,
     Nombre VARCHAR(100) NOT NULL,
     Correo VARCHAR(100) UNIQUE NOT NULL,
     Contrasenna VARCHAR(255) NOT NULL,
-    Activo bit(1) NOT NULL,
-    tRol_id bigint(11)
+    ContrasennaTemporal BOOLEAN DEFAULT FALSE, 
+    CodigoRecuperacion VARCHAR(10) DEFAULT NULL,  
+    Activo BIT(1) NOT NULL,
+    tRol_id BIGINT(11),
+    ImagePath VARCHAR(400) NOT NULL,
+    Destacado BIT(1) NOT NULL
 );
 
 -- Tabla: Dueños
@@ -44,7 +48,8 @@ CREATE TABLE tDuenos (
     Nombre VARCHAR(100) NOT NULL,
     Telefono VARCHAR(15),
     Email VARCHAR(100),
-    Direccion VARCHAR(255)
+    Direccion VARCHAR(255),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Mascotas
@@ -56,7 +61,8 @@ CREATE TABLE tMascotas (
     Edad INT,
     Peso DECIMAL(5, 2),
     Fecha_Registro DATE NOT NULL,
-    tDueño_Id bigint(11)
+    tDueño_Id bigint(11),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Citas
@@ -65,7 +71,8 @@ CREATE TABLE tCitas (
     tMascota_id bigint(11),
     Fecha_Cita DATETIME NOT NULL,
     Motivo TEXT,
-    Estado ENUM('pendiente', 'completada', 'cancelada')
+    Estado ENUM('pendiente', 'completada', 'cancelada'),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Tratamientos
@@ -74,7 +81,8 @@ CREATE TABLE tTratamientos (
     tMascota_Id bigint(11),
     Fecha_Tratamiento DATE NOT NULL,
     Descripcion TEXT,
-    Costo DECIMAL(10, 2)
+    Costo DECIMAL(10, 2),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Veterinarios
@@ -83,7 +91,8 @@ CREATE TABLE tVeterinarios (
     Nombre VARCHAR(100) NOT NULL,
     Especialidad VARCHAR(50),
     Telefono VARCHAR(15),
-    Email VARCHAR(100)
+    Email VARCHAR(100),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Medicamentos
@@ -91,7 +100,8 @@ CREATE TABLE tMedicamentos (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
-    Dosis VARCHAR(50)
+    Dosis VARCHAR(50),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Facturas
@@ -99,7 +109,8 @@ CREATE TABLE tFacturas (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     tDueno_Id bigint(11),
     Fecha_Emision DATE NOT NULL,
-    Total DECIMAL(10, 2)
+    Total DECIMAL(10, 2),
+    Activo bit(1) NOT NULL
 );
 
 -- Tabla: Recuperacion 
@@ -107,7 +118,8 @@ CREATE TABLE tRecuperacion (
     id bigint(11) AUTO_INCREMENT PRIMARY KEY,
     tUsuarios_id bigint(11),
     token VARCHAR(255) NOT NULL,
-    fecha_expiracion DATETIME NOT NULL
+    fecha_expiracion DATETIME NOT NULL,
+    Activo bit(1) NOT NULL
 );
 
 

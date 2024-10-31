@@ -19,7 +19,7 @@
         }
     }
 
-    function RegistrarUsuarioModel($Identificacion,$Nombre,$Correo,$Contrasenna)
+    function RegistrarModel($Identificacion,$Nombre,$Correo,$Contrasenna)
     {
         try
         {
@@ -81,7 +81,6 @@
             $sentencia = "CALL sp_LOGIN_cambiarContrasenna('$Id', '$NuevaContrasenna')";
             $resultado = $enlace->query($sentencia);
 
-            // Limpiar la marca temporal de la contraseña
             if ($resultado) {
                 $sentencia = "UPDATE tUsuarios SET ContrasennaTemporal = FALSE WHERE Id = '$Id'";
                 $enlace->query($sentencia);

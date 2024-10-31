@@ -29,12 +29,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="../root/img/logo/logo.png" alt="VetCare Pro" height="60" width="60">
-  </div>
-
-  <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
@@ -87,16 +81,36 @@
        <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          
-               <li class="nav-item">
+          <li class="nav-item">
             <a href="../System/Index_System.php" class="nav-link">
             <i class="bi bi-house"></i>
               <p>
                 Home
               </p>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="../Usuarios/consultarUsuario.php?ConsultarUsuario=1" class="nav-link">
+            <i class="bi bi-people"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Usuarios/registrarUsuario.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Usuario</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">
