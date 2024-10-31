@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_LOGIN_insertarUsuario;
+DROP PROCEDURE IF EXISTS sp_UPDATE_actualizarUsuario;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
@@ -208,8 +208,8 @@ CREATE PROCEDURE sp_INSERT_registrarUsuario(
 )
 BEGIN
     -- Inserción del nuevo usuario
-    INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id)
-    VALUES (pIdentificacion, pNombre, pCorreo, pContrasenna, pActivo, pTRol_id);
+    INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, ContrasennaTemporal, Activo, tRol_id)
+    VALUES (pIdentificacion, pNombre, pCorreo, pContrasenna, 1, pActivo, pTRol_id);
     
     -- Registro de la acción en la tabla de Log
     INSERT INTO Log (accion, descripcion, usuario_id)
@@ -230,9 +230,9 @@ BEGIN
 END
 DELIMITER ;
 
--- ________________________________________________sp_UPDATE_CambiarEstadoUsuario____________________________________________________________11
+-- ________________________________________________sp_UPDATE_cambiarEstadoUsuario___________________________________________________________11
 DELIMITER ;;
-CREATE PROCEDURE sp_UPDATE_CambiarEstadoUsuario(
+CREATE PROCEDURE sp_UPDATE_cambiarEstadoUsuario(
     IN pUserId BIGINT,
     IN pNuevoEstado BIT
 )
@@ -243,3 +243,60 @@ BEGIN
     WHERE Id = pUserId;
 END ;;
 DELIMITER ;
+
+-- ________________________________________________sp_GET_UsuarioPorID_______________________________________________________________________12
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_UsuarioPorID(
+    IN pId BIGINT
+)
+BEGIN
+    -- Seleccionar el usuario por su ID
+    SELECT 
+        u.Id,
+        u.Identificacion,
+        u.Nombre,
+        u.Correo,
+        u.Activo,
+        u.tRol_id,
+        r.NombreRol,
+        u.ContrasennaTemporal
+    FROM 
+        tUsuarios u
+        JOIN tRoles r ON u.tRol_id = r.Id
+    WHERE 
+        u.Id = pId;
+END ;;
+DELIMITER ;
+
+-- ________________________________________________sp_UPDATE_actualizarUsuario_________________________________________________________________13
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_actualizarUsuario(
+    IN pId BIGINT,
+    IN pNombre VARCHAR(100),
+    IN pCorreo VARCHAR(100),
+    IN pIdentificacion VARCHAR(20),
+    IN pActivo TINYINT(1),
+    IN pRolId BIGINT,
+    IN pIdSession BIGINT
+)
+BEGIN
+    -- Convertir el valor de pActivo a 0 si es diferente de 1
+    SET pActivo = IF(pActivo = 1, 1, 0);
+
+    -- Actualización del usuario
+    UPDATE tUsuarios
+    SET 
+        Nombre = pNombre,
+        Correo = pCorreo,
+        Identificacion = pIdentificacion,
+        Activo = pActivo,
+        tRol_id = pRolId
+    WHERE 
+        Id = pId;
+
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Actualizar Usuario', CONCAT('Usuario actualizado: ', pNombre, ', por el usuario con ID: ', pIdSession), pIdSession);
+END ;;
+DELIMITER ;;
+

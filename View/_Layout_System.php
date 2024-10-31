@@ -99,15 +99,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../Usuarios/consultarUsuarioActivo.php?ConsultarUsuarioActivo=1" class="nav-link">
+                <a href="../Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1" class="nav-link">
                 <i class="bi bi-person-check"></i>
-                  <p>Usuarios Activos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../Usuarios/consultarUsuarioInactivo.php?ConsultarUsuarioInactivo=1" class="nav-link">
-                <i class="bi bi-person-dash"></i>
-                  <p>Usuarios Inactivos</p>
+                  <p>Consultar Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">

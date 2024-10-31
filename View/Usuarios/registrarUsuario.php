@@ -29,7 +29,7 @@
                                     }
                                 ?>
 
-                                <form method="post" action="RegistrarUsuario.php">
+                                <form method="post" action="registrarUsuario.php">
                                     <div class="form-group">
                                         <input type="text" name="Nombre" class="form-control form-control-user" placeholder="Nombre" required>
                                     </div><br>

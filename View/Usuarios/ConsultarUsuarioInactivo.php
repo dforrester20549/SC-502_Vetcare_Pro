@@ -39,6 +39,10 @@
                                                         <td><?php echo htmlspecialchars($usuariosInactivos['Nombre']); ?></td>
                                                         <td><?php echo htmlspecialchars($usuariosInactivos['Correo']); ?></td>
                                                         <td><?php echo htmlspecialchars($usuariosInactivos['NombreRol']); ?></td>
+                                                        <td><?php if ($usuariosActivos['tRol_id'] !== '1') : ?>
+                                                                <a href="actualizarUsuario.php?id=<?php echo $usuariosActivos['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-person-gear"></i></a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>

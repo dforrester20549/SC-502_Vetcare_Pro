@@ -2,6 +2,8 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/UsuariosModel.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
+    $DatosActivos = ConsultarUsuarioActivo();
+    $DatosInactivos = ConsultarUsuarioInactivo();
     $Roles = ObtenerRol();
 
     if(session_status() == PHP_SESSION_NONE) {
@@ -10,7 +12,7 @@
 
     // -------------------------------------- Consultar Usuario ---------------------------------
     
-    if (isset($_GET["ConsultarUsuario"])) 
+    if (isset($_GET["consultarUsuario"])) 
     {
         $consultar = ConsultarUsuarios();
 
@@ -18,7 +20,7 @@
         
     }
 
-    if (isset($_GET["ConsultarUsuarioActivo"])) 
+    if (isset($_GET["consultarUsuarioActivo"])) 
     {
         $consultar = ConsultarUsuarioActivo();
 
@@ -26,7 +28,7 @@
         
     }
 
-    if (isset($_GET["ConsultarUsuarioInactivo"])) 
+    if (isset($_GET["consultarUsuarioActivo"])) 
     {
         $consultar = ConsultarUsuarioInactivo();
 
@@ -70,6 +72,44 @@
         }
         
         header('Location: registrarUsuario.php'); 
+        exit();
+    }
+
+
+     // -------------------------------------- Actualizar Usuario ---------------------------------
+
+     if (isset($_GET['id'])) {
+        $Id = $_GET['id'];
+        
+        $actualizarusuario = ConsultarUsuarioPorId($Id);
+    
+        if ($actualizarusuario) {
+            $Datos = $actualizarusuario;
+        } else {
+            $_SESSION['txtMensaje'] = "Usuario no encontrado.";
+            header('Location: consultarUsuarioActivo.php');
+            exit();
+        }
+    }
+
+    if (isset($_POST["btnActualizarUsuario"])) {
+        $Id = $_POST["idUsuario"];  
+        $Nombre = $_POST["Nombre"];
+        $Correo = $_POST["Correo"];
+        $Cedula = $_POST["Cedula"];
+        $Activo = $_POST["Activo"];
+        $Rol = $_POST["NombreRol"];
+        $IdSession = $_SESSION['IdSession'];  
+        
+        $resultado = ActualizarUsuarioModel($Id, $Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession);
+    
+        if ($resultado) { 
+            $_SESSION['txtMensaje'] = "La información del usuario se ha actualizado correctamente.";
+        } else {
+            $_SESSION['txtMensaje'] = "Ocurrió un error al actualizar la información.";
+        }
+        
+        header('Location: consultarUsuarioActivo.php');
         exit();
     }
 

@@ -100,4 +100,39 @@
     }
 
 
+        // -------------------------------------- Actualizar Usuario ---------------------------------
+        function ConsultarUsuarioPorId($Id){
+            try {
+                $enlace = AbrirBD();
+                $sentencia = "CALL sp_GET_UsuarioPorID('$Id')";
+                $resultado = $enlace->query($sentencia);
+        
+                $actualizarusuario = null;
+                if ($resultado && $resultado->num_rows > 0) {
+                    $actualizarusuario = mysqli_fetch_assoc($resultado);
+                }
+        
+                CerrarBD($enlace);
+                return $actualizarusuario;
+            } catch (Exception $ex) {
+                return null;
+            }
+        }
+
+        function ActualizarUsuarioModel($Id, $Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+            $sentencia = "CALL sp_UPDATE_actualizarUsuario('$Id','$Nombre','$Correo','$Cedula','$Activo','$Rol','$IdSession')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
 ?>
