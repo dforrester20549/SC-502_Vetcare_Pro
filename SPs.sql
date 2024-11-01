@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_UPDATE_actualizarUsuario;
+DROP PROCEDURE IF EXISTS sp_TRUNCATE_Logs;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
@@ -300,3 +300,34 @@ BEGIN
 END ;;
 DELIMITER ;;
 
+-- ________________________________________________sp_GET_consultarLogs_________________________________________________________________14
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarLogs()
+BEGIN
+
+    SELECT 
+        Id,
+        accion,
+        descripcion,
+        usuario_id
+        
+    FROM 
+        Log;
+END ;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_TRUNCATE_Logs____________________________________________________________________15
+DELIMITER ;;
+CREATE PROCEDURE sp_TRUNCATE_Logs(
+    IN pIdSession BIGINT
+)
+BEGIN
+    -- Limpiar la tabla Logs
+    TRUNCATE TABLE Log;
+
+    -- Registrar la acción de eliminación en la tabla Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Eliminar Logs', CONCAT( 'Se realizó el eliminado de todos los registros en la tabla Logs',pIdSession), pIdSession);
+END ;;
+DELIMITER ;

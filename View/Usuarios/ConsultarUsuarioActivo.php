@@ -1,7 +1,7 @@
 <?php
     include_once '../../Controller/UsuariosController.php';
 
-    $title = "Administrar Usuarios";
+    $title = "Consultar Usuarios";
     $content = __FILE__;
 
     include('../../View/_Layout_System.php');
