@@ -23,11 +23,6 @@
                                 </div>
 
                                 <?php
-                                    if (isset($_SESSION["txtMensaje"])) {
-                                        echo '<div class="alert alert-info text-center">' . htmlspecialchars($_SESSION["txtMensaje"]) . '</div>';
-                                        unset($_SESSION["txtMensaje"]); 
-                                    }
-
                                     if (isset($actualizarusuario) && $actualizarusuario):
                                 ?>
                                     <form method="post" action="actualizarUsuario.php">
@@ -82,3 +77,4 @@
         </div>
     </div>
 </div>
+

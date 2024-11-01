@@ -65,12 +65,12 @@
         $resultado = RegistrarUsuarioModel($Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession);
     
         if ($resultado) { 
-            $_SESSION['txtMensaje'] = "Su información se ha registrado correctamente y se ha enviado un correo con su contraseña temporal.";
+            $_SESSION["Success"] = "Su información se ha registrado correctamente y se ha enviado un correo con su contraseña temporal.";
         } else {
-            $_SESSION['txtMensaje'] = "Ocurrió un error al registrar la información.";
+            $_SESSION["Error"] = "Ocurrió un error al registrar la información.";
         }
         
-        header('Location: registrarUsuario.php'); 
+        header('Location: consultarUsuarioActivo.php'); 
         exit();
     }
 
@@ -85,7 +85,7 @@
         if ($actualizarusuario) {
             $Datos = $actualizarusuario;
         } else {
-            $_SESSION['txtMensaje'] = "Usuario no encontrado.";
+            $_SESSION["Error"] = "Usuario no encontrado.";
             header('Location: consultarUsuarioActivo.php');
             exit();
         }
@@ -103,9 +103,9 @@
         $resultado = ActualizarUsuarioModel($Id, $Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession);
     
         if ($resultado) { 
-            $_SESSION['txtMensaje'] = "La información del usuario se ha actualizado correctamente.";
+            $_SESSION["Success"] = "La información del usuario se ha actualizado correctamente.";
         } else {
-            $_SESSION['txtMensaje'] = "Ocurrió un error al actualizar la información.";
+            $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
         header('Location: consultarUsuarioActivo.php');
