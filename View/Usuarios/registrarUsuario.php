@@ -22,13 +22,6 @@
                                     <h3 class="h4 text-gray-900 mb-4">Registrar Usuarios</h3>
                                 </div>
 
-                                <?php
-                                    if (isset($_SESSION["txtMensaje"])) {
-                                        echo '<div class="alert alert-info text-center">' . htmlspecialchars($_SESSION["txtMensaje"]) . '</div>';
-                                        unset($_SESSION["txtMensaje"]); 
-                                    }
-                                ?>
-
                                 <form method="post" action="registrarUsuario.php">
                                     <div class="form-group">
                                         <input type="text" name="Nombre" class="form-control form-control-user" placeholder="Nombre" required>
@@ -65,3 +58,4 @@
         </div>
     </div>
 </div>
+
