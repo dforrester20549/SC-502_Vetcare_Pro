@@ -17,7 +17,6 @@
         $consultar = ConsultarUsuarios();
 
         $Datos = $consultar;
-        
     }
 
     if (isset($_GET["consultarUsuarioActivo"])) 
@@ -114,4 +113,33 @@
     }
 
 
+
+    // -------------------------------------- Consultar Logs ---------------------------------
+
+    if (isset($_GET["consultarLogs"])) 
+    {
+        $consultarLogs = consultarLogs();
+
+        $DatosLogs = $consultarLogs;
+    }
+
+
+    // -------------------------------------- Descargar Logs ---------------------------------
+
+    if (isset($_POST['btnDescargarLogs'])) 
+    {
+        descargarLogsCSV();
+    }
+    
+
+    // -------------------------------------- Eliminar Logs ---------------------------------
+
+    if (isset($_POST['btnEliminarLogs'])) 
+    {
+        $IdSession = $_SESSION['IdSession'];  
+        eliminarLogs($IdSession);
+        $_SESSION["Success"] = "Todos los registros de logs han sido eliminados.";
+        header('Location: ../View/Usuarios/consultarLogs.php'); 
+        exit();
+    }
 ?>

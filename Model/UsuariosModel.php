@@ -135,4 +135,52 @@
             return false;
         }
     }
+
+
+    // -------------------------------------- Consultar Logs ---------------------------------
+    function consultarLogs()
+    {
+        $enlace = AbrirBD();
+        $sentencia = "CALL sp_GET_consultarLogs()";
+        $resultado = $enlace -> query($sentencia);
+
+        $consultarLogs = [];
+        if ($resultado) {
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $consultarLogs[] = $row;
+            }
+        }
+        return $consultarLogs;
+    }
+
+    // -------------------------------------- Descargar Logs ---------------------------------
+    function descargarLogsCSV() {
+        $logs = consultarLogs(); 
+        $filename = "logs_" . date("Y-m-d") . ".csv";
+    
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/csv;");
+    
+        $output = fopen("php://output", "w");
+        fputcsv($output, ["Acción", "Descripción", "Usuario"]);
+    
+        foreach ($logs as $log) {
+            fputcsv($output, $log);
+        }
+    
+        fclose($output);
+        exit(); 
+    }
+
+
+    // -------------------------------------- Descargar Logs ---------------------------------
+    function eliminarLogs($IdSession) {
+            
+        $enlace = AbrirBD();
+        $sentencia = "CALL sp_TRUNCATE_Logs('$IdSession')";
+        $enlace->query($sentencia);
+        CerrarBD($enlace);
+    }
+
 ?>

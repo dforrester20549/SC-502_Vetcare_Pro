@@ -1,7 +1,6 @@
 <?php
     include_once '../../Controller/LoginController.php';
 
-    // Verifica si el usuario tiene una sesión válida
     if (!isset($_SESSION["IdSession"])) {
         echo "Acceso no autorizado.";
         exit();
@@ -20,30 +19,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <div class="form-box">
-                    <h2>Cambiar Contraseña</h2>
+                <div class="card shadow-lg p-4">
+                    <div class="text-center mb-4">
+                        <h3><strong>Cambiar Contraseña</strong></h3>
+                    </div>
                     <form action="../../Controller/LoginController.php" method="post">
                         <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
-                        
+
                         <div class="form-group">
                             <label for="new_password">Nueva Contraseña:</label>
                             <input type="password" name="new_password" id="new_password" class="form-control" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="confirm_password">Confirmar Contraseña:</label>
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
                         </div>
 
-                        <button type="submit" name="btnCambiarContrasenna" class="btn btn-primary w-100">Cambiar Contraseña</button>
+                        <button type="submit" name="btnCambiarContrasenna" class="btn btn-primary w-100 mt-3">Cambiar Contraseña</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+        <div class="container text-center">
+            <a href="/SC-502_Vetcare_Pro/index.php">
+                <img src="../root/img/logo/logo.png" alt="Logo VetCare Pro" width="100">
+            </a>
+            <p class="text-muted">&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="../root/js/jquery-1.11.1.min.js"></script>
     <script src="../root/bootstrap/js/bootstrap.min.js"></script>
 </body>
