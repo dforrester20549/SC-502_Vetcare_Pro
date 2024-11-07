@@ -1,9 +1,8 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_TRUNCATE_Logs;
+DROP PROCEDURE IF EXISTS sp_GET_consultarUsuarios;
 
--- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
 DELIMITER //
 CREATE PROCEDURE sp_LOGIN_insertarUsuario (
     IN p_Identificacion VARCHAR(20),
@@ -19,12 +18,12 @@ BEGIN
     ELSE
         -- Insertar nuevo usuario
         INSERT INTO tusuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id)
-        VALUES (p_Identificacion, p_Nombre, p_Correo, p_Contrasenna, 1, 4);
+        VALUES (p_Identificacion, p_Nombre, p_Correo, p_Contrasenna, 1, 3);
     END IF; -- Cerrar el bloque IF
 END // -- Cerrar el procedimiento
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_iniciarSesion___________________________________________________________________02
+
 DELIMITER ;;
 CREATE PROCEDURE sp_LOGIN_iniciarSesion(pCorreo varchar(80),
                                     pContrasenna varchar(10))
@@ -49,7 +48,6 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_recuperarAcceso___________________________________________________________________03
 DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_recuperarAcceso(IN p_correo VARCHAR(255))
 BEGIN
@@ -76,23 +74,8 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_actualizarContrasenna______________________________________________________________04
 DELIMITER $$
-CREATE PROCEDURE sp_LOGIN_actualizarContrasenna(
-    IN pId BIGINT,
-    IN pCodigo VARCHAR(10)
-)
-BEGIN
-    UPDATE vetcaredb.tUsuarios
-    SET Contrasenna = pCodigo,
-        ContrasennaTemporal = TRUE,
-        CodigoRecuperacion = pCodigo
-    WHERE Id = pId;
-END
-DELIMITER ;
 
--- ________________________________________________sp_LOGIN_cambiarContrasenna________________________________________________________________05
-DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_cambiarContrasenna(
     IN p_token VARCHAR(255),
     IN p_nuevaContrasennaHash VARCHAR(255)
@@ -124,19 +107,13 @@ END $$
 
 DELIMITER ;
 
--- _________________________________________________TUSUARIOS______________________________________________________________________________
+-- TUSUARIOS
 
--- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________________06
+-- SP_GET_TUSUARIOS
 DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuarios(
-    IN pIdSession BIGINT
-)
+CREATE PROCEDURE sp_GET_consultarUsuarios()
 BEGIN
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
-
-    -- Selección de la información del usuario y el nombre del rol
+    -- Selección de la información de todos los usuarios y sus roles
     SELECT 
         u.Id,
         u.Identificacion,
@@ -147,187 +124,6 @@ BEGIN
         r.NombreRol
     FROM 
         tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Id = pIdSession;
-END ;;
-DELIMITER ;
-
--- ________________________________________________sp_GET_consultarUsuariosActivos_____________________________________________________________07
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuariosActivos()
-BEGIN
-    -- Selección de la información de los usuarios activos y el nombre del rol
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Activo = 1;
-END
-DELIMITER ;
-
--- ________________________________________________sp_GET_consultarUsuariosInactivos___________________________________________________________08
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuariosInactivos()
-BEGIN
-    -- Selección de la información de los usuarios activos y el nombre del rol
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Activo = 0;
-END
-DELIMITER ;
-
--- ________________________________________________sp_INSERT_registrarUsuario_________________________________________________________________09
-DELIMITER ;;
-CREATE PROCEDURE sp_INSERT_registrarUsuario(
-    IN pIdentificacion VARCHAR(20),
-    IN pNombre VARCHAR(100),
-    IN pCorreo VARCHAR(100),
-    IN pContrasenna VARCHAR(255), 
-    IN pActivo BIT,
-    IN pTRol_id BIGINT,
-    IN pIdSession BIGINT
-)
-BEGIN
-    -- Inserción del nuevo usuario
-    INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, ContrasennaTemporal, Activo, tRol_id)
-    VALUES (pIdentificacion, pNombre, pCorreo, pContrasenna, 1, pActivo, pTRol_id);
-    
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Registrar Usuario', CONCAT('Usuario registrado: ', pNombre, ', por el usuario con ID: ', pIdSession), pIdSession);
-END ;;
-DELIMITER ;
-
--- ________________________________________________sp_GET_tRoles____________________________________________________________________________10
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_tRoles()
-BEGIN
-    -- Selección de todos los roles
-    SELECT 
-        Id,
-        NombreRol
-    FROM 
-        tRoles;
-END
-DELIMITER ;
-
--- ________________________________________________sp_UPDATE_cambiarEstadoUsuario___________________________________________________________11
-DELIMITER ;;
-CREATE PROCEDURE sp_UPDATE_cambiarEstadoUsuario(
-    IN pUserId BIGINT,
-    IN pNuevoEstado BIT
-)
-BEGIN
-    -- Actualización del estado del usuario
-    UPDATE tUsuarios 
-    SET Activo = pNuevoEstado
-    WHERE Id = pUserId;
-END ;;
-DELIMITER ;
-
--- ________________________________________________sp_GET_UsuarioPorID_______________________________________________________________________12
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_UsuarioPorID(
-    IN pId BIGINT
-)
-BEGIN
-    -- Seleccionar el usuario por su ID
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol,
-        u.ContrasennaTemporal
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Id = pId;
-END ;;
-DELIMITER ;
-
--- ________________________________________________sp_UPDATE_actualizarUsuario_________________________________________________________________13
-DELIMITER ;;
-CREATE PROCEDURE sp_UPDATE_actualizarUsuario(
-    IN pId BIGINT,
-    IN pNombre VARCHAR(100),
-    IN pCorreo VARCHAR(100),
-    IN pIdentificacion VARCHAR(20),
-    IN pActivo TINYINT(1),
-    IN pRolId BIGINT,
-    IN pIdSession BIGINT
-)
-BEGIN
-    -- Convertir el valor de pActivo a 0 si es diferente de 1
-    SET pActivo = IF(pActivo = 1, 1, 0);
-
-    -- Actualización del usuario
-    UPDATE tUsuarios
-    SET 
-        Nombre = pNombre,
-        Correo = pCorreo,
-        Identificacion = pIdentificacion,
-        Activo = pActivo,
-        tRol_id = pRolId
-    WHERE 
-        Id = pId;
-
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Actualizar Usuario', CONCAT('Usuario actualizado: ', pNombre, ', por el usuario con ID: ', pIdSession), pIdSession);
-END ;;
-DELIMITER ;;
-
--- ________________________________________________sp_GET_consultarLogs_________________________________________________________________14
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarLogs()
-BEGIN
-
-    SELECT 
-        Id,
-        accion,
-        descripcion,
-        usuario_id
-        
-    FROM 
-        Log;
-END ;;
-DELIMITER ;
-
-
--- ________________________________________________sp_TRUNCATE_Logs____________________________________________________________________15
-DELIMITER ;;
-CREATE PROCEDURE sp_TRUNCATE_Logs(
-    IN pIdSession BIGINT
-)
-BEGIN
-    -- Limpiar la tabla Logs
-    TRUNCATE TABLE Log;
-
-    -- Registrar la acción de eliminación en la tabla Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Eliminar Logs', CONCAT( 'Se realizó el eliminado de todos los registros en la tabla Logs',pIdSession), pIdSession);
+        JOIN tRoles r ON u.tRol_id = r.Id;
 END ;;
 DELIMITER ;

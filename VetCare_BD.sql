@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 
 
 -- Eliminar tablas
-DROP TABLE tUsuarios;
+DROP TABLE tmascotas;
 
 
 -- Se crean las tablas
@@ -72,7 +72,8 @@ CREATE TABLE tCitas (
     Fecha_Cita DATETIME NOT NULL,
     Motivo TEXT,
     Estado ENUM('pendiente', 'completada', 'cancelada'),
-    Activo bit(1) NOT NULL
+    Activo bit(1) NOT NULL,
+    tVeterinario_id BIGINT(11)
 );
 
 -- Tabla: Tratamientos
@@ -82,7 +83,8 @@ CREATE TABLE tTratamientos (
     Fecha_Tratamiento DATE NOT NULL,
     Descripcion TEXT,
     Costo DECIMAL(10, 2),
-    Activo bit(1) NOT NULL
+    Activo bit(1) NOT NULL,
+    tMedicamento_id BIGINT(11)
 );
 
 -- Tabla: Veterinarios
@@ -123,22 +125,44 @@ CREATE TABLE tRecuperacion (
 );
 
 
--- Añadir llaves foráneas
+-- Relacionar tUsuarios con tRoles
 ALTER TABLE tUsuarios
-ADD FOREIGN KEY (tRol_id) REFERENCES tRoles(id);
+ADD CONSTRAINT FK_tUsuarios_tRoles
+FOREIGN KEY (tRol_id) REFERENCES tRoles(Id);
 
+-- Relacionar tMascotas con tDuenos
 ALTER TABLE tMascotas
-ADD FOREIGN KEY (tDueño_id) REFERENCES tDuenos(id);
+ADD CONSTRAINT FK_tMascotas_tDuenos
+FOREIGN KEY (tDueno_Id) REFERENCES tDuenos(Id) ON DELETE CASCADE;
 
+-- Relacionar tCitas con tMascotas y tVeterinarios
 ALTER TABLE tCitas
-ADD FOREIGN KEY (tMascota_id) REFERENCES tMascotas(id);
+ADD CONSTRAINT FK_tCitas_tMascotas
+FOREIGN KEY (tMascota_id) REFERENCES tMascotas(Id) ON DELETE CASCADE;
 
+
+-- Relacionar tTratamientos con tMascotas, tVeterinarios, y tMedicamentos
 ALTER TABLE tTratamientos
-ADD FOREIGN KEY (tMascota_id) REFERENCES tMascotas(id);
+ADD CONSTRAINT FK_tTratamientos_tMascotas
+FOREIGN KEY (tMascota_Id) REFERENCES tMascotas(Id) ON DELETE CASCADE;
 
+
+-- Relacionar tFacturas con tDuenos
 ALTER TABLE tFacturas
-ADD FOREIGN KEY (tDueno_id) REFERENCES tDuenos(id);
+ADD CONSTRAINT FK_tFacturas_tDuenos
+FOREIGN KEY (tDueno_Id) REFERENCES tDuenos(Id) ON DELETE SET NULL;
 
+-- Relacionar tRecuperacion con tUsuarios
 ALTER TABLE tRecuperacion
-ADD FOREIGN KEY (tUsuarios_id) REFERENCES tUsuarios(id); 
+ADD CONSTRAINT FK_tRecuperacion_tUsuarios
+FOREIGN KEY (tUsuarios_id) REFERENCES tUsuarios(Id) ON DELETE CASCADE;
 
+-- Crear la llave foránea de tTratamientos hacia tMedicamentos
+ALTER TABLE tTratamientos
+ADD CONSTRAINT fk_ttratamientos_tmedicamentos
+FOREIGN KEY (tMedicamento_id) REFERENCES tMedicamentos(Id);
+
+-- Crear la llave foránea de tCitas hacia tVeterinarios
+ALTER TABLE tCitas
+ADD CONSTRAINT fk_tcitas_tveterinarios
+FOREIGN KEY (tVeterinario_id) REFERENCES tVeterinarios(Id);
