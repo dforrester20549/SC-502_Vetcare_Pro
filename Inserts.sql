@@ -11,4 +11,5 @@ INSERT INTO tRoles (NombreRol) VALUES
 ('veterinario'),
 ('cliente');
 
-
+INSERT INTO tmedicamentos (Nombre, Descripcion, Precio, Cantidad)
+VALUES ('Epiotic spherulites x 100 Ml', 'Su uso regular ayuda a prevenir las recaídas en animales predispuestos y a mantener el equilibrio microbiano natural.', 37.60, '10')
