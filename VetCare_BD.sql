@@ -1,13 +1,10 @@
+CREATE SCHEMA `vetcaredb` ;
 USE vetcaredb;
 
 -- Crear usuario y darle todos los privilegios
 CREATE USER 'system'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'system'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-
-
--- Eliminar tablas
-DROP TABLE tmascotas;
 
 
 -- Se crean las tablas
@@ -133,7 +130,7 @@ FOREIGN KEY (tRol_id) REFERENCES tRoles(Id);
 -- Relacionar tMascotas con tDuenos
 ALTER TABLE tMascotas
 ADD CONSTRAINT FK_tMascotas_tDuenos
-FOREIGN KEY (tDueno_Id) REFERENCES tDuenos(Id) ON DELETE CASCADE;
+FOREIGN KEY (tDueño_Id) REFERENCES tDuenos(Id) ON DELETE CASCADE;
 
 -- Relacionar tCitas con tMascotas y tVeterinarios
 ALTER TABLE tCitas
