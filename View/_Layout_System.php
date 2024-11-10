@@ -53,7 +53,7 @@
               <i class="ti ti-user fs-6"></i>
               <p class="mb-0 fs-3">Mi Perfil</p>
             </a>
-            <a href="../Usuario/cambiarAcceso.php" class="d-flex align-items-center gap-2 dropdown-item">
+            <a href="../Usuarios/seguridad.php" class="d-flex align-items-center gap-2 dropdown-item">
               <i class="ti ti-list-check fs-6"></i>
               <p class="mb-0 fs-3">Seguridad</p>
             </a>

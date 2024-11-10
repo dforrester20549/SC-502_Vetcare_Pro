@@ -173,6 +173,30 @@
         exit(); 
     }
 
+    // -------------------------------------- Cambiar Contraseña ---------------------------------
+    /*function CambiarContrasennaConUsuarioModel($Id, $NuevaContrasenna)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL sp_LOGIN_cambiarContrasenna('$Id', '$NuevaContrasenna')";
+            $resultado = $enlace->query($sentencia);
+
+            if ($resultado) {
+                $sentencia = "UPDATE tUsuarios SET ContrasennaTemporal = FALSE WHERE Id = '$Id'";
+                $enlace->query($sentencia);
+            }
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch (Exception $ex)
+        {
+            return false;
+        }
+    }*/
+
 
     // -------------------------------------- Descargar Logs ---------------------------------
     function eliminarLogs($IdSession) {

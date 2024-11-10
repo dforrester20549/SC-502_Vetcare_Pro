@@ -69,7 +69,7 @@
                                     </div>
 
                                     <!-- Tabla de Usuarios Inactivos -->
-                                    <div class="tab-pane fade show active" id="usuarios-inactivos" role="tabpanel" aria-labelledby="usuarios-inactivos-tab">
+                                    <div class="tab-pane fade" id="usuarios-inactivos" role="tabpanel" aria-labelledby="usuarios-inactivos-tab">
                                         <div class="table-responsive">
                                             <table id="DataTableInactivos" class="table table-bordered">
                                                 <thead>

@@ -111,6 +111,31 @@
         header('Location: consultarUsuarioActivo.php');
         exit();
     }
+    
+
+    // -------------------------------------- Cambiar Contraseña ---------------------------------
+    /*if (isset($_POST["btnCambiarContrasenna"])) {
+        $idUsuario = $_POST["idUsuario"];
+        $nuevaContrasenna = $_POST["new_password"];
+        $confirmarContrasenna = $_POST["confirm_password"];
+    
+
+        if ($nuevaContrasenna === $confirmarContrasenna) {
+
+            $resultado = CambiarContrasennaConUsuarioModel($idUsuario, $nuevaContrasenna);
+    
+            if ($resultado) {
+                $_POST["txtMensaje"] = "Contraseña cambiada correctamente.";
+                header('location: ../View/_Layout_System.php');
+            } else {
+                $_POST["txtMensaje"] = "Hubo un problema al cambiar su contraseña.";
+                header('location: ../View/_Layout_System.php');
+            }
+        } else {
+            $_POST["txtMensaje"] = "Las contraseñas no coinciden.";
+            header('location: ../View/Usuarios/seguridad.php');
+        }
+    }*/
 
 
 
