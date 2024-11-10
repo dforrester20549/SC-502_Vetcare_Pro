@@ -174,7 +174,7 @@
     }
 
     // -------------------------------------- Cambiar Contraseña ---------------------------------
-    function CambiarContrasennaConUsuarioModel($Id, $NuevaContrasenna)
+    /*function CambiarContrasennaConUsuarioModel($Id, $NuevaContrasenna)
     {
         try
         {
@@ -195,7 +195,7 @@
         {
             return false;
         }
-    }
+    }*/
 
 
     // -------------------------------------- Descargar Logs ---------------------------------

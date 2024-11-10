@@ -114,7 +114,7 @@
     
 
     // -------------------------------------- Cambiar Contraseña ---------------------------------
-    if (isset($_POST["btnCambiarContrasenna"])) {
+    /*if (isset($_POST["btnCambiarContrasenna"])) {
         $idUsuario = $_POST["idUsuario"];
         $nuevaContrasenna = $_POST["new_password"];
         $confirmarContrasenna = $_POST["confirm_password"];
@@ -135,7 +135,7 @@
             $_POST["txtMensaje"] = "Las contraseñas no coinciden.";
             header('location: ../View/Usuarios/seguridad.php');
         }
-    }
+    }*/
 
 
 
