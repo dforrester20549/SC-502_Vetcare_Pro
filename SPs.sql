@@ -127,3 +127,33 @@ BEGIN
         JOIN tRoles r ON u.tRol_id = r.Id;
 END ;;
 DELIMITER ;
+
+
+USE `vetcaredb`;
+DROP procedure IF EXISTS `RegistrarCita`;
+
+DELIMITER $$
+USE `vetcaredb`$$
+CREATE PROCEDURE `RegistrarCita` (pmascotaid bigint(11),pfecha datetime,pmotivo text, pveterinarioid bigint(11))
+BEGIN
+INSERT INTO `vetcaredb`.`tcitas`
+(
+`tMascota_id`,
+`Fecha_Cita`,
+`Motivo`,
+`Estado`,
+`Activo`,
+`tVeterinario_id`)
+VALUES
+(
+pmascotaid,
+pfecha,
+pmotivo,
+'pendiente',
+1,
+pveterinarioid);
+
+END$$
+
+DELIMITER ;
+
