@@ -1,13 +1,10 @@
+CREATE database vetcaredb ;
 USE vetcaredb;
-
+SELECT User, Host FROM mysql.user WHERE User = 'system' AND Host = 'localhost';
 -- Crear usuario y darle todos los privilegios
 CREATE USER 'system'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'system'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-
-
--- Eliminar tablas
-DROP TABLE tmascotas;
 
 
 -- Se crean las tablas
@@ -61,7 +58,7 @@ CREATE TABLE tMascotas (
     Edad INT,
     Peso DECIMAL(5, 2),
     Fecha_Registro DATE NOT NULL,
-    tDueño_Id bigint(11),
+    tDueno_Id bigint(11),
     Activo bit(1) NOT NULL
 );
 
