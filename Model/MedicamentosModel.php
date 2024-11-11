@@ -1,13 +1,13 @@
 <?php
     include_once 'BaseDatos.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     // -------------------------------------- Consultar Medicamentos ---------------------------------
 
-    function ConsultarMedicamentos()
+    function ConsultarMedicamentosModel()
     {
         $enlace = AbrirBD();
-        $sentencia = "CALL sp_GET_Medicamentos()";
+
+        $sentencia = "CALL sp_ConsultarMedicamentos()";
         $resultado = $enlace -> query($sentencia);
 
         $medicamentos = [];
@@ -16,37 +16,8 @@
                 $medicamentos[] = $row;
             }
         }
+        CerrarBD($enlace);
         return $medicamentos;
-    }
-
-    function ConsultarMedicamentosConStock()
-    {
-        $enlace = AbrirBD();
-        $sentencia = "CALL sp_GET_MedicamentosConStock()";
-        $resultado = $enlace -> query($sentencia);
-
-        $medicamentosConStock = [];
-        if ($resultado) {
-            while ($row = mysqli_fetch_assoc($resultado)) {
-                $medicamentosConStock[] = $row;
-            }
-        }
-        return $medicamentosConStock;
-    }
-
-    function ConsultarMedicamentosSinStock()
-    {
-        $enlace = AbrirBD();
-        $sentencia = "CALL sp_GET_consultarMedicamentosSinStock()";
-        $resultado = $enlace -> query($sentencia);
-
-        $medicamentosSinStock = [];
-        if ($resultado) {
-            while ($row = mysqli_fetch_assoc($resultado)) {
-                $medicamentosSinStock[] = $row;
-            }
-        }
-        return $medicamentosSinStock;
     }
 
     // -------------------------------------- Registrar Medicamento ---------------------------------
@@ -55,7 +26,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_INSERT_Medicamento('$Nombre', '$Descripcion', '$Precio', '$Cantidad')";
+            $sentencia = "CALL sp_InsertarMedicamento('$Nombre', '$Descripcion', '$Precio', '$Cantidad')";
             $resultado = $enlace->query($sentencia);
             CerrarBD($enlace);
             return $resultado;
@@ -69,7 +40,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_GET_MedicamentoPorID('$Id')";
+            $sentencia = "CALL sp_ConsultarMedicamentos('$Id')";
             $resultado = $enlace->query($sentencia);
         
             $actualizarMedicamento = null;
@@ -88,7 +59,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_UPDATE_Medicamento('$Id','$Nombre','$Descripcion','$Precio','$Cantidad')";
+            $sentencia = "CALL sp_ActualizarMedicamento('$Id','$Nombre','$Descripcion','$Precio','$Cantidad')";
             $resultado = $enlace -> query($sentencia);
             CerrarBD($enlace);
             return $resultado;

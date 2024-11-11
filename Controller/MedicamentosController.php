@@ -1,6 +1,5 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/MedicamentosModel.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -11,19 +10,7 @@
     
     if (isset($_GET["consultarMedicamentos"])) 
     {
-        $consultar = ConsultarMedicamentos();
-        $Datos = $consultar;
-    }
-
-    if (isset($_GET["consultarMedicamentosConStock"])) 
-    {
-        $consultar = ConsultarMedicamentosConStock();
-        $Datos = $consultar;
-    }
-
-    if (isset($_GET["consultarMedicamentosSinStock"])) 
-    {
-        $consultar = ConsultarMedicamentosSinStock();
+        $consultar = ConsultarMedicamentosModel();
         $Datos = $consultar;
     }
 
