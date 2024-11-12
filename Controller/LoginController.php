@@ -46,7 +46,7 @@
             }
         } else {
             session_destroy();
-            $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
+            $_SESSION["Error"] = "Datos de inicio de sesión incorrectas";
         }
     }
 
