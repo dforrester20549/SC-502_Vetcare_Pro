@@ -343,23 +343,9 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
     -- Selección de la información del usuario y el nombre del rol
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Id = pIdSession;
-END ;;
-DELIMITER ;
 
--- ________________________________________________sp_UPDATE_seguridad___________________________________________________17
+
+-- ________________________________________________sp_UPDATE_seguridad_________________________________________________________________17
 DELIMITER $$
 CREATE PROCEDURE sp_UPDATE_seguridad (
     IN p_Id BIGINT,
@@ -389,4 +375,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Usuario no encontrado.';
     END IF;
 END $$
+=======
+        u.Activo = 0;
+END
 DELIMITER ;
