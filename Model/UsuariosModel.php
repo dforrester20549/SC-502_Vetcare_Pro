@@ -101,23 +101,23 @@
 
 
         // -------------------------------------- Actualizar Usuario ---------------------------------
-        function ConsultarUsuarioPorId($Id){
-            try {
-                $enlace = AbrirBD();
-                $sentencia = "CALL sp_GET_UsuarioPorID('$Id')";
-                $resultado = $enlace->query($sentencia);
+    function ConsultarUsuarioPorId($Id){
+        try {
+            $enlace = AbrirBD();
+            $sentencia = "CALL sp_GET_UsuarioPorID('$Id')";
+            $resultado = $enlace->query($sentencia);
         
-                $actualizarusuario = null;
-                if ($resultado && $resultado->num_rows > 0) {
-                    $actualizarusuario = mysqli_fetch_assoc($resultado);
-                }
-        
-                CerrarBD($enlace);
-                return $actualizarusuario;
-            } catch (Exception $ex) {
-                return null;
+            $actualizarusuario = null;
+            if ($resultado && $resultado->num_rows > 0) {
+                $actualizarusuario = mysqli_fetch_assoc($resultado);
             }
+        
+            CerrarBD($enlace);
+            return $actualizarusuario;
+        } catch (Exception $ex) {
+            return null;
         }
+    }
 
         function ActualizarUsuarioModel($Id, $Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession)
     {
@@ -173,20 +173,36 @@
         exit(); 
     }
 
-    // -------------------------------------- Cambiar Contraseña ---------------------------------
-    /*function CambiarContrasennaConUsuarioModel($Id, $NuevaContrasenna)
+    // -------------------------------------- Perfil ---------------------------------
+    function ConsultarPerfilPorId($Id){
+        try {
+            $enlace = AbrirBD();
+            $sentencia = "CALL sp_GET_UsuarioPorID('$Id')";
+            $resultado = $enlace->query($sentencia);
+        
+            $perfil = null;
+            if ($resultado && $resultado->num_rows > 0) {
+                $perfil = mysqli_fetch_assoc($resultado);
+            }
+        
+            CerrarBD($enlace);
+            return $perfil;
+        } catch (Exception $ex) {
+            return null;
+        }
+    }
+
+
+
+    function SeguridadModel($idUsuario, $contrasennaNueva)
     {
         try
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL sp_LOGIN_cambiarContrasenna('$Id', '$NuevaContrasenna')";
-            $resultado = $enlace->query($sentencia);
-
-            if ($resultado) {
-                $sentencia = "UPDATE tUsuarios SET ContrasennaTemporal = FALSE WHERE Id = '$Id'";
-                $enlace->query($sentencia);
-            }
+            $sentencia = $enlace->prepare("CALL sp_UPDATE_seguridad(?, ?)");
+            $sentencia->bind_param("is", $idUsuario, $contrasennaNueva);
+            $resultado = $sentencia->execute();
 
             CerrarBD($enlace);
             return $resultado;
@@ -195,7 +211,7 @@
         {
             return false;
         }
-    }*/
+    }
 
 
     // -------------------------------------- Descargar Logs ---------------------------------

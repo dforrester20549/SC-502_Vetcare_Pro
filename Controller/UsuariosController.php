@@ -77,7 +77,7 @@
 
      // -------------------------------------- Actualizar Usuario ---------------------------------
 
-     if (isset($_GET['id'])) {
+    if (isset($_GET['id'])) {
         $Id = $_GET['id'];
         
         $actualizarusuario = ConsultarUsuarioPorId($Id);
@@ -113,31 +113,78 @@
     }
     
 
-    // -------------------------------------- Cambiar Contraseña ---------------------------------
-    /*if (isset($_POST["btnCambiarContrasenna"])) {
+    // -------------------------------------- Seguridad ---------------------------------
+    if (isset($_GET['idseguridad'])) {
+        $Id = $_GET['idseguridad'];
+        
+        $perfil = ConsultarPerfilPorId($Id);
+    
+        if ($perfil) {
+            $Datos = $perfil;
+        } else {
+            $_SESSION["Error"] = "Error de usuario.";
+            header('location: ../View/Usuarios/seguridad.php');
+            exit();
+        }
+    }
+
+    if (isset($_POST["btnSeguridad"])) {
         $idUsuario = $_POST["idUsuario"];
-        $nuevaContrasenna = $_POST["new_password"];
+        $contrasennaNueva = $_POST["new_password"];
         $confirmarContrasenna = $_POST["confirm_password"];
     
-
-        if ($nuevaContrasenna === $confirmarContrasenna) {
-
-            $resultado = CambiarContrasennaConUsuarioModel($idUsuario, $nuevaContrasenna);
+        if ($contrasennaNueva === $confirmarContrasenna) {
+            $resultado = SeguridadModel($idUsuario, $contrasennaNueva);
     
             if ($resultado) {
-                $_POST["txtMensaje"] = "Contraseña cambiada correctamente.";
-                header('location: ../View/_Layout_System.php');
+                $_SESSION["Success"] = "Contraseña cambiada correctamente.";
             } else {
-                $_POST["txtMensaje"] = "Hubo un problema al cambiar su contraseña.";
-                header('location: ../View/_Layout_System.php');
+                $_SESSION["Error"] = "Hubo un problema al cambiar su contraseña.";
             }
         } else {
-            $_POST["txtMensaje"] = "Las contraseñas no coinciden.";
-            header('location: ../View/Usuarios/seguridad.php');
+            $_SESSION["Error"] = "Las contraseñas no coinciden.";
         }
-    }*/
+    
+        header('location: ../View/Usuarios/seguridad.php');
+        exit();
+    }
+
+    // -------------------------------------- Perfil ---------------------------------
+    if (isset($_GET['idperfil'])) {
+        $Id = $_GET['idperfil'];
+        
+        $perfil = ConsultarPerfilPorId($Id);
+    
+        if ($perfil) {
+            $Datos = $perfil;
+        } else {
+            $_SESSION["Error"] = "Error de usuario.";
+            header('location: ../View/Usuarios/perfil.php');
+            exit();
+        }
+    }
 
 
+    if (isset($_POST["btnPerfil"])) {
+        $Id = $_POST["idUsuario"];  
+        $Nombre = $_POST["Nombre"];
+        $Correo = $_POST["Correo"];
+        $Cedula = $_POST["Cedula"];
+        $Activo = $_POST["Activo"];
+        $Rol = $_POST["NombreRol"];
+        $IdSession = $_SESSION['IdSession'];  
+        
+        $resultado = ActualizarUsuarioModel($Id, $Nombre, $Correo, $Cedula, $Activo, $Rol, $IdSession);
+    
+        if ($resultado) { 
+            $_SESSION["Success"] = "La información del perfil se ha actualizado correctamente.";
+        } else {
+            $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
+        }
+        
+        header('Location: ../View/Usuarios/perfil.php');
+        exit();
+    }
 
     // -------------------------------------- Consultar Logs ---------------------------------
 

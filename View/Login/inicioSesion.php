@@ -100,9 +100,33 @@
 
     <script src="../root/js/jquery-1.11.1.min.js"></script>
     <script src="../root/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
-
-
-
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        <?php if (isset($_SESSION["Success"])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                confirmButtonColor: "#D9C65D",
+                 text: '<?php echo $_SESSION["Success"]; ?>'
+            });
+            <?php unset($_SESSION["Success"]); ?>
+        <?php endif; ?>
+            
+        <?php if (isset($_SESSION["Error"])): ?>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                confirmButtonColor: "#D9C65D",
+                text: '<?php echo $_SESSION["Error"]; ?>'
+            });
+            <?php unset($_SESSION["Error"]); ?>
+        <?php endif; ?>
+    });
+</script>
+

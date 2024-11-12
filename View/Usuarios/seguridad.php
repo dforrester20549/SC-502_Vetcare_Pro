@@ -1,19 +1,32 @@
 <?php
     include_once '../../Controller/UsuariosController.php';
 
-    include('../../View/_Layout_System.php');
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $idUsuario = $_SESSION['IdSession'];
+    $rolUsuario = $_SESSION['Rol'];
+
+    switch ($rolUsuario) {
+        case 1:
+            include('../../View/_Layout_System.php');
+            break;
+        case 2:
+            include('../../View/_Layout_Admin.php');
+            break;
+        case 3:
+            include('../../View/_Layout_Veterinario.php');
+            break;
+        case 4:
+            include('../../View/_Layout_Cliente.php');
+            break;
+        default:
+            include('../../View/_Layout_Cliente.php');
+    }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambiar Contraseña - VetCare Pro</title>
-    <link rel="stylesheet" href="../root/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../root/css/style.css">
-</head>
-<body>
+
+
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
@@ -21,7 +34,8 @@
                     <div class="text-center mb-4">
                         <h3><strong>Cambiar Contraseña</strong></h3>
                     </div>
-                    <form action="../../Controller/LoginController.php" method="post">
+                    <form action="../../Controller/UsuariosController.php" method="post">
+                        <input type="hidden" name="action" value="seguridad">
                         <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
 
                         <div class="form-group">
@@ -34,25 +48,40 @@
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
                         </div>
 
-                        <button type="submit" name="btnSeguridad" class="btn btn-primary w-100 mt-3">Cambiar Contraseña</button>
+                        <button type="submit"  id="btnSeguridad" name="btnSeguridad" class="btn btn-primary w-100 mt-3">Cambiar Contraseña</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <a href="/SC-502_Vetcare_Pro/index.php">
-                <img src="../root/img/logo/logo.png" alt="Logo VetCare Pro" width="100">
-            </a>
-            <p class="text-muted">&copy; <script>document.write(new Date().getFullYear());</script> VetCare Pro. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    <!-- Carga de scripts para DataTables y SweetAlert -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Scripts -->
-    <script src="../root/js/jquery-1.11.1.min.js"></script>
-    <script src="../root/bootstrap/js/bootstrap.min.js"></script>
-</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        <?php if (isset($_SESSION["Success"])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                confirmButtonColor: "#D9C65D",
+                text: '<?php echo $_SESSION["Success"]; ?>'
+            });
+            <?php unset($_SESSION["Success"]); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION["Error"])): ?>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                confirmButtonColor: "#D9C65D",
+                text: '<?php echo $_SESSION["Error"]; ?>'
+            });
+            <?php unset($_SESSION["Error"]); ?>
+        <?php endif; ?>
+    });
+</script>
+
+
 </html>

@@ -331,3 +331,51 @@ BEGIN
     VALUES ('Eliminar Logs', CONCAT( 'Se realizó el eliminado de todos los registros en la tabla Logs',pIdSession), pIdSession);
 END ;;
 DELIMITER ;
+
+-- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________16
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarUsuarios(
+    IN pIdSession BIGINT
+)
+BEGIN
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+
+    -- Selección de la información del usuario y el nombre del rol
+
+
+-- ________________________________________________sp_UPDATE_seguridad_________________________________________________________________17
+DELIMITER $$
+CREATE PROCEDURE sp_UPDATE_seguridad (
+    IN p_Id BIGINT,
+    IN p_contrasennaNueva VARCHAR(255)
+)
+BEGIN
+    DECLARE v_usuarioExistente INT;
+
+    -- Verificar si el usuario existe
+    SELECT COUNT(*) INTO v_usuarioExistente
+    FROM tUsuarios
+    WHERE Id = p_Id;
+
+    IF v_usuarioExistente = 1 THEN
+        -- Actualizar la contraseña del usuario
+        UPDATE tUsuarios
+        SET Contrasenna = p_contrasennaNueva,
+            ContrasennaTemporal = FALSE -- Cambiamos a FALSE si es una contraseña definitiva
+        WHERE Id = p_Id;
+
+        -- Insertar un registro en la tabla Log
+        INSERT INTO Log (accion, descripcion, usuario_id)
+        VALUES ('Actualizar Contraseña', CONCAT('La contraseña del usuario con ID ', p_Id, ' fue actualizada.'), p_Id);
+
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario no encontrado.';
+    END IF;
+END $$
+=======
+        u.Activo = 0;
+END
+DELIMITER ;
