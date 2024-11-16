@@ -379,3 +379,57 @@ END $$
         u.Activo = 0;
 END
 DELIMITER ;
+
+-- ________________________________________________sp_InsertarMedicamento____________________________________________________________________16
+DELIMITER //
+CREATE PROCEDURE sp_InsertarMedicamento (
+    IN p_Nombre NVARCHAR(100),
+    IN p_Descripcion NVARCHAR(255),
+    IN p_Dosis NVARCHAR(50),
+    IN pIdSession BIGINT
+)
+BEGIN
+    INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+    VALUES (p_Nombre, p_Descripcion, p_Dosis);
+    
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+END // 
+DELIMITER ;
+-- ________________________________________________sp_ConsultarMedicamentos____________________________________________________________________17
+DELIMITER // 
+CREATE PROCEDURE sp_ConsultarMedicamentos()
+BEGIN
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+
+	SELECT 
+	Nombre, 
+	Descripcion, 
+	Dosis 
+	FROM tmedicamentos; 
+END // 
+DELIMITER;
+-- ________________________________________________sp_ActualizarMedicamento____________________________________________________________________18
+DELIMITER // 
+CREATE PROCEDURE sp_ActualizarMedicamento (
+    IN p_Id INT(11),
+    IN p_Nombre NVARCHAR(100),
+    IN p_Descripcion NVARCHAR(255),
+    IN p_Dosis NVARCHAR(50),
+    IN pIdSession BIGINT
+)
+BEGIN
+    UPDATE tmedicamentos
+    SET Nombre = p_Nombre,
+        Descripcion = p_Descripcion,
+        Dosis = p_Dosis
+    WHERE Id = p_Id;
+
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+END // 
+DELIMITER ;
