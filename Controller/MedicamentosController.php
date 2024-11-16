@@ -3,17 +3,16 @@
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
-    $mensaje = "";
     }
 
-    // -------------------------------------- Consultar Medicamentos ---------------------------------
-    
-    if (isset($_GET["consultarMedicamentos"])) 
-    {
-        $consultar = ConsultarMedicamentosModel();
-        $Datos = $consultar;
-    }
+// -------------------------------------- Consultar Medicamentos ---------------------------------
+include_once '../../Model/MedicamentosModel.php';
 
+if (isset($_GET["btnconsultarMedicamentos"])) {
+    $Datos = ConsultarMedicamentosModel();
+}
+
+//include('../../View/consultarMedicamentos.php');
     // -------------------------------------- Registrar Medicamento ---------------------------------
 
     if (isset($_GET["btnRegistrarMedicamento"])) {
@@ -23,10 +22,10 @@
     if (isset($_POST["btnRegistrarMedicamento"])) {
         $Nombre = $_POST["Nombre"];
         $Descripcion = $_POST["Descripcion"];
-        $Precio = $_POST["Precio"];
-        $Cantidad = $_POST["Cantidad"];
+        $Dosis = $_POST["Dosis"];
+        $IdSession = $_SESSION['IdSession'];
     
-        $resultado = RegistrarMedicamentoModel($Nombre, $Descripcion, $Precio, $Cantidad);
+        $resultado = RegistrarMedicamentoModel($Nombre, $Descripcion, $Dosis, $IdSession);
     
         if ($resultado) {
             $mensaje = "El medicamento se ha registrado correctamente.";
@@ -59,10 +58,10 @@
         $Id = $_POST["idMedicamento"];  
         $Nombre = $_POST["Nombre"];
         $Descripcion = $_POST["Descripcion"];
-        $Precio = $_POST["Precio"];
-        $Cantidad = $_POST["Cantidad"];
+        $Dosis = $_POST["Dosis"];
+        $IdSession = $_SESSION['IdSession'];
         
-        $resultado = ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Precio, $Cantidad);
+        $resultado = ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Dosis, $IdSession);
 
     if ($resultado == true) {
         header('location: ../../View/Medicamentos/actualizarMedicamentos.php');

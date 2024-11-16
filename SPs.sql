@@ -332,25 +332,52 @@ BEGIN
 END ;;
 DELIMITER ;
 
-
-DELIMITER //
-CREATE PROCEDURE sp_LOGIN_insertarUsuario (
-    IN p_Identificacion VARCHAR(20),
-    IN p_Nombre VARCHAR(100),
-    IN p_Correo VARCHAR(100),
-    IN p_Contrasenna VARCHAR(255)
-) 
+-- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________16
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarUsuarios(
+    IN pIdSession BIGINT
+)
 BEGIN
-    -- Verifica si ya existe un usuario con el mismo email
-    IF EXISTS (SELECT 1 FROM tusuarios WHERE Correo = p_Correo) THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El correo electrónico ya está registrado';
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+
+    -- Selección de la información del usuario y el nombre del rol
+
+
+-- ________________________________________________sp_UPDATE_seguridad_________________________________________________________________17
+DELIMITER $$
+CREATE PROCEDURE sp_UPDATE_seguridad (
+    IN p_Id BIGINT,
+    IN p_contrasennaNueva VARCHAR(255)
+)
+BEGIN
+    DECLARE v_usuarioExistente INT;
+
+    -- Verificar si el usuario existe
+    SELECT COUNT(*) INTO v_usuarioExistente
+    FROM tUsuarios
+    WHERE Id = p_Id;
+
+    IF v_usuarioExistente = 1 THEN
+        -- Actualizar la contraseña del usuario
+        UPDATE tUsuarios
+        SET Contrasenna = p_contrasennaNueva,
+            ContrasennaTemporal = FALSE -- Cambiamos a FALSE si es una contraseña definitiva
+        WHERE Id = p_Id;
+
+        -- Insertar un registro en la tabla Log
+        INSERT INTO Log (accion, descripcion, usuario_id)
+        VALUES ('Actualizar Contraseña', CONCAT('La contraseña del usuario con ID ', p_Id, ' fue actualizada.'), p_Id);
+
     ELSE
-        -- Insertar nuevo usuario
-        INSERT INTO tusuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id)
-        VALUES (p_Identificacion, p_Nombre, p_Correo, p_Contrasenna, 1, 4);
-    END IF; -- Cerrar el bloque IF
-END // -- Cerrar el procedimiento
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario no encontrado.';
+    END IF;
+END $$
+=======
+        u.Activo = 0;
+END
 DELIMITER ;
 
 -- ________________________________________________sp_InsertarMedicamento____________________________________________________________________16
@@ -358,51 +385,51 @@ DELIMITER //
 CREATE PROCEDURE sp_InsertarMedicamento (
     IN p_Nombre NVARCHAR(100),
     IN p_Descripcion NVARCHAR(255),
-    IN p_Precio DECIMAL(10, 2),
-    IN p_Cantidad INT(11)
+    IN p_Dosis NVARCHAR(50),
+    IN pIdSession BIGINT
 )
 BEGIN
-    INSERT INTO tmedicamentos (Nombre, Descripcion, Precio, Cantidad)
-    VALUES (p_Nombre, p_Descripcion, p_Precio, p_Cantidad);
+    INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+    VALUES (p_Nombre, p_Descripcion, p_Dosis);
+    
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 END // 
 DELIMITER ;
--- ________________________________________________sp_ConsultarMedicamentos____________________________________________________________________16
+-- ________________________________________________sp_ConsultarMedicamentos____________________________________________________________________17
 DELIMITER // 
 CREATE PROCEDURE sp_ConsultarMedicamentos()
-BEGIN 
+BEGIN
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
+
 	SELECT 
 	Nombre, 
 	Descripcion, 
-	Precio, 
-	Cantidad 
+	Dosis 
 	FROM tmedicamentos; 
 END // 
 DELIMITER;
--- ________________________________________________sp_ActualizarMedicamento____________________________________________________________________16
+-- ________________________________________________sp_ActualizarMedicamento____________________________________________________________________18
 DELIMITER // 
 CREATE PROCEDURE sp_ActualizarMedicamento (
     IN p_Id INT(11),
     IN p_Nombre NVARCHAR(100),
     IN p_Descripcion NVARCHAR(255),
-    IN p_Precio DECIMAL(10, 2),
-    IN p_Cantidad INT(11)
+    IN p_Dosis NVARCHAR(50),
+    IN pIdSession BIGINT
 )
 BEGIN
     UPDATE tmedicamentos
     SET Nombre = p_Nombre,
         Descripcion = p_Descripcion,
-        Precio = p_Precio,
-        Cantidad = p_Cantidad
+        Dosis = p_Dosis
     WHERE Id = p_Id;
-END // 
-DELIMITER ;
--- ________________________________________________sp_EliminarMedicamento____________________________________________________________________16
-DELIMITER // 
-CREATE PROCEDURE sp_EliminarMedicamento (
-    IN p_Id INT(11)
-)
-BEGIN
-    DELETE FROM tmedicamentos
-    WHERE Id = p_Id;
+
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 END // 
 DELIMITER ;

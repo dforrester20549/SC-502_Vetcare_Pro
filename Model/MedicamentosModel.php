@@ -22,11 +22,11 @@
 
     // -------------------------------------- Registrar Medicamento ---------------------------------
 
-    function RegistrarMedicamentoModel($Nombre, $Descripcion, $Precio, $Cantidad)
+    function RegistrarMedicamentoModel($Nombre, $Descripcion, $Dosis, $IdSession)
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_InsertarMedicamento('$Nombre', '$Descripcion', '$Precio', '$Cantidad')";
+            $sentencia = "CALL sp_InsertarMedicamento('$Nombre', '$Descripcion', '$Dosis', '$IdSession')";
             $resultado = $enlace->query($sentencia);
             CerrarBD($enlace);
             return $resultado;
@@ -55,11 +55,11 @@
         }
     }
 
-    function ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Precio, $Cantidad)
+    function ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Dosis, $IdSession)
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_ActualizarMedicamento('$Id','$Nombre','$Descripcion','$Precio','$Cantidad')";
+            $sentencia = "CALL sp_ActualizarMedicamento('$Id','$Nombre','$Descripcion','$Dosis', '$IdSession')";
             $resultado = $enlace -> query($sentencia);
             CerrarBD($enlace);
             return $resultado;

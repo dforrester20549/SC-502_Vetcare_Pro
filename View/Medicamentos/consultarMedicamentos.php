@@ -1,10 +1,7 @@
 <?php
 include_once '../../Controller/MedicamentosController.php';
 
-
 $title = "Consultar medicamentos";
-$content = __FILE__;
-
 include('../../View/_Layout_Admin.php');
 ?>
 
@@ -20,31 +17,37 @@ include('../../View/_Layout_Admin.php');
                                     <h3 class="h4 text-gray-900 mb-4">Consultar medicamentos</h3>
                                 </div>
 
-                                <div class="table-responsive">
+                                <!-- Formulario para el botón de consultar -->
+                                <form method="get" action="">
+                                    <input type="hidden" name="btnconsultarMedicamentos" value="true">
+                                    <button type="submit" class="btn btn-primary">Refrescar</button>
+                                </form>
+
+                                <div class="table-responsive" style="margin-top: 20px;">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Identificación</th>
                                                 <th>Nombre</th>
-                                                <th>Descripcion</th>
-                                                <th>Precio</th>
-                                                <th>Cantidad</th>
+                                                <th>Descripción</th>
+                                                <th>Dosis</th>
+                                                <th>Activo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($Datos)) : ?>
-                                                <?php foreach ($Datos as $medicamentos) : ?>
+                                                <?php foreach ($Datos as $medicamento) : ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($medicamentos['Identificacion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($medicamentos['Nombre']); ?></td>
-                                                        <td><?php echo htmlspecialchars($medicamentos['Descripcion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($medicamentos['Precio']); ?></td>
-                                                        <td><?php echo htmlspecialchars($medicamentos['Cantidad']); ?></td>
+                                                        <td><?php echo htmlspecialchars($medicamento['Id']); ?></td>
+                                                        <td><?php echo htmlspecialchars($medicamento['Nombre']); ?></td>
+                                                        <td><?php echo htmlspecialchars($medicamento['Descripcion']); ?></td>
+                                                        <td><?php echo htmlspecialchars($medicamento['Dosis']); ?></td>
+                                                        <td><?php echo htmlspecialchars($medicamento['Activo']); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
                                                 <tr>
-                                                    <td colspan="6" class="text-center">No se encontraron medicamentos registrados.</td>
+                                                    <td colspan="4" class="text-center">No se encontraron medicamentos registrados.</td>
                                                 </tr>
                                             <?php endif; ?>
                                         </tbody>
