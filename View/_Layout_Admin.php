@@ -13,7 +13,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>System</title>
+  <title>VetCare - Administrador</title>
 
   <link rel="stylesheet" href="../root/css/all.min.css">
   <link rel="stylesheet" href="../root/css/tempusdominus-bootstrap-4.min.css">
