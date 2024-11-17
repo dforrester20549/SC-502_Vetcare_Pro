@@ -159,7 +159,7 @@
             $Datos = $perfil;
         } else {
             $_SESSION["Error"] = "Error de usuario.";
-            header('location: ../View/Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>');
+            //header('location: ../View/Usuarios/perfil.php');
             exit();
         }
     }
@@ -182,7 +182,7 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
-        header('Location: ../View/Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>');
+        header('Location: ../View/Usuarios/perfil.php?idperfil=' . $Id);
         exit();
     }
 
