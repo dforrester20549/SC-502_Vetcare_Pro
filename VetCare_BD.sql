@@ -6,6 +6,7 @@ CREATE USER 'system'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'system'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
+DROP TABLE tDuenos;
 
 -- Se crean las tablas
 
@@ -42,7 +43,7 @@ CREATE TABLE tUsuarios (
 -- Tabla: Dueños
 CREATE TABLE tDuenos (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
+    NombreDuenos VARCHAR(100) NOT NULL,
     Telefono VARCHAR(15),
     Email VARCHAR(100),
     Direccion VARCHAR(255),
@@ -52,7 +53,7 @@ CREATE TABLE tDuenos (
 -- Tabla: Mascotas
 CREATE TABLE tMascotas (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
+    NombreMascotas VARCHAR(100) NOT NULL,
     Tipo VARCHAR(50) NOT NULL,
     Raza VARCHAR(50),
     Edad INT,
@@ -130,7 +131,7 @@ FOREIGN KEY (tRol_id) REFERENCES tRoles(Id);
 -- Relacionar tMascotas con tDuenos
 ALTER TABLE tMascotas
 ADD CONSTRAINT FK_tMascotas_tDuenos
-FOREIGN KEY (tDueno_Id) REFERENCES tDuenos(Id) ON DELETE CASCADE;
+FOREIGN KEY (tDueno_Id) REFERENCES tDuenos(Id);
 
 -- Relacionar tCitas con tMascotas y tVeterinarios
 ALTER TABLE tCitas

@@ -4,6 +4,8 @@
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
+    $idUsuario = $_SESSION['IdSession'];
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +93,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="../Usuarios/consultarUsuario.php?ConsultarUsuario=1" class="nav-link">
+            <a href="*" class="nav-link">
             <i class="bi bi-people"></i>
               <p>
                 Usuarios
@@ -108,6 +110,29 @@
                 <a href="../Usuarios/registrarUsuario.php" class="nav-link">
                 <i class="bi bi-person-plus"></i>
                   <p>Registrar Usuario</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="*" class="nav-link">
+            <i class="bi bi-bug-fill"></i>
+              <p>
+                Mascotas
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="../Mascotas/consultarMascotas.php?consultarMascotas=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Mascotas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Mascotas/registrarMascotas.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Mascotas</p>
                 </a>
               </li>
             </ul>

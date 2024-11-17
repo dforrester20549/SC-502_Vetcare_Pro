@@ -1,7 +1,7 @@
 <?php
-    include_once '../../Controller/UsuariosController.php';
+    include_once '../../Controller/MascotasController.php';
 
-    $title = "Consultar Usuarios";
+    $title = "Consultar Mascotas";
     $content = __FILE__;
 
     $rolUsuario = $_SESSION['Rol']; 
@@ -13,8 +13,14 @@
         case 2:
             include('../../View/_Layout_Admin.php');
             break;
+        case 3:
+            include('../../View/_Layout_Veterinario.php');
+            break;
+        case 4:
+            include('../../View/_Layout_Cliente.php');
+            break;
         default:
-            include('../../View/_Layout_Admin.php');
+            include('../../View/_Layout_Cliente.php');
     }
 ?>
 
@@ -28,50 +34,54 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h3 class="h4 text-gray-900 mb-4">Administrar Usuarios</h3>
+                                    <h3 class="h4 text-gray-900 mb-4">Administrar Mascotas</h3>
                                 </div>
-                                
-                                <!-- Pestañas de Usuarios Activos e Inactivos -->
-                                <ul class="nav nav-tabs" id="usuariosTabs" role="tablist">
+
+                                <!-- Pestañas de Mascotas Activas e Inactivas -->
+                                <ul class="nav nav-tabs" id="mascotasTabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="usuarios-activos-tab" data-toggle="tab" href="#usuarios-activos" role="tab" aria-controls="usuarios-activos" aria-selected="true">Usuarios Activos</a>
+                                        <a class="nav-link active" id="mascotas-activos-tab" data-toggle="tab" href="#mascotas-activos" role="tab" aria-controls="mascotas-activos" aria-selected="true">Mascotas Activas</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="usuarios-inactivos-tab" data-toggle="tab" href="#usuarios-inactivos" role="tab" aria-controls="usuarios-inactivos" aria-selected="false">Usuarios Inactivos</a>
+                                        <a class="nav-link" id="mascotas-inactivos-tab" data-toggle="tab" href="#mascotas-inactivos" role="tab" aria-controls="mascotas-inactivos" aria-selected="false">Mascotas Inactivas</a>
                                     </li>
                                 </ul>
 
-                                <div class="tab-content mt-4" id="usuariosTabsContent">
-                                    <!-- Tabla de Usuarios Activos -->
-                                    <div class="tab-pane fade show active" id="usuarios-activos" role="tabpanel" aria-labelledby="usuarios-activos-tab">
+                                <div class="tab-content mt-4" id="mascotasTabsContent">
+                                    <!-- Tabla de Mascotas Activas -->
+                                    <div class="tab-pane fade show active" id="mascotas-activos" role="tabpanel" aria-labelledby="mascotas-activos-tab">
                                         <div class="table-responsive">
                                             <table id="DataTableActivos" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Identificación</th>
                                                         <th>Nombre</th>
-                                                        <th>Correo Electrónico</th>
-                                                        <th>Rol</th>
-                                                        <th>Acción</th>
+                                                        <th>Tipo</th>
+                                                        <th>Raza</th>
+                                                        <th>Edad</th>
+                                                        <th>Peso</th>
+                                                        <th>Dueño</th>
+                                                        <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php if (!empty($DatosActivos)) : ?>
-                                                        <?php foreach ($DatosActivos as $usuariosActivos) : ?>
+                                                    <?php if (!empty($Datos)) : ?>
+                                                        <?php foreach ($Datos as $mascota) : ?>
                                                             <tr>
-                                                                <td><?php echo htmlspecialchars($usuariosActivos['Identificacion']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosActivos['Nombre']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosActivos['Correo']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosActivos['NombreRol']); ?></td>
-                                                                <td><?php if ($usuariosActivos['tRol_id'] !== '1') : ?>
-                                                                        <a href="actualizarUsuario.php?id=<?php echo $usuariosActivos['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-person-gear"></i></a>
-                                                                    <?php endif; ?>
+                                                                <td><?php echo htmlspecialchars($mascota['NombreMascotas']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Tipo']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Raza']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Edad']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Peso']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['NombreDuenos']); ?></td>
+                                                                <td>
+                                                                    <a href="actualizarMascotas.php?id=<?php echo $mascota['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                                                    <a href="../../Controller/MascotasController.php?eliminarMascotas=1&id=<?php echo $mascota['Id']; ?>" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     <?php else : ?>
                                                         <tr>
-                                                            <td colspan="5" class="text-center">No se encontraron Usuarios Registrados.</td>
+                                                            <td colspan="7" class="text-center">No se encontraron mascotas activas.</td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 </tbody>
@@ -79,36 +89,40 @@
                                         </div>
                                     </div>
 
-                                    <!-- Tabla de Usuarios Inactivos -->
-                                    <div class="tab-pane fade" id="usuarios-inactivos" role="tabpanel" aria-labelledby="usuarios-inactivos-tab">
+                                    <!-- Tabla de Mascotas Inactivas -->
+                                    <div class="tab-pane fade" id="mascotas-inactivos" role="tabpanel" aria-labelledby="mascotas-inactivos-tab">
                                         <div class="table-responsive">
                                             <table id="DataTableInactivos" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Identificación</th>
                                                         <th>Nombre</th>
-                                                        <th>Correo Electrónico</th>
-                                                        <th>Rol</th>
-                                                        <th>Acción</th>
+                                                        <th>Tipo</th>
+                                                        <th>Raza</th>
+                                                        <th>Edad</th>
+                                                        <th>Peso</th>
+                                                        <th>Dueño</th>
+                                                        <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php if (!empty($DatosInactivos)) : ?>
-                                                        <?php foreach ($DatosInactivos as $usuariosInactivos) : ?>
+                                                        <?php foreach ($DatosInactivos as $mascota) : ?>
                                                             <tr>
-                                                                <td><?php echo htmlspecialchars($usuariosInactivos['Identificacion']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosInactivos['Nombre']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosInactivos['Correo']); ?></td>
-                                                                <td><?php echo htmlspecialchars($usuariosInactivos['NombreRol']); ?></td>
-                                                                <td><?php if ($usuariosInactivos['tRol_id'] !== '1') : ?>
-                                                                        <a href="actualizarUsuario.php?id=<?php echo $usuariosInactivos['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-person-gear"></i></a>
-                                                                    <?php endif; ?>
+                                                                <td><?php echo htmlspecialchars($mascota['NombreMascotas']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Tipo']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Raza']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Edad']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['Peso']); ?></td>
+                                                                <td><?php echo htmlspecialchars($mascota['NombreDuenos']); ?></td>
+                                                                <td>
+                                                                    <a href="actualizarMascotas.php?id=<?php echo $mascota['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                                                    <a href="../../Controller/MascotasController.php?activarMascotas=1&id=<?php echo $mascota['Id']; ?>" class="btn btn-success"><i class="bi bi-check-square-fill"></i></a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     <?php else : ?>
                                                         <tr>
-                                                            <td colspan="5" class="text-center">No se encontraron Usuarios Registrados.</td>
+                                                            <td colspan="7" class="text-center">No se encontraron mascotas inactivas.</td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 </tbody>

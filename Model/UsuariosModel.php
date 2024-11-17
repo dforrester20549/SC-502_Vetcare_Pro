@@ -100,7 +100,7 @@
     }
 
 
-        // -------------------------------------- Actualizar Usuario ---------------------------------
+    // -------------------------------------- Actualizar Usuario ---------------------------------
     function ConsultarUsuarioPorId($Id){
         try {
             $enlace = AbrirBD();
