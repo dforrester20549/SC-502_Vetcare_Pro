@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="../root/ss/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="../root/css/daterangepicker.css">
   <link rel="stylesheet" href="../root/css/summernote-bs4.min.css">
+  <link rel="stylesheet" href="../root/css/style4.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -171,3 +172,16 @@
 </body>
 
 </html>
+
+<style>
+  body {
+    background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
+    background-size: 100% auto;
+  }
+
+  .wrapper {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    padding: 20px;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+  }
+</style>
