@@ -343,9 +343,23 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
     -- Selección de la información del usuario y el nombre del rol
+    SELECT 
+        u.Id,
+        u.Identificacion,
+        u.Nombre,
+        u.Correo,
+        u.Activo,
+        u.tRol_id,
+        r.NombreRol
+    FROM 
+        tUsuarios u
+        JOIN tRoles r ON u.tRol_id = r.Id
+    WHERE 
+        u.Id = pIdSession;
+END ;;
+DELIMITER ;
 
-
--- ________________________________________________sp_UPDATE_seguridad_________________________________________________________________17
+-- ________________________________________________sp_UPDATE_seguridad___________________________________________________17
 DELIMITER $$
 CREATE PROCEDURE sp_UPDATE_seguridad (
     IN p_Id BIGINT,
@@ -375,6 +389,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Usuario no encontrado.';
     END IF;
 END $$
+<<<<<<< HEAD
 =======
         u.Activo = 0;
 END
@@ -455,7 +470,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarMascotasPorId______________________________________________21
+-- ________________________________________________sp_GET_consultarMascotasPorId________________________________________________21
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarMascotasPorId(
     IN p_Id BIGINT
@@ -482,7 +497,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_UPDATE_actualizarMascotas_______________________________________________22
+-- ________________________________________________sp_UPDATE_actualizarMascotas_________________________________________________22
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_actualizarMascotas(
 
@@ -525,7 +540,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarMascotasInacivos_______________________________________23
+-- ________________________________________________sp_GET_consultarMascotasInacivos_________________________________________23
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarMascotasInactivos()
 BEGIN
@@ -550,7 +565,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_DELETE_eliminarMascotasPorId______________________________________24
+-- ________________________________________________sp_DELETE_eliminarMascotasPorId__________________________________________24
 DELIMITER ;;
 CREATE PROCEDURE sp_DELETE_eliminarMascotasPorId(
     IN p_Id BIGINT,
@@ -575,7 +590,7 @@ END;;
 DELIMITER ;;
 
 
--- ________________________________________________sp_UPDATE_activarMascotasPorId______________________________________24
+-- ________________________________________________sp_UPDATE_activarMascotasPorId__________________________________________25
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_activarMascotasPorId(
     IN p_Id BIGINT,
@@ -598,3 +613,6 @@ BEGIN
     );
 END;;
 DELIMITER ;;
+=======
+DELIMITER ;
+>>>>>>> parent of 51a8fcc (Merge branch 'main' into Daniel)
