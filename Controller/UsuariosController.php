@@ -70,7 +70,7 @@
             $_SESSION["Error"] = "Ocurrió un error al registrar la información.";
         }
         
-        header('Location: consultarUsuarioActivo.php'); 
+        header('Location: ../View/Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1'); 
         exit();
     }
 
@@ -108,7 +108,7 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
-        header('Location: consultarUsuarioActivo.php');
+        header('Location: ../View/Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1');
         exit();
     }
     
@@ -159,7 +159,7 @@
             $Datos = $perfil;
         } else {
             $_SESSION["Error"] = "Error de usuario.";
-            header('location: ../View/Usuarios/perfil.php');
+            header('location: ../View/Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>');
             exit();
         }
     }
@@ -182,7 +182,7 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
-        header('Location: ../View/Usuarios/perfil.php');
+        header('Location: ../View/Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>');
         exit();
     }
 
@@ -211,7 +211,7 @@
         $IdSession = $_SESSION['IdSession'];  
         eliminarLogs($IdSession);
         $_SESSION["Success"] = "Todos los registros de logs han sido eliminados.";
-        header('Location: ../View/Usuarios/consultarLogs.php'); 
+        header('Location: ../View/Usuarios/consultarLogs.php?consultarLogs=1'); 
         exit();
     }
 ?>

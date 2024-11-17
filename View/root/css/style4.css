@@ -1,0 +1,10 @@
+body {
+    background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
+    background-size: 100% auto;
+  }
+
+  .wrapper {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    padding: 20px;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+  }
