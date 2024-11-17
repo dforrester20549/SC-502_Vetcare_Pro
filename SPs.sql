@@ -1,9 +1,9 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_TRUNCATE_Logs;
+DROP PROCEDURE IF EXISTS sp_UPDATE_actualizarMascotas;
 
--- ________________________________________________sp_LOGIN_insertarUsuario___________________________________________________________________01
+-- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
 CREATE PROCEDURE sp_LOGIN_insertarUsuario (
     IN p_Identificacion VARCHAR(20),
@@ -24,7 +24,7 @@ BEGIN
 END // -- Cerrar el procedimiento
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_iniciarSesion___________________________________________________________________02
+-- ________________________________________________sp_LOGIN_iniciarSesion___________________________________________________________________________02
 DELIMITER ;;
 CREATE PROCEDURE sp_LOGIN_iniciarSesion(pCorreo varchar(80),
                                     pContrasenna varchar(10))
@@ -49,7 +49,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_recuperarAcceso___________________________________________________________________03
+-- ________________________________________________sp_LOGIN_recuperarAcceso_________________________________________________________________________03
 DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_recuperarAcceso(IN p_correo VARCHAR(255))
 BEGIN
@@ -76,7 +76,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_actualizarContrasenna______________________________________________________________04
+-- ________________________________________________sp_LOGIN_actualizarContrasenna___________________________________________________________________04
 DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_actualizarContrasenna(
     IN pId BIGINT,
@@ -91,7 +91,7 @@ BEGIN
 END
 DELIMITER ;
 
--- ________________________________________________sp_LOGIN_cambiarContrasenna________________________________________________________________05
+-- ____________________________________________________sp_LOGIN_cambiarContrasenna__________________________________________________________________05
 DELIMITER $$
 CREATE PROCEDURE sp_LOGIN_cambiarContrasenna(
     IN p_token VARCHAR(255),
@@ -124,9 +124,9 @@ END $$
 
 DELIMITER ;
 
--- _________________________________________________TUSUARIOS______________________________________________________________________________
+-- _____________________________________________________________TUSUARIOS_____________________________________________________________________________
 
--- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________________06
+-- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS________________________________________________________________06
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuarios(
     IN pIdSession BIGINT
@@ -153,7 +153,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_consultarUsuariosActivos_____________________________________________________________07
+-- ________________________________________________sp_GET_consultarUsuariosActivos__________________________________________________________________07
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuariosActivos()
 BEGIN
@@ -174,7 +174,7 @@ BEGIN
 END
 DELIMITER ;
 
--- ________________________________________________sp_GET_consultarUsuariosInactivos___________________________________________________________08
+-- ________________________________________________sp_GET_consultarUsuariosInactivos________________________________________________________________08
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuariosInactivos()
 BEGIN
@@ -195,7 +195,7 @@ BEGIN
 END
 DELIMITER ;
 
--- ________________________________________________sp_INSERT_registrarUsuario_________________________________________________________________09
+-- ________________________________________________sp_INSERT_registrarUsuario_______________________________________________________________________09
 DELIMITER ;;
 CREATE PROCEDURE sp_INSERT_registrarUsuario(
     IN pIdentificacion VARCHAR(20),
@@ -217,7 +217,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_tRoles____________________________________________________________________________10
+-- ________________________________________________sp_GET_tRoles____________________________________________________________________________________10
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_tRoles()
 BEGIN
@@ -230,7 +230,7 @@ BEGIN
 END
 DELIMITER ;
 
--- ________________________________________________sp_UPDATE_cambiarEstadoUsuario___________________________________________________________11
+-- ________________________________________________sp_UPDATE_cambiarEstadoUsuario___________________________________________________________________11
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_cambiarEstadoUsuario(
     IN pUserId BIGINT,
@@ -244,7 +244,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_UsuarioPorID_______________________________________________________________________12
+-- ________________________________________________sp_GET_UsuarioPorID______________________________________________________________________________12
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_UsuarioPorID(
     IN pId BIGINT
@@ -268,7 +268,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_UPDATE_actualizarUsuario_________________________________________________________________13
+-- ________________________________________________sp_UPDATE_actualizarUsuario______________________________________________________________________13
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_actualizarUsuario(
     IN pId BIGINT,
@@ -300,7 +300,7 @@ BEGIN
 END ;;
 DELIMITER ;;
 
--- ________________________________________________sp_GET_consultarLogs_________________________________________________________________14
+-- ________________________________________________sp_GET_consultarLogs_____________________________________________________________________________14
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarLogs()
 BEGIN
@@ -317,7 +317,7 @@ END ;;
 DELIMITER ;
 
 
--- ________________________________________________sp_TRUNCATE_Logs____________________________________________________________________15
+-- ________________________________________________sp_TRUNCATE_Logs_________________________________________________________________________________15
 DELIMITER ;;
 CREATE PROCEDURE sp_TRUNCATE_Logs(
     IN pIdSession BIGINT
@@ -332,7 +332,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS___________________________________________________16
+-- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS________________________________________________________________16
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarUsuarios(
     IN pIdSession BIGINT
@@ -343,9 +343,23 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
     -- Selección de la información del usuario y el nombre del rol
+    SELECT 
+        u.Id,
+        u.Identificacion,
+        u.Nombre,
+        u.Correo,
+        u.Activo,
+        u.tRol_id,
+        r.NombreRol
+    FROM 
+        tUsuarios u
+        JOIN tRoles r ON u.tRol_id = r.Id
+    WHERE 
+        u.Id = pIdSession;
+END ;;
+DELIMITER ;
 
-
--- ________________________________________________sp_UPDATE_seguridad_________________________________________________________________17
+-- ________________________________________________sp_UPDATE_seguridad______________________________________________________________________________17
 DELIMITER $$
 CREATE PROCEDURE sp_UPDATE_seguridad (
     IN p_Id BIGINT,
@@ -375,14 +389,232 @@ BEGIN
         SET MESSAGE_TEXT = 'Usuario no encontrado.';
     END IF;
 END $$
-=======
         u.Activo = 0;
 END
 DELIMITER ;
 
--- ________________________________________________sp_InsertarMedicamento____________________________________________________________________16
+
+-- ________________________________________________sp_GET_consultarMascotas_________________________________________________________________________18
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarMascotas()
+BEGIN
+
+    SELECT 
+		u.Id,
+        u.NombreMascotas,
+        u.Tipo,
+        u.Raza,
+        u.Edad,
+        u.Peso,
+        u.Fecha_Registro,
+        u.tDueno_Id,
+		r.NombreDuenos
+        
+     FROM 
+        tMascotas u
+        JOIN tDuenos r ON u.tDueno_Id = r.Id
+    WHERE 
+        u.Activo = 1;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_INSERT_RegistrarMascotas______________________________________________________________________19
+DELIMITER ;;
+CREATE PROCEDURE sp_INSERT_RegistrarMascotas(
+    IN p_NombreMascotas VARCHAR(100),
+    IN p_Tipo VARCHAR(50),
+    IN p_Raza VARCHAR(50),
+    IN p_Edad INT,
+    IN p_Peso DECIMAL(5, 2),
+    IN p_Fecha_Registro DATE,
+    IN p_tDueno_Id BIGINT,
+    IN p_Activo TINYINT(1),
+    IN p_IdSession INT
+)
+BEGIN
+
+ -- Convertir el valor de pActivo a 0 si es diferente de 1
+    SET pActivo = IF(pActivo = 1, 1, 0);
+    
+    
+    -- Insertar en la tabla tMascotas
+    INSERT INTO tMascotas (NombreMascotas, Tipo, Raza, Edad, Peso, Fecha_Registro, tDueno_Id, Activo)
+    VALUES (p_NombreMascotas, p_Tipo, p_Raza, p_Edad, p_Peso, p_Fecha_Registro, p_tDueno_Id, p_Activo);
+    
+    -- Registrar la acción en la tabla Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Registrar Mascota', CONCAT('Se registró la mascota: ', p_NombreMascotas), p_IdSession);
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_GET_tDuenos___________________________________________________________________________________20
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_tDuenos()
+BEGIN
+    SELECT 
+        Id,
+        NombreDuenos,
+        Telefono,
+        Email,
+        Direccion,
+        Activo
+    FROM 
+        tDuenos
+    WHERE 
+        Activo = 1;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_GET_consultarMascotasPorId____________________________________________________________________21
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarMascotasPorId(
+    IN p_Id BIGINT
+)
+BEGIN
+    SELECT 
+        m.Id,
+        m.NombreMascotas,
+        m.Tipo,
+        m.Raza,
+        m.Edad,
+        m.Peso,
+        m.Fecha_Registro,
+        m.tDueno_Id,
+        d.NombreDuenos AS NombreDueno,
+        m.Activo
+    FROM 
+        tMascotas m
+    JOIN 
+        tDuenos d ON m.tDueno_Id = d.Id
+    WHERE 
+        m.Id = p_Id;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_actualizarMascotas_____________________________________________________________________22
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_actualizarMascotas(
+
+	IN p_Id bigint (11),
+    IN p_NombreMascotas VARCHAR(100),
+    IN p_Tipo VARCHAR(50),
+    IN p_Raza VARCHAR(50),
+    IN p_Edad INT,
+    IN p_Peso DECIMAL(5, 2),
+    IN p_Fecha_Registro DATE,
+    IN p_tDueno_Id BIGINT,
+    IN p_Activo BIT,
+    IN p_IdSession INT
+)
+BEGIN
+	
+    
+
+    UPDATE tMascotas
+    SET 
+		Id = p_Id,
+        NombreMascotas = p_NombreMascotas,
+        Tipo = p_Tipo,
+        Raza = p_Raza,
+        Edad = p_Edad,
+        Peso = p_Peso,
+        Fecha_Registro = p_Fecha_Registro,
+        tDueno_Id = p_tDueno_Id,
+        Activo = 1
+    WHERE 
+        Id = p_Id;
+    
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Actualizar Mascota', 
+        CONCAT('Se actualizó la mascota: ', p_NombreMascotas, ' con ID: ', p_Id), 
+        p_IdSession
+    );
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_GET_consultarMascotasInacivos_________________________________________________________________23
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarMascotasInactivos()
+BEGIN
+
+    SELECT 
+		u.Id,
+        u.NombreMascotas,
+        u.Tipo,
+        u.Raza,
+        u.Edad,
+        u.Peso,
+        u.Fecha_Registro,
+        u.tDueno_Id,
+		r.NombreDuenos
+        
+     FROM 
+        tMascotas u
+        JOIN tDuenos r ON u.tDueno_Id = r.Id
+    WHERE 
+        u.Activo = 0;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_DELETE_eliminarMascotasPorId__________________________________________________________________24
+DELIMITER ;;
+CREATE PROCEDURE sp_DELETE_eliminarMascotasPorId(
+    IN p_Id BIGINT,
+    IN p_IdSession INT
+)
+BEGIN
+    -- Cambiar el campo Activo a 0
+    UPDATE tMascotas
+    SET 
+        Activo = 0
+    WHERE 
+        Id = p_Id;
+    
+    -- Registrar la acción en el log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Inactivar Mascota',
+        CONCAT('Se ha inactivado la mascota con ID: ', p_Id),
+        p_IdSession
+    );
+END;;
+DELIMITER ;;
+
+
+-- ________________________________________________sp_UPDATE_activarMascotasPorId___________________________________________________________________25
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_activarMascotasPorId(
+    IN p_Id BIGINT,
+    IN p_IdSession INT
+)
+BEGIN
+    -- Cambiar el campo Activo a 0
+    UPDATE tMascotas
+    SET 
+        Activo = 1
+    WHERE 
+        Id = p_Id;
+    
+    -- Registrar la acción en el log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Inactivar Mascota',
+        CONCAT('Se ha inactivado la mascota con ID: ', p_Id),
+        p_IdSession
+    );
+END;;
+DELIMITER ;;
+
+-- ________________________________________________sp_INSERT_insertarMedicamento____________________________________________________________________26
 DELIMITER //
-CREATE PROCEDURE sp_InsertarMedicamento (
+CREATE PROCEDURE sp_INSERT_insertarMedicamento (
     IN p_Nombre NVARCHAR(100),
     IN p_Descripcion NVARCHAR(255),
     IN p_Dosis NVARCHAR(50),
@@ -397,9 +629,11 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 END // 
 DELIMITER ;
--- ________________________________________________sp_ConsultarMedicamentos____________________________________________________________________17
+
+
+-- ________________________________________________sp_GET_consultarMedicamentos_____________________________________________________________________27
 DELIMITER // 
-CREATE PROCEDURE sp_ConsultarMedicamentos()
+CREATE PROCEDURE sp_GET_consultarMedicamentos()
 BEGIN
     -- Registro de la acción en la tabla de Log
     INSERT INTO Log (accion, descripcion, usuario_id)
@@ -412,9 +646,11 @@ BEGIN
 	FROM tmedicamentos; 
 END // 
 DELIMITER;
--- ________________________________________________sp_ActualizarMedicamento____________________________________________________________________18
+
+
+-- ________________________________________________sp_UPDATE_actualizarMedicamento__________________________________________________________________28
 DELIMITER // 
-CREATE PROCEDURE sp_ActualizarMedicamento (
+CREATE PROCEDURE sp_UPDATE_actualizarMedicamento (
     IN p_Id INT(11),
     IN p_Nombre NVARCHAR(100),
     IN p_Descripcion NVARCHAR(255),
