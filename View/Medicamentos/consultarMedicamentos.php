@@ -16,7 +16,7 @@ include('../../View/_Layout_Admin.php');
                                 <div class="text-center">
                                     <h3 class="h4 text-gray-900 mb-4">Consultar medicamentos</h3>
                                 </div>
-
+ 
                                 <!-- Formulario para el botón de consultar -->
                                 <form method="get" action="">
                                     <input type="hidden" name="btnconsultarMedicamentos" value="true">
