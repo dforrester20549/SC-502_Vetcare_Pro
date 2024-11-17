@@ -5,7 +5,16 @@
     $title = "Actualizar Usuario";
     $content = __FILE__;
 
-    include('../../View/_Layout_System.php');
+    switch ($rolUsuario) {
+        case 1:
+            include('../../View/_Layout_System.php');
+            break;
+        case 2:
+            include('../../View/_Layout_Admin.php');
+            break;
+        default:
+            include('../../View/_Layout_Admin.php');
+    }
 ?>
 
 <!-- Incluir el contenido específico de la vista -->
