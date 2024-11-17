@@ -1,6 +1,6 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/MascotasModel.php';
-
+ 
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
