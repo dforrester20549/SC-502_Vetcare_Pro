@@ -1,14 +1,15 @@
 USE VETCAREDB;
 
-<<<<<<< HEAD
+
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE `tduenos`;
 SET FOREIGN_KEY_CHECKS = 1;
-=======
+
+
 -- Inserta el usuario SYSTEM
 INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id,ImagePath, Destacado)
 VALUES ('102220222', 'SYSTEM', 'sys.vetcare@gmail.com', 'VetCare123', 1, 1, '',0);
->>>>>>> parent of 51a8fcc (Merge branch 'main' into Daniel)
+
 
 -- Se crean los roles
 INSERT INTO tRoles (NombreRol) VALUES 
