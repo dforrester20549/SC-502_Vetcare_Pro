@@ -118,6 +118,29 @@
 
           <li class="nav-item">
             <a href="*" class="nav-link">
+            <i class="bi bi-people"></i>
+              <p>
+                Veterinarios
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Veterinarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Veterinarios/registrarVeterinarios.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Veterinarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="*" class="nav-link">
             <i class="bi bi-bug-fill"></i>
               <p>
                 Mascotas
@@ -192,12 +215,16 @@
 <style>
   body {
     background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
-    background-size: 100% auto;
+    background-size: 100%; 
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
   }
 
   .wrapper {
-    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    background: rgba(255, 255, 255, 0.8); 
     padding: 20px;
-    border-radius: 10px; /* Opcional: bordes redondeados */
+    border-radius: 10px; 
   }
 </style>
