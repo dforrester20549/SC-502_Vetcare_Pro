@@ -669,3 +669,21 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 END // 
 DELIMITER ;
+
+--________________________________________________spRegistrarDueno__________________________________________________________________
+
+DELIMITER $$
+
+CREATE PROCEDURE spRegistrarDueno(
+    IN pNombre VARCHAR(100),
+    IN pTelefono VARCHAR(15),
+    IN pEmail VARCHAR(100),
+    IN pDireccion VARCHAR(255),
+    IN pActivo BIT
+)
+BEGIN
+    INSERT INTO tDuenos (NombreDuenos, Telefono, Email, Direccion, Activo)
+    VALUES (pNombre, pTelefono, pEmail, pDireccion, pActivo);
+END$$
+
+DELIMITER ;

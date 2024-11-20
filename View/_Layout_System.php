@@ -147,9 +147,34 @@
               </p>
             </a>
           </li>
+
+
+          <!-- Dueños -->
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="bi bi-person-circle"></i>
+        <p>Dueños</p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
+            <i class="bi bi-person-badge"></i>
+            <p>Consultar Dueños</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="../Duenos/registrarDuenos.php" class="nav-link">
+            <i class="bi bi-person-plus-fill"></i>
+            <p>Registrar Dueños</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    
       </nav>
     </div>
   </aside>
+  
 
   
   <!-- Control Sidebar -->
