@@ -41,9 +41,7 @@ include('../../View/_Layout_System.php');
                                 </form>
 
                                 <div class="text-center">
-
-                                    <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">Volver a Consultar Dueños</a>
-
+                                    <a href="consultarDuenos.php" class="small">Volver a Consultar Dueños</a>
                                 </div>
                             </div>
                         </div>
