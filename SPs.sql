@@ -332,32 +332,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS________________________________________________________________16
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuarios(
-    IN pIdSession BIGINT
-)
-BEGIN
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
-    -- Selección de la información del usuario y el nombre del rol
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Id = pIdSession;
-END ;;
-DELIMITER ;
 
 -- ________________________________________________sp_UPDATE_seguridad______________________________________________________________________________17
 DELIMITER $$
@@ -435,7 +410,7 @@ CREATE PROCEDURE sp_INSERT_RegistrarMascotas(
 BEGIN
 
  -- Convertir el valor de pActivo a 0 si es diferente de 1
-    SET pActivo = IF(pActivo = 1, 1, 0);
+    SET p_Activo = IF(p_Activo = 1, 1, 0);
     
     
     -- Insertar en la tabla tMascotas

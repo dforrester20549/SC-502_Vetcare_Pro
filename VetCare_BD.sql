@@ -62,7 +62,7 @@ CREATE TABLE tMascotas (
     Edad INT,
     Peso DECIMAL(5, 2),
     Fecha_Registro DATE NOT NULL,
-    tDueño_Id bigint(11),
+    tDueno_Id bigint(11),
     Activo bit(1) NOT NULL
 );
 
