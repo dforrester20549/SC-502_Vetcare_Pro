@@ -690,7 +690,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarVeterinariosInactivos________________________________________________________30
+-- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________30
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosInactivos()
 BEGIN
@@ -712,7 +712,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_INSERT_RegistrarVeterinarios___________________________________________________________31
+-- ________________________________________________sp_INSERT_RegistrarVeterinarios________________________________________________________________31
 DELIMITER ;;
 CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
     IN p_NombreVeterinarios VARCHAR(100),
@@ -773,7 +773,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarVeterinariosPorId____________________________________________________________32
+-- ________________________________________________sp_GET_consultarVeterinariosPorId______________________________________________________________32
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosPorId(
     IN p_Id BIGINT
@@ -797,7 +797,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_UPDATE_actualizarVeterinarios________________________________________________________33
+-- ________________________________________________sp_UPDATE_actualizarVeterinarios_______________________________________________________________33
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_actualizarVeterinarios(
 
@@ -829,4 +829,84 @@ BEGIN
         p_IdSession
     );
 END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_INSERT_registrarCita________________________________________________________________________34
+DELIMITER $$
+USE `vetcaredb`$$
+CREATE PROCEDURE `sp_INSERT_registrarCita` (pmascotaid bigint(11),pfecha datetime,pmotivo text, pveterinarioid bigint(11))
+BEGIN
+INSERT INTO `vetcaredb`.`tcitas`
+(
+`tMascota_id`,
+`Fecha_Cita`,
+`Motivo`,
+`Estado`,
+`Activo`,
+`tVeterinario_id`)
+VALUES
+(
+pmascotaid,
+pfecha,
+pmotivo,
+'pendiente',
+1,
+pveterinarioid);
+ 
+END$$
+ 
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_inhabilitarCita______________________________________________________________________35
+DELIMITER $$
+USE vetcaredb$$
+CREATE PROCEDURE sp_UPDATE_inhabilitarCita (pid bigint(11))
+BEGIN
+UPDATE vetcaredb.tcitas
+SET
+Activo = 0
+WHERE Id = pid;
+ 
+END$$
+ 
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_actualizarCita______________________________________________________________________36
+DELIMITER $$
+USE vetcaredb$$
+CREATE PROCEDURE sp_UPDATE_actualizarCita (pid bigint(11),pmascotaid bigint(11),pfecha datetime,pmotivo text, pestado enum('pendiente','completada','cancelada'),pveterinarioid bigint(11))
+ 
+BEGIN
+UPDATE vetcaredb.tcitas
+SET
+tMascota_id = pmascotaid,
+Fecha_Cita = pfecha,
+Motivo = pmotivo,
+Estado = pestado,
+Activo = 1,
+tVeterinario_id = pveterinarioid
+WHERE Id = pid;
+ 
+ 
+END$$
+ 
+DELIMITER ;
+
+
+--________________________________________________sp_INSERT_registrarDueno________________________________________________________________________37
+DELIMITER $$
+CREATE PROCEDURE sp_INSERT_registrarDueno(
+    IN pNombre VARCHAR(100),
+    IN pTelefono VARCHAR(15),
+    IN pEmail VARCHAR(100),
+    IN pDireccion VARCHAR(255),
+    IN pActivo BIT
+)
+BEGIN
+    INSERT INTO tDuenos (NombreDuenos, Telefono, Email, Direccion, Activo)
+    VALUES (pNombre, pTelefono, pEmail, pDireccion, pActivo);
+END$$
 DELIMITER ;
