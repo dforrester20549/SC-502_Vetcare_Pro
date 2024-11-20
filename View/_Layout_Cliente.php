@@ -182,12 +182,16 @@
 <style>
   body {
     background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
-    background-size: 100% auto;
+    background-size: 100%; 
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
   }
 
   .wrapper {
-    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    background: rgba(255, 255, 255, 0.8); 
     padding: 20px;
-    border-radius: 10px; /* Opcional: bordes redondeados */
+    border-radius: 10px; 
   }
 </style>

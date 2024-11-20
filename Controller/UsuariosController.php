@@ -108,7 +108,7 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
-        header('Location: ../View/Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1');
+        header('Location: ../Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1');
         exit();
     }
     
