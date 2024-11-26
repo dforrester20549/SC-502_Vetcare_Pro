@@ -1,15 +1,16 @@
 <?php
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/SC-502_Vetcare_Pro/Controller/LoginController.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . '/SC-502_Vetcare_Pro/Controller/LoginController.php';
 
-    if(session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
-    $idUsuario = $_SESSION['IdSession'];
+$idUsuario = $_SESSION['IdSession'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,64 +30,65 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-  <!-- Right navbar links -->
-  <ul class="navbar-nav ml-auto">
-    <!-- User Dropdown Menu -->
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="drop2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="user-panel d-flex align-items-center">
-          <div class="image">
-            <img src="../root/img/admin/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="30" height="30">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- User Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="drop2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="user-panel d-flex align-items-center">
+              <div class="image">
+                <img src="../root/img/admin/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="30" height="30">
+              </div>
+              <div class="info">
+                <?php if (isset($_SESSION["NombreUsuario"])): ?>
+                  <span class="d-none d-md-inline"><?php echo htmlspecialchars($_SESSION["NombreUsuario"]); ?></span>
+                <?php endif; ?>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop2">
+            <div class="message-body">
+              <?php if (isset($_SESSION["NombreUsuario"])): ?>
+                <a href="../Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>" class="d-flex align-items-center gap-2 dropdown-item">
+                  <i class="ti ti-user fs-6"></i>
+                  <p class="mb-0 fs-3">Mi Perfil</p>
+                </a>
+                <a href="../Usuarios/seguridad.php?idseguridad=<?php echo $idUsuario; ?>" class="d-flex align-items-center gap-2 dropdown-item">
+                  <i class="ti ti-list-check fs-6"></i>
+                  <p class="mb-0 fs-3">Seguridad</p>
+                </a>
+                <form action="" method="POST">
+                  <button type="submit" style="width:150px" id="btnCerrarSesion" name="btnCerrarSesion"
+                    class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</button>
+                </form>
+              <?php else: ?>
+                <a href="../Login/inicioSesion.php" style="width:150px" class="btn btn-outline-primary mx-3 mt-2 d-block">Iniciar Sesión</a>
+              <?php endif; ?>
+            </div>
           </div>
-          <div class="info">
-            <?php if (isset($_SESSION["NombreUsuario"])): ?>
-              <span class="d-none d-md-inline"><?php echo htmlspecialchars($_SESSION["NombreUsuario"]); ?></span>
-            <?php endif; ?>
-          </div>
-        </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a class="brand-link">
+        <img src="../root/img/logo/logo.png" alt="VetCare Pro" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">VetCare Pro</span>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop2">
-        <div class="message-body">
-          <?php if (isset($_SESSION["NombreUsuario"])): ?>
-            <a href="../Usuarios/perfil.php?idperfil=<?php echo $idUsuario; ?>" class="d-flex align-items-center gap-2 dropdown-item">
-              <i class="ti ti-user fs-6"></i>
-              <p class="mb-0 fs-3">Mi Perfil</p>
-            </a>
-            <a href="../Usuarios/seguridad.php?idseguridad=<?php echo $idUsuario; ?>" class="d-flex align-items-center gap-2 dropdown-item">
-              <i class="ti ti-list-check fs-6"></i>
-              <p class="mb-0 fs-3">Seguridad</p>
-            </a>
-            <form action="" method="POST">
-              <button type="submit" style="width:150px" id="btnCerrarSesion" name="btnCerrarSesion"
-                      class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</button>
-            </form>
-          <?php else: ?>
-            <a href="../Login/inicioSesion.php" style="width:150px" class="btn btn-outline-primary mx-3 mt-2 d-block">Iniciar Sesión</a>
-          <?php endif; ?>
-        </div>
-      </div>
-    </li>
-  </ul>
-</nav>
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a class="brand-link">
-      <img src="../root/img/logo/logo.png" alt="VetCare Pro" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">VetCare Pro</span>
-    </a>
-
-       <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="../System/Index_System.php" class="nav-link">
-            <i class="bi bi-house"></i>
+              <i class="bi bi-house"></i>
               <p>
                 Home
               </p>
@@ -95,7 +97,7 @@
 
           <li class="nav-item">
             <a href="*" class="nav-link">
-            <i class="bi bi-people"></i>
+              <i class="bi bi-people"></i>
               <p>
                 Usuarios
               </p>
@@ -103,13 +105,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1" class="nav-link">
-                <i class="bi bi-person-check"></i>
+                  <i class="bi bi-person-check"></i>
                   <p>Consultar Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../Usuarios/registrarUsuario.php" class="nav-link">
-                <i class="bi bi-person-plus"></i>
+                  <i class="bi bi-person-plus"></i>
                   <p>Registrar Usuario</p>
                 </a>
               </li>
@@ -118,7 +120,7 @@
 
           <li class="nav-item">
             <a href="*" class="nav-link">
-            <i class="bi bi-people"></i>
+              <i class="bi bi-people"></i>
               <p>
                 Veterinarios
               </p>
@@ -126,13 +128,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1" class="nav-link">
-                <i class="bi bi-person-check"></i>
+                  <i class="bi bi-person-check"></i>
                   <p>Consultar Veterinarios</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../Veterinarios/registrarVeterinarios.php" class="nav-link">
-                <i class="bi bi-person-plus"></i>
+                  <i class="bi bi-person-plus"></i>
                   <p>Registrar Veterinarios</p>
                 </a>
               </li>
@@ -141,21 +143,51 @@
 
           <li class="nav-item">
             <a href="*" class="nav-link">
-            <i class="bi bi-bug-fill"></i>
+              <i class="bi bi-bug-fill"></i>
+              <p>
+                Medicamentos
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Medicamentos/consultarMedicamentos.php?consultarMedicamentos=1" class="nav-link">
+                  <i class="bi bi-person-check"></i>
+                  <p>Consultar medicamentos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Medicamentos/registrarMedicamentos.php" class="nav-link">
+                  <i class="bi bi-person-plus"></i>
+                  <p>Registrar medicamentos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Medicamentos/actualizarMedicamentos.php?actualizarMedicamentos=1" class="nav-link">
+                  <i class="bi bi-person-plus"></i>
+                  <p>Actualizar medicamentos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="*" class="nav-link">
+              <i class="bi bi-bug-fill"></i>
               <p>
                 Mascotas
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="../Mascotas/consultarMascotas.php?consultarMascotas=1" class="nav-link">
-                <i class="bi bi-person-check"></i>
+                <a href="../Mascotas/consultarMascotas.php?consultarMascotas=1" class="nav-link">
+                  <i class="bi bi-person-check"></i>
                   <p>Consultar Mascotas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../Mascotas/registrarMascotas.php" class="nav-link">
-                <i class="bi bi-person-plus"></i>
+                  <i class="bi bi-person-plus"></i>
                   <p>Registrar Mascotas</p>
                 </a>
               </li>
@@ -164,7 +196,7 @@
 
           <li class="nav-item">
             <a href="../Usuarios/consultarLogs.php?consultarLogs=1" class="nav-link">
-            <i class="bi bi-substack"></i>
+              <i class="bi bi-substack"></i>
               <p>
                 Logs
               </p>
@@ -173,65 +205,65 @@
 
 
           <!-- Dueños -->
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="bi bi-person-circle"></i>
-        <p>Dueños</p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
-            <i class="bi bi-person-badge"></i>
-            <p>Consultar Dueños</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../Duenos/registrarDuenos.php" class="nav-link">
-            <i class="bi bi-person-plus-fill"></i>
-            <p>Registrar Dueños</p>
-          </a>
-        </li>
-      </ul>
-    </li>
-    
-      </nav>
-    </div>
-  </aside>
-  
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="bi bi-person-circle"></i>
+              <p>Dueños</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>Consultar Dueños</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Duenos/registrarDuenos.php" class="nav-link">
+                  <i class="bi bi-person-plus-fill"></i>
+                  <p>Registrar Dueños</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
-  
+      </nav>
+  </div>
+  </aside>
+
+
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
 
-<script src="../root/js/jquery.min.js"></script>
-<script src="../root/js/jquery-ui.min.js"></script>
+  <script src="../root/js/jquery.min.js"></script>
+  <script src="../root/js/jquery-ui.min.js"></script>
 
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
 
 
-<script src="../root/js/bootstrap.bundle.min.js"></script>
-<script src="../root/js/Chart.min.js"></script>
-<script src="../root/js/sparkline.js"></script>
-<script src="../root/js/jquery.vmap.min.js"></script>
-<script src="../root/js/jquery.vmap.usa.js"></script>
-<script src="../root/js/jquery.knob.min.js"></script>
-<script src="../root/js/moment.min.js"></script>
-<script src="../root/js/daterangepicker.js"></script>
-<script src="../root/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="../root/js/summernote-bs4.min.js"></script>
-<script src="../root/js/jquery.overlayScrollbars.min.js"></script>
-<script src="../root/js/adminlte.js"></script>
-<script src="../root/js/pages/dashboard.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../root/js/bootstrap.bundle.min.js"></script>
+  <script src="../root/js/Chart.min.js"></script>
+  <script src="../root/js/sparkline.js"></script>
+  <script src="../root/js/jquery.vmap.min.js"></script>
+  <script src="../root/js/jquery.vmap.usa.js"></script>
+  <script src="../root/js/jquery.knob.min.js"></script>
+  <script src="../root/js/moment.min.js"></script>
+  <script src="../root/js/daterangepicker.js"></script>
+  <script src="../root/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="../root/js/summernote-bs4.min.js"></script>
+  <script src="../root/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../root/js/adminlte.js"></script>
+  <script src="../root/js/pages/dashboard.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 
@@ -240,16 +272,16 @@
 <style>
   body {
     background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
-    background-size: 100%; 
+    background-size: 100%;
     height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
+    overflow: hidden;
   }
 
   .wrapper {
-    background: rgba(255, 255, 255, 0.8); 
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    border-radius: 10px; 
+    border-radius: 10px;
   }
 </style>

@@ -1,11 +1,28 @@
 <?php
-    include_once '../../Controller/MedicamentosController.php';
+include_once '../../Controller/MedicamentosController.php';
 
+$title = "Actualizar medicamento";
+$content = __FILE__;
 
-    $title = "Actualizar medicamento";
-    $content = __FILE__;
+$rolUsuario = $_SESSION['Rol'];
+$idUsuario = $_SESSION["IdSession"];
 
-    include('../../View/_Layout_Admin.php');
+switch ($rolUsuario) {
+    case 1:
+        include('../../View/_Layout_System.php');
+        break;
+    case 2:
+        include('../../View/_Layout_Admin.php');
+        break;
+    case 3:
+        include('../../View/_Layout_Veterinario.php');
+        break;
+    case 4:
+        include('../../View/_Layout_Cliente.php');
+        break;
+    default:
+        include('../../View/_Layout_Cliente.php');
+}
 ?>
 
 <!-- Incluir el contenido específico de la vista -->
@@ -22,32 +39,26 @@
                                     <h3 class="h4 text-gray-900 mb-4">Actualizar medicamentos</h3>
                                 </div>
 
-                                    <form method="post" action="actualizarmedicamento.php">
-                                        <input type="hidden" name="idMedicamento" value="<?php echo htmlspecialchars($actualizarmedicamento['Id']); ?>">
+                                <form action="" method="POST">
 
-                                            <div class="form-group">
-                                                <input type="text" name="Nombre" class="form-control form-control-user" placeholder="Nombre" 
-                                                    value="<?php echo htmlspecialchars($actualizarmedicamento['Nombre']); ?>" required>
-                                            </div><br>
+                                    <div class="form-group">
+                                        <input type="text" id="id" name="id" class="form-control form-control-user" placeholder="Id del medicamento" required>
+                                    </div><br>
+                                    <div class="form-group">
+                                        <input type="text" id="Nombre" name="Nombre" class="form-control form-control-user" placeholder="Ingrese el nuevo nombre" required>
+                                    </div><br>
+                                    <div class="form-group">
+                                        <input type="text" id="Descripcion" name="Descripcion" class="form-control form-control-user" placeholder="Ingrese la nueva descripcion" required>
+                                    </div><br>
+                                    <div class="form-group">
+                                        <input type="text" id="Dosis" name="Dosis" class="form-control form-control-user" placeholder="Ingrese la nueva dosis" required>
+                                    </div><br>
+                                    <input type="hidden" name="IdSession" value="<?php echo  htmlspecialchars($idUsuario); ?>">
 
-                                            <div class="form-group">
-                                                <input type="text" name="Descripcion" class="form-control form-control-user" placeholder="Descripcion" 
-                                                    value="<?php echo htmlspecialchars($actualizarmedicamento['Descripcion']); ?>" required>
-                                            </div><br>
+                                    <input type="submit" class="btn btn-primary btn-user btn-block"
+                                        id="btnActualizarMedicamento" name="btnActualizarMedicamento" value="Procesar">
+                                </form>
 
-                                            <div class="form-group">
-                                                <input type="text" name="Descripcion" class="form-control form-control-user" placeholder="Descripcion" 
-                                                    value="<?php echo htmlspecialchars($actualizarmedicamento['Descripcion']); ?>" required>
-                                            </div><br>
-
-                                            <div class="form-group">
-                                                <input type="text" name="Dosis" class="form-control form-control-user" placeholder="Dosis" 
-                                                    value="<?php echo htmlspecialchars($actualizarmedicamento['Dosis']); ?>" required>
-                                            </div><br>
-
-                                        <input type="submit" class="btn btn-primary btn-user btn-block" 
-                                            id="btnactualizarmedicamento" name="btnactualizarmedicamento" value="Procesar">
-                                    </form>
                             </div>
                         </div>
                     </div>
@@ -56,4 +67,3 @@
         </div>
     </div>
 </div>
-

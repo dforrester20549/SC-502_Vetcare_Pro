@@ -1,5 +1,6 @@
 <?php
     include_once 'BaseDatos.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     // -------------------------------------- Consultar Medicamentos ---------------------------------
 
@@ -7,7 +8,7 @@
     {
         $enlace = AbrirBD();
 
-        $sentencia = "CALL sp_ConsultarMedicamentos()";
+        $sentencia = "CALL sp_GET_consultarMedicamentos()";
         $resultado = $enlace -> query($sentencia);
 
         $medicamentos = [];
@@ -19,14 +20,13 @@
         CerrarBD($enlace);
         return $medicamentos;
     }
-
     // -------------------------------------- Registrar Medicamento ---------------------------------
 
     function RegistrarMedicamentoModel($Nombre, $Descripcion, $Dosis, $IdSession)
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_InsertarMedicamento('$Nombre', '$Descripcion', '$Dosis', '$IdSession')";
+            $sentencia = "CALL sp_INSERT_insertarMedicamento('$Nombre', '$Descripcion', '$Dosis', '$IdSession')";
             $resultado = $enlace->query($sentencia);
             CerrarBD($enlace);
             return $resultado;
@@ -40,17 +40,14 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_ConsultarMedicamentos('$Id')";
+            $sentencia = "CALL sp_GET_MedicamentoPorID($Id)";
             $resultado = $enlace->query($sentencia);
         
-            $actualizarMedicamento = null;
-            if ($resultado && $resultado->num_rows > 0) {
-                $actualizarMedicamento = mysqli_fetch_assoc($resultado);
-            }
-        
             CerrarBD($enlace);
-            return $actualizarMedicamento;
-        } catch (Exception $ex) {
+            return $resultado;
+        } 
+        catch (Exception $ex) 
+        {
             return null;
         }
     }
@@ -59,7 +56,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_ActualizarMedicamento('$Id','$Nombre','$Descripcion','$Dosis', '$IdSession')";
+            $sentencia = "CALL sp_UPDATE_actualizarMedicamento('$Id','$Nombre','$Descripcion','$Dosis', '$IdSession')";
             $resultado = $enlace -> query($sentencia);
             CerrarBD($enlace);
             return $resultado;
@@ -68,4 +65,31 @@
         }
     }
 
+// -------------------------------------- Inactivar medicamento ---------------------------------
+    function InactivarMedicamento($Id, $IdSession)
+    {
+    try {
+        $enlace = AbrirBD();
+        $sentencia = "CALL sp_UPDATE_inactivarMedicamento('$Id', '$IdSession')";
+        $resultado = $enlace->query($sentencia);
+        CerrarBD($enlace);
+        return $resultado;
+    } catch (Exception $ex) {
+        return false;
+    }
+    }
+    
+// -------------------------------------- Activar medicamento ---------------------------------
+    function ActivarMedicamento($Id, $IdSession)
+    {
+        try {
+        $enlace = AbrirBD();      
+        $sentencia = "CALL sp_UPDATE_activarMedicamento('$Id', '$IdSession')";
+        $resultado = $enlace->query($sentencia);
+        CerrarBD($enlace);
+        return $resultado;
+    } catch (Exception $ex) {
+        return false;
+    }
+    }
 ?>

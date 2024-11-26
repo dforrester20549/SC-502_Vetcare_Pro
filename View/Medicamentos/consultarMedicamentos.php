@@ -2,7 +2,27 @@
 include_once '../../Controller/MedicamentosController.php';
 
 $title = "Consultar medicamentos";
-include('../../View/_Layout_Admin.php');
+$content = __FILE__;
+
+$rolUsuario = $_SESSION['Rol'];
+
+
+switch ($rolUsuario) {
+    case 1:
+        include('../../View/_Layout_System.php');
+        break;
+    case 2:
+        include('../../View/_Layout_Admin.php');
+        break;
+    case 3:
+        include('../../View/_Layout_Veterinario.php');
+        break;
+    case 4:
+        include('../../View/_Layout_Cliente.php');
+        break;
+    default:
+        include('../../View/_Layout_Cliente.php');
+}
 ?>
 
 <div class="container">
@@ -17,7 +37,6 @@ include('../../View/_Layout_Admin.php');
                                     <h3 class="h4 text-gray-900 mb-4">Consultar medicamentos</h3>
                                 </div>
 
-                                <!-- Formulario para el botón de consultar -->
                                 <form method="get" action="">
                                     <input type="hidden" name="btnconsultarMedicamentos" value="true">
                                     <button type="submit" class="btn btn-primary">Refrescar</button>
@@ -32,6 +51,7 @@ include('../../View/_Layout_Admin.php');
                                                 <th>Descripción</th>
                                                 <th>Dosis</th>
                                                 <th>Activo</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,7 +62,20 @@ include('../../View/_Layout_Admin.php');
                                                         <td><?php echo htmlspecialchars($medicamento['Nombre']); ?></td>
                                                         <td><?php echo htmlspecialchars($medicamento['Descripcion']); ?></td>
                                                         <td><?php echo htmlspecialchars($medicamento['Dosis']); ?></td>
-                                                        <td><?php echo htmlspecialchars($medicamento['Activo']); ?></td>
+                                                        <td><?php echo $medicamento['Activo'] ? 'Activo' : 'Inactivo'; ?></td>
+                                                        <td>
+                                                            <?php if ($medicamento['Activo']) : ?>
+                                                                <form method="post" action="consultarMedicamentos.php" style="display:inline;">
+                                                                    <input type="hidden" name="idMedicamento" value="<?php echo htmlspecialchars($medicamento['Id']); ?>">
+                                                                    <button type="submit" name="btnInactivarMedicamento" class="btn btn-warning">Inactivar</button>
+                                                                </form>
+                                                            <?php else : ?>
+                                                                <form method="post" action="consultarMedicamentos.php" style="display:inline;">
+                                                                    <input type="hidden" name="idMedicamento" value="<?php echo htmlspecialchars($medicamento['Id']); ?>">
+                                                                    <button type="submit" name="btnActivarMedicamento" class="btn btn-success">Activar</button>
+                                                                </form>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>

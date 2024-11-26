@@ -25,6 +25,37 @@ VALUES
 ('Ana Morales', '8666-3456', 'ana.morales@example.com', 'Heredia, Residencial Flores', 1),
 ('Laura Jiménez', '8555-7890', 'laura.jimenez@example.com', 'Puntarenas, Centro', 1);
 
+-- Inserta medicamentos SYSTEM
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Antiparasitario Canino', 'Pastillas para desparasitar perros', '1 pastilla cada 3 meses');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Antiinflamatorio Felino', 'Solución oral antiinflamatoria para gatos', '5 ml una vez al día');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Antibiotico Aves', 'Antibiótico en polvo para aves de corral', '1 gramo por litro de agua');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Vacuna Rabia Canina', 'Vacuna contra la rabia para perros', '1 dosis anual');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Suplemento Vitaminico', 'Suplemento vitamínico para mascotas', '1 cucharadita al día');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Solución Ocular', 'Solución ocular para tratar infecciones en ojos de mascotas', '2 gotas en cada ojo, dos veces al día');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Antipulgas Topico', 'Tratamiento tópico antipulgas para gatos', 'Aplicar una vez al mes');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Calmante Canino', 'Calmante para perros en situaciones de estrés', '1 tableta 30 minutos antes de la situación de estrés');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Digestivo', 'Medicamento digestivo para mejorar la digestión en mascotas', '2 ml con cada comida');
+
+INSERT INTO tmedicamentos (Nombre, Descripcion, Dosis)
+VALUES ('Champú Medicado', 'Champú medicado para tratar problemas de piel en perros y gatos', 'Usar 3 veces a la semana');
+
 -- Inserta mascotas SYSTEM
 INSERT INTO tMascotas (NombreMascotas, Tipo, Raza, Edad, Peso, Fecha_Registro, tDueno_Id, Activo) 
 VALUES 

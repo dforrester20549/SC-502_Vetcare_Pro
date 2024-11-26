@@ -2,10 +2,28 @@
 include_once '../../Controller/MedicamentosController.php';
 
 
-$title = "Registrar medicamentos ";
-$content = __FILE__;
+    $title = "Registrar medicamentos ";
+    $content = __FILE__;
 
-include('../../View/_Layout_Admin.php');
+    $rolUsuario = $_SESSION['Rol']; 
+
+
+    switch ($rolUsuario) {
+        case 1:
+            include('../../View/_Layout_System.php');
+            break;
+        case 2:
+            include('../../View/_Layout_Admin.php');
+            break;
+        case 3:
+            include('../../View/_Layout_Veterinario.php');
+            break;
+        case 4:
+            include('../../View/_Layout_Cliente.php');
+            break;
+        default:
+            include('../../View/_Layout_Cliente.php');
+    }
 ?>
 
 <!-- Incluir el contenido específico de la vista -->
