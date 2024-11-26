@@ -587,6 +587,7 @@ BEGIN
 END;;
 DELIMITER ;;
 
+
 -- ________________________________________________sp_INSERT_insertarMedicamento____________________________________________________________________26
 DELIMITER //
 CREATE PROCEDURE sp_INSERT_insertarMedicamento (
@@ -610,6 +611,9 @@ DELIMITER ;
 DELIMITER // 
 CREATE PROCEDURE sp_GET_consultarMedicamentos()
 BEGIN
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
 	SELECT 
 	Nombre, 
@@ -641,9 +645,58 @@ BEGIN
     VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 END // 
 DELIMITER ;
+-- ________________________________________________sp_UPDATE_inactivarMedicamento____________________________________________________________________29
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_inactivarMedicamento(
+    IN p_Id INT(11),
+    IN pIdSession BIGINT
+)
+BEGIN
+    UPDATE tmedicamentos
+    SET Activo = 0
+    WHERE Id = p_Id;
+
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Inactivar Medicamento', CONCAT('Medicamento con ID: ', p_Id, ' inactivado por el usuario con ID: ', pIdSession), pIdSession);
+END ;;
+DELIMITER ;;
+-- ________________________________________________sp_UPDATE_activarMedicamento____________________________________________________________________30
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_activarMedicamento(
+    IN p_Id INT(11),
+    IN pIdSession BIGINT
+)
+BEGIN
+    UPDATE tmedicamentos
+    SET Activo = 1
+    WHERE Id = p_Id;
+
+    -- Registro de la acción en la tabla de Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Activar Medicamento', CONCAT('Medicamento con ID: ', p_Id, ' activado por el usuario con ID: ', pIdSession), pIdSession);
+END ;;
+DELIMITER ;;
+-- ________________________________________________sp_GET_MedicamentoPorID____________________________________________________________________________31
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_MedicamentoPorID(
+    IN pId BIGINT
+)
+BEGIN
+    SELECT
+    Id,
+	Nombre, 
+	Descripcion, 
+	Dosis 
+    FROM 
+        tmedicamentos 
+    WHERE 
+        Id = pId;
+END ;;
+DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarVeterinarios___________________________________________________________________29
+-- ________________________________________________sp_GET_consultarVeterinarios___________________________________________________________________32
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinarios()
 BEGIN
@@ -665,7 +718,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________30
+-- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________33
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosInactivos()
 BEGIN
@@ -687,7 +740,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_INSERT_RegistrarVeterinarios________________________________________________________________31
+-- ________________________________________________sp_INSERT_RegistrarVeterinarios________________________________________________________________34
 DELIMITER ;;
 CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
     IN p_NombreVeterinarios VARCHAR(100),
@@ -748,7 +801,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_GET_consultarVeterinariosPorId______________________________________________________________32
+-- ________________________________________________sp_GET_consultarVeterinariosPorId______________________________________________________________35
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosPorId(
     IN p_Id BIGINT
@@ -772,7 +825,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_UPDATE_actualizarVeterinarios_______________________________________________________________33
+-- ________________________________________________sp_UPDATE_actualizarVeterinarios_______________________________________________________________36
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_actualizarVeterinarios(
 
@@ -807,7 +860,7 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_INSERT_registrarCita________________________________________________________________________34
+-- ________________________________________________sp_INSERT_registrarCita________________________________________________________________________37
 DELIMITER $$
 USE `vetcaredb`$$
 CREATE PROCEDURE `sp_INSERT_registrarCita` (pmascotaid bigint(11),pfecha datetime,pmotivo text, pveterinarioid bigint(11))
@@ -834,7 +887,7 @@ END$$
 DELIMITER ;
 
 
--- ________________________________________________sp_UPDATE_inhabilitarCita______________________________________________________________________35
+-- ________________________________________________sp_UPDATE_inhabilitarCita______________________________________________________________________38
 DELIMITER $$
 USE vetcaredb$$
 CREATE PROCEDURE sp_UPDATE_inhabilitarCita (pid bigint(11))
@@ -849,7 +902,7 @@ END$$
 DELIMITER ;
 
 
--- ________________________________________________sp_UPDATE_actualizarCita______________________________________________________________________36
+-- ________________________________________________sp_UPDATE_actualizarCita______________________________________________________________________39
 DELIMITER $$
 USE vetcaredb$$
 CREATE PROCEDURE sp_UPDATE_actualizarCita (pid bigint(11),pmascotaid bigint(11),pfecha datetime,pmotivo text, pestado enum('pendiente','completada','cancelada'),pveterinarioid bigint(11))
@@ -871,7 +924,7 @@ END$$
 DELIMITER ;
 
 
---________________________________________________sp_INSERT_registrarDueno________________________________________________________________________37
+--________________________________________________sp_INSERT_registrarDueno________________________________________________________________________40
 DELIMITER $$
 CREATE PROCEDURE sp_INSERT_registrarDueno(
     IN pNombre VARCHAR(100),

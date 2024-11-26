@@ -1,29 +1,48 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/MedicamentosModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
-// -------------------------------------- Consultar Medicamentos ---------------------------------
-include_once '../../Model/MedicamentosModel.php';
+// -------------------------------------- Consultar medicamentos ---------------------------------
 
-if (isset($_GET["btnconsultarMedicamentos"])) {
+    if (isset($_GET["btnconsultarMedicamentos"])) {
+    $IdSession = 1;
     $Datos = ConsultarMedicamentosModel();
+    }
+
+// -------------------------------------- Eliminar medicamento ---------------------------------
+
+if (isset($_POST["btnInactivarMedicamento"])) {
+    $Id = $_POST['idMedicamento'];
+    $IdSession = 1;
+
+    $resultado = InactivarMedicamento($Id, $IdSession);
+
+}
+// -------------------------------------- Activar medicamento ---------------------------------
+
+if (isset($_POST["btnActivarMedicamento"])) {
+    $Id = $_POST['idMedicamento'];
+    $IdSession = 1;
+
+    $resultado = ActivarMedicamento($Id, $IdSession);
+
 }
 
-//include('../../View/consultarMedicamentos.php');
     // -------------------------------------- Registrar Medicamento ---------------------------------
 
     if (isset($_GET["btnRegistrarMedicamento"])) {
-        $Datos = []; 
+        $Datos = [];
+        $IdSession = 1;
     }
 
     if (isset($_POST["btnRegistrarMedicamento"])) {
         $Nombre = $_POST["Nombre"];
         $Descripcion = $_POST["Descripcion"];
         $Dosis = $_POST["Dosis"];
-        $IdSession = $_SESSION['IdSession'];
     
         $resultado = RegistrarMedicamentoModel($Nombre, $Descripcion, $Dosis, $IdSession);
     
@@ -37,38 +56,31 @@ if (isset($_GET["btnconsultarMedicamentos"])) {
         exit();
     }
 
-    // -------------------------------------- Actualizar Medicamento ---------------------------------
-
+// -------------------------------------- Actualizar Medicamento ---------------------------------
     if (isset($_GET['id'])) {
-        $Id = $_GET['id'];
-        
-        $actualizarMedicamento = ConsultarMedicamentoPorId($Id);
+    $resultado = ConsultarMedicamentoPorId($Id);
 
-    if ($actualizarMedicamento == true) {
-        header('location: ../../View/Medicamentos/actualizarMedicamentos.php');
-        $_POST["txtMensaje"] = "Medicamento encontrado.";
-    } else {
-        $_POST["txtMensaje"] = "Medicamento no encontrado.";
-        exit();
-    }
-    
+    if ($resultado != null && $resultado->num_rows > 0) 
+    {
+        return mysqli_fetch_assoc($resultado);
+    } else
+        $_SESSION["Error"] = "Medicamento no encontrado.";
+        header('location: ../../View/Medicamentos/consultarMedicamentos.php');
     }
 
     if (isset($_POST["btnActualizarMedicamento"])) {
-        $Id = $_POST["idMedicamento"];  
+        $Id = $_POST["id"];
         $Nombre = $_POST["Nombre"];
         $Descripcion = $_POST["Descripcion"];
         $Dosis = $_POST["Dosis"];
         $IdSession = $_SESSION['IdSession'];
-        
-        $resultado = ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Dosis, $IdSession);
 
-    if ($resultado == true) {
-        header('location: ../../View/Medicamentos/actualizarMedicamentos.php');
-        $_POST["txtMensaje"] = "La información del medicamento se ha actualizado correctamente.";
-    } else {
-        $_POST["txtMensaje"] = "Ocurrió un error al actualizar la información.";
-    }
+        $resultado = ActualizarMedicamentoModel($Id, $Nombre, $Descripcion, $Dosis, $IdSession);
+        if ($resultado == true) {
+            header('location: ../../View/Medicamentos/actualizarMedicamentos.php');
+        } else {
+            $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
+        }
         exit();
     }
 ?>
