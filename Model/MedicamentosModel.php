@@ -7,7 +7,7 @@
     {
         $enlace = AbrirBD();
 
-        $sentencia = "CALL sp_ConsultarMedicamentos()";
+        $sentencia = "CALL sp_GET_consultarMedicamentos()";
         $resultado = $enlace -> query($sentencia);
 
         $medicamentos = [];
@@ -26,7 +26,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_InsertarMedicamento('$Nombre', '$Descripcion', '$Dosis', '$IdSession')";
+            $sentencia = "CALL sp_INSERT_insertarMedicamento('$Nombre', '$Descripcion', '$Dosis', '$IdSession')";
             $resultado = $enlace->query($sentencia);
             CerrarBD($enlace);
             return $resultado;
@@ -59,7 +59,7 @@
     {
         try {
             $enlace = AbrirBD();
-            $sentencia = "CALL sp_ActualizarMedicamento('$Id','$Nombre','$Descripcion','$Dosis', '$IdSession')";
+            $sentencia = "CALL sp_UPDATE_actualizarMedicamento('$Id','$Nombre','$Descripcion','$Dosis', '$IdSession')";
             $resultado = $enlace -> query($sentencia);
             CerrarBD($enlace);
             return $resultado;

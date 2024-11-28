@@ -1,6 +1,10 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/DuenosModel.php';
 
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_GET['consultarDuenos'])) {
     $Datos = ConsultarDuenos();
 }

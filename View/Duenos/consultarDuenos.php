@@ -4,7 +4,24 @@ include_once '../../Controller/DuenosController.php';
 $title = "Consultar Dueños";
 $content = __FILE__;
 
-    include('../../View/_Layout_System.php');
+$rolUsuario = $_SESSION['Rol']; 
+
+switch ($rolUsuario) {
+    case 1:
+        include('../../View/_Layout_System.php');
+        break;
+    case 2:
+        include('../../View/_Layout_Admin.php');
+        break;
+    case 3:
+        include('../../View/_Layout_Veterinario.php');
+        break;
+    case 4:
+        include('../../View/_Layout_Cliente.php');
+        break;
+    default:
+        include('../../View/_Layout_Cliente.php');
+}
 ?>
 
 <div class="container">
@@ -64,3 +81,55 @@ $content = __FILE__;
         </div>
     </div>
 </div>
+
+
+<!-- Carga de scripts para DataTables y SweetAlert -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-ES.json"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#DataTableActivos').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es-ES.json'
+            },
+            columnDefs: [
+                { type: 'num', targets: 0 }
+            ],
+            order: [[0, 'desc']]
+        });
+        $('#DataTableInactivos').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es-ES.json'
+            },
+            columnDefs: [
+                { type: 'num', targets: 0 }
+            ],
+            order: [[0, 'desc']]
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        <?php if (isset($_SESSION["Success"])): ?>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                confirmButtonColor: "#D9C65D",
+                text: '<?php echo $_SESSION["Success"]; ?>'
+            });
+            <?php unset($_SESSION["Success"]); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION["Error"])): ?>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                confirmButtonColor: "#D9C65D",
+                text: '<?php echo $_SESSION["Error"]; ?>'
+            });
+            <?php unset($_SESSION["Error"]); ?>
+        <?php endif; ?>
+    });
+</script>

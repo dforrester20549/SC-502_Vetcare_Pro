@@ -84,6 +84,8 @@
        <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <!-- Home -->
           <li class="nav-item">
             <a href="../System/Index_System.php" class="nav-link">
             <i class="bi bi-house"></i>
@@ -93,6 +95,7 @@
             </a>
           </li>
 
+          <!-- Usuarios -->
           <li class="nav-item">
             <a href="*" class="nav-link">
             <i class="bi bi-people"></i>
@@ -116,6 +119,7 @@
             </ul>
           </li>
 
+          <!-- Veterinarios -->
           <li class="nav-item">
             <a href="*" class="nav-link">
             <i class="bi bi-people"></i>
@@ -139,6 +143,7 @@
             </ul>
           </li>
 
+          <!-- Mascotas -->
           <li class="nav-item">
             <a href="*" class="nav-link">
             <i class="bi bi-bug-fill"></i>
@@ -162,6 +167,73 @@
             </ul>
           </li>
 
+          <!-- Dueños -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="bi bi-person-circle"></i>
+              <p>Dueños</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>Consultar Dueños</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Duenos/registrarDuenos.php" class="nav-link">
+                  <i class="bi bi-person-plus-fill"></i>
+                  <p>Registrar Dueños</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Citas -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-calendar3"></i>
+              <p>Citas</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Citas/Citas.php?Citas=1" class="nav-link">
+                <i class="bi bi-calendar-check-fill"></i>
+                  <p>Consultar Citas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Citas/ModificaCitas.php?ModificaCitas=1" class="nav-link">
+                <i class="bi bi-calendar-plus-fill"></i>
+                  <p>Modificar Citas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Medicamentos -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-capsule"></i>
+              <p>Medicamentos</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Medicamentos/consultarMedicamentos.php?consultarMedicamentos=1" class="nav-link">
+                <i class="bi bi-prescription2"></i>
+                  <p>Consultar Medicamentos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Medicamentos/registrarMedicamentos.php?registrarMedicamentos=1" class="nav-link">
+                <i class="bi bi-prescription"></i>
+                  <p>Registrar Medicamentos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
           <li class="nav-item">
             <a href="../Usuarios/consultarLogs.php?consultarLogs=1" class="nav-link">
             <i class="bi bi-substack"></i>
@@ -170,29 +242,6 @@
               </p>
             </a>
           </li>
-
-
-          <!-- Dueños -->
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="bi bi-person-circle"></i>
-        <p>Dueños</p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
-            <i class="bi bi-person-badge"></i>
-            <p>Consultar Dueños</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../Duenos/registrarDuenos.php" class="nav-link">
-            <i class="bi bi-person-plus-fill"></i>
-            <p>Registrar Dueños</p>
-          </a>
-        </li>
-      </ul>
-    </li>
     
       </nav>
     </div>
@@ -237,6 +286,7 @@
 
 </html>
 
+
 <style>
   body {
     background: url('../root/img/backgrounds/Fondo2.jpg') no-repeat center center fixed;
@@ -244,7 +294,6 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
   }
 
   .wrapper {

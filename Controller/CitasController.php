@@ -1,5 +1,9 @@
 <?php
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/Model/Citasmodel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/CitasModel.php';
+
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     if(isset($_POST["btnAgendarCita"]))
     {
