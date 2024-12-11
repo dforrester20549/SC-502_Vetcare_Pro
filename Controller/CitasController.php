@@ -1,5 +1,6 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/CitasModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -11,11 +12,13 @@
         $fecha = $_POST["txtfecha"];
         $motivo = $_POST["txtMotivo"];
         $idvet = $_POST["txtvetid"];
+        $Correo = $_SESSION["Correo"];
+        $Nombre = $_SESSION["NombreUsuario"];
 
         $fechaactual = date("Y-m-d");
 
         if ($fecha >= $fechaactual) {
-            $resultado = RegistrarCita($idmascota,$fecha,$motivo,$idvet);
+            $resultado = RegistrarCita($idmascota,$fecha,$motivo,$idvet,$Correo,$Nombre);
             $_POST["txtMensaje"] = "Su cita se ha registrado correctamente";
             
         }else{   

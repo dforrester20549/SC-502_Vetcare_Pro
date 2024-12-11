@@ -39,10 +39,10 @@ function RegistrarDueno($nombre, $telefono, $email, $direccion)
 {
     try {
         $enlace = AbrirBD();
-        $sentencia = "CALL sp_INSERT_registrarDueno(?, ?, ?, ?, ?, ?)";
+        $sentencia = "CALL sp_INSERT_registrarDueno(?, ?, ?, ?, ?)";
         $stmt = $enlace->prepare($sentencia);
         $activo = 1; 
-        $stmt->bind_param("ssssii", $nombre, $telefono, $email, $direccion, $activo);
+        $stmt->bind_param("ssssi", $nombre, $telefono, $email, $direccion, $activo);
 
         $resultado = $stmt->execute();
         CerrarBD($enlace);
