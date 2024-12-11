@@ -4,7 +4,7 @@ include_once 'BaseDatos.php';
 function ConsultarDuenos()
 {
     $enlace = AbrirBD();
-    $sentencia = "SELECT * FROM tDuenos";
+    $sentencia = "CALL sp_GET_consultarDuenos()";
     $resultado = $enlace->query($sentencia);
 
     $duenos = [];
@@ -21,16 +21,17 @@ function ConsultarDuenos()
 function DesactivarDueno($Id)
 {
     try {
-        $enlace = AbrirBD();
-        $sentencia = "UPDATE tDuenos SET Activo = 0 WHERE Id = ?";
-        $stmt = $enlace->prepare($sentencia);
-        $stmt->bind_param("i", $Id);
-        $resultado = $stmt->execute();
+        $enlace = AbrirBD(); 
+        $sentencia = $enlace->prepare("CALL sp_UPDATE_desactivarDueno(?)");
+        $sentencia->bind_param("i", $Id);
+        $resultado = $sentencia->execute();
 
+        $sentencia->close();
         CerrarBD($enlace);
-        return $resultado;
+        return $resultado; 
+
     } catch (Exception $ex) {
-        return false;
+        return false; 
     }
 }
 
@@ -38,13 +39,15 @@ function RegistrarDueno($nombre, $telefono, $email, $direccion)
 {
     try {
         $enlace = AbrirBD();
-        $sentencia = "CALL spRegistrarDueno(?, ?, ?, ?, 1)";
+        $sentencia = "CALL sp_INSERT_registrarDueno(?, ?, ?, ?, ?, ?)";
         $stmt = $enlace->prepare($sentencia);
-        $stmt->bind_param("ssss", $nombre, $telefono, $email, $direccion);
-        $resultado = $stmt->execute();
+        $activo = 1; 
+        $stmt->bind_param("ssssii", $nombre, $telefono, $email, $direccion, $activo);
 
+        $resultado = $stmt->execute();
         CerrarBD($enlace);
         return $resultado;
+
     } catch (Exception $ex) {
         return false;
     }

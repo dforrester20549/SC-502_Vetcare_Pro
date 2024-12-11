@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_INSERT_registrarVeterinarios;
+DROP PROCEDURE IF EXISTS sp_INSERT_registrarDueno;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
@@ -871,7 +871,7 @@ END$$
 DELIMITER ;
 
 
---________________________________________________sp_INSERT_registrarDueno________________________________________________________________________37
+-- ________________________________________________sp_INSERT_registrarDueno________________________________________________________________________37
 DELIMITER $$
 CREATE PROCEDURE sp_INSERT_registrarDueno(
     IN pNombre VARCHAR(100),
@@ -884,4 +884,62 @@ BEGIN
     INSERT INTO tDuenos (NombreDuenos, Telefono, Email, Direccion, Activo)
     VALUES (pNombre, pTelefono, pEmail, pDireccion, pActivo);
 END$$
+DELIMITER ;
+
+
+
+-- ________________________________________________sp_GET_consultarDuenos________________________________________________________________________38
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarDuenos()
+BEGIN
+    -- Seleccionar todos los registros de la tabla tDuenos
+    SELECT 
+        Id,
+        NombreDuenos,
+        Telefono,
+        Email,
+        Direccion,
+        Activo
+    FROM 
+        tDuenos;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_desactivarDueno____________________________________________________________________39
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_desactivarDueno(
+    IN p_Id BIGINT
+)
+BEGIN
+    -- Actualizar el estado de activo a 0 para el dueño con el ID proporcionado
+    UPDATE tDuenos
+    SET Activo = 0
+    WHERE Id = p_Id;
+END;;
+DELIMITER ;
+
+
+
+-- ________________________________________________sp_INSERT_registrarDueno____________________________________________________________________40
+DELIMITER ;;
+CREATE PROCEDURE sp_INSERT_registrarDueno(
+    IN p_NombreDuenos VARCHAR(100),
+    IN p_Telefono VARCHAR(15),
+    IN p_Email VARCHAR(100),
+    IN p_Direccion VARCHAR(255),
+    IN p_Activo TINYINT(1)
+)
+BEGIN
+    -- Validar que el valor de Activo sea 0 o 1
+    SET p_Activo = IF(p_Activo = 1, 1, 0);
+
+    -- Insertar los datos en la tabla tDuenos
+    INSERT INTO tDuenos (NombreDuenos, Telefono, Email, Direccion, Activo)
+    VALUES (p_NombreDuenos, p_Telefono, p_Email, p_Direccion, p_Activo);
+
+    -- Registrar la acción en la tabla Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES ('Registrar Dueño', CONCAT('Se registró el dueño: ', p_NombreDuenos), NULL);
+END;;
 DELIMITER ;
