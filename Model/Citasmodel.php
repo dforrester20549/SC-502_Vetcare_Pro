@@ -7,7 +7,7 @@
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL RegistrarCita('$txtidmascota','$txtfecha','$txtMotivo','$txtvetid')";
+            $sentencia = "CALL sp_INSERT_registrarCita('$txtidmascota','$txtfecha','$txtMotivo','$txtvetid')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);

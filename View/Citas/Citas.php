@@ -41,9 +41,20 @@
 
                                 <!-- Formulario de Agendar Cita -->
                                 <form action="" method="POST">
-                                    <div class="form-group">
-                                        <label for="txtidmascota">Ingrese el ID de su mascota</label>
-                                        <input type="text" class="form-control" id="txtidmascota" name="txtidmascota" placeholder="ID">
+                                    <div class="form-group col-md">
+                                        <label class="form-label">Seleccione la Mascota</label>
+                                        <select name="NombreMascota" class="form-control" id="txtidmascota" required>
+                                            <option value="">Seleccione la Mascota</option>
+                                            <?php if (!empty($Mascotas)): ?>
+                                                <?php foreach ($Mascotas as $Mascota): ?>
+                                                    <option value="<?php echo $Mascota['Id']; ?>">
+                                                        <?php echo htmlspecialchars($Mascota['NombreMascotas']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <option value="">No hay mascotas disponibles</option>
+                                            <?php endif; ?>
+                                        </select>
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="txtfecha">Fecha de la cita</label>
@@ -53,9 +64,20 @@
                                         <label for="txtMotivo">Motivo por el que solicita la cita</label>
                                         <input type="text" class="form-control" id="txtMotivo" name="txtMotivo" placeholder="Motivo">
                                     </div>
-                                    <div class="form-group mt-3">
-                                        <label for="txtvetid">ID del veterinario que atiende a su mascota</label>
-                                        <input type="text" class="form-control" id="txtvetid" name="txtvetid" placeholder="ID vet">
+                                    <div class="form-group col-md">
+                                        <label class="form-label">Seleccione el Veterinario</label>
+                                        <select name="NombreVeterinario" class="form-control" id="txtvetid" required>
+                                            <option value="">Seleccione el Veterinario</option>
+                                            <?php if (!empty($Veterinarios)): ?>
+                                                <?php foreach ($Veterinarios as $Veterinario): ?>
+                                                    <option value="<?php echo $Veterinario['Id']; ?>">
+                                                        <?php echo htmlspecialchars($Veterinario['NombreVeterinarios']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <option value="">No hay veterinarios disponibles</option>
+                                            <?php endif; ?>
+                                        </select>
                                     </div>
                                     <div class="mt-4 d-flex justify-content-between">
                                         <button type="submit" class="btn btn-primary" id="btnAgendarCita" name="btnAgendarCita">Procesar</button>

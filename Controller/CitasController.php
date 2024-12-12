@@ -1,17 +1,22 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/CitasModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/VeterinariosModel.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Model/MascotasModel.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/SC-502_Vetcare_Pro/Utilidades/Utilidades.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
+    $Veterinarios = consultarVeterinarios();
+    $Mascotas = ConsultarMascotas();
+
     if(isset($_POST["btnAgendarCita"]))
     {
-        $idmascota = $_POST["txtidmascota"];
+        $idmascota = $_POST["NombreMascota"];
         $fecha = $_POST["txtfecha"];
         $motivo = $_POST["txtMotivo"];
-        $idvet = $_POST["txtvetid"];
+        $idvet = $_POST["NombreVeterinario"];
         $Correo = $_SESSION["Correo"];
         $Nombre = $_SESSION["NombreUsuario"];
 
@@ -24,19 +29,16 @@
         }else{   
             $_POST["txtMensaje"] = "la fecha no es valida";
         }
-     
-        
-      
     }
 
     if(isset($_POST["btnActualizarCita"]))
     {
         $idcita = $_POST["txtidcita"];
-        $idmascota = $_POST["txtidmascota"];
+        $idmascota = $_POST["NombreMascota"];
         $fecha = $_POST["txtfecha"];
         $motivo = $_POST["txtMotivo"];
         $estado = $_POST["txtestado"];
-        $idvet = $_POST["txtvetid"];
+        $idvet = $_POST["NombreVeterinario"];
 
       
         $resultado = ActualizarCita($idcita,$idmascota,$fecha, $motivo,$estado,$idvet);
