@@ -219,7 +219,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../Medicamentos/consultarMedicamentos.php?consultarMedicamentos=1" class="nav-link">
+              <a href="../Medicamentos/ConsultarMedicamentos.php?consultarMedicamentos=1" class="nav-link">
                 <i class="bi bi-prescription2"></i>
                   <p>Consultar Medicamentos</p>
                 </a>
@@ -233,6 +233,27 @@
             </ul>
           </li>
 
+           <!-- Tratamiento -->
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-hospital"></i>
+              <p>Tratamiento</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Tratamiento/consultarTratamiento.php?consultarTratamiento=1" class="nav-link">
+                <i class="bi bi-bandaid"></i>
+                  <p>Consultar Tratamiento</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Medicamentos/registrarMedicamentos.php?registrarMedicamentos=1" class="nav-link">
+                <i class="bi bi-prescription"></i>
+                  <p>Registrar Tratamiento</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="../Usuarios/consultarLogs.php?consultarLogs=1" class="nav-link">

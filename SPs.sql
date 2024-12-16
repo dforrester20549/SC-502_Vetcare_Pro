@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_INSERT_registrarDueno;
+DROP PROCEDURE IF EXISTS sp_DELETE_eliminarVeterinarioPorId;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
@@ -943,3 +943,95 @@ BEGIN
     VALUES ('Registrar Dueño', CONCAT('Se registró el dueño: ', p_NombreDuenos), NULL);
 END;;
 DELIMITER ;
+
+
+-- ________________________________________________sp_GET_consultarmascotatx_________________________________________________________________41
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarmascotatx()
+BEGIN
+    SELECT 
+        m.Id AS MascotaId,
+        m.NombreMascotas AS NombreMascota,
+        m.Tipo AS TipoMascota,
+        m.Raza AS Raza,
+        m.Edad AS Edad,
+        m.Peso AS Peso,
+        c.Id AS CitaId,
+        c.Fecha_Cita AS FechaCita,
+        c.Motivo AS MotivoCita,
+        c.Estado AS EstadoCita,
+        d.NombreDuenos AS NombreDueno,
+        v.NombreVeterinarios AS Veterinario
+    FROM 
+        tMascotas AS m
+    INNER JOIN 
+        tCitas AS c ON m.Id = c.tMascota_id
+    INNER JOIN 
+        tDuenos AS d ON m.tDueno_Id = d.Id
+    INNER JOIN 
+        tVeterinarios AS v ON c.tVeterinario_id = v.Id
+    WHERE 
+        c.Activo = 1; -- Filtrar solo citas activas
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_INSERT_registrarTx___________________________________________________________________42
+DELIMITER ;;
+CREATE PROCEDURE sp_INSERT_registrarTx(
+    IN p_Costo DECIMAL(10, 2),
+    IN p_Descripcion TEXT,
+    IN p_tMascota_Id BIGINT,
+    IN p_tVeterinario_Id BIGINT,
+    IN p_tMedicamento_Id BIGINT,
+    IN p_Activo TINYINT(1),
+    IN p_IdSession INT
+)
+BEGIN
+    DECLARE v_TratamientoId BIGINT;
+
+    -- Insertar en la tabla tTratamientos
+    INSERT INTO tTratamientos (tMascota_Id, Fecha_Tratamiento, Descripcion, Costo, Activo, tMedicamento_Id)
+    VALUES (p_tMascota_Id, NOW(), p_Descripcion, p_Costo, p_Activo, p_tMedicamento_Id);
+
+    -- Obtener el ID del tratamiento recién insertado
+    SET v_TratamientoId = LAST_INSERT_ID();
+
+    -- Actualizar el estado de la cita asociada a 'completada'
+    UPDATE tCitas
+    SET Estado = 'completada'
+    WHERE tMascota_id = p_tMascota_Id AND tVeterinario_id = p_tVeterinario_Id;
+
+    -- Registrar en el Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Registrar Tratamiento',
+        CONCAT('Se registró el tratamiento con ID: ', v_TratamientoId, ' para la mascota con ID: ', p_tMascota_Id),
+        p_IdSession
+    );
+END;;
+DELIMITER ;
+
+
+
+-- ________________________________________________sp_DELETE_eliminarVeterinarioPorId_____________________________________________________43
+DELIMITER ;;
+CREATE PROCEDURE sp_DELETE_eliminarVeterinarioPorId(
+    IN p_Id BIGINT,
+    IN p_IdSession INT
+)
+BEGIN
+     -- Actualizar el estado de activo a 0 para el dueño con el ID proporcionado
+    UPDATE tVeterinarios
+    SET Activo = 0
+    WHERE Id = p_Id;
+    
+    -- Registrar la acción en el log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Inactivar Mascota',
+        CONCAT('Se ha inactivado el Veterinario con ID: ', p_Id),
+        p_IdSession
+    );
+END;;
+DELIMITER ;;

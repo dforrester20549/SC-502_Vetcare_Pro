@@ -108,35 +108,58 @@
 
 
     function ActualizarVeterinariosModel($Id, $NombreVeterinarios, $Especialidad, $Telefono, $Email, $Activo, $IdSession)
-{
-    try {
+    {
+        try {
+            $enlace = AbrirBD();
+
+            // Preparar la consulta para el procedimiento almacenado
+            $sentencia = $enlace->prepare("CALL sp_UPDATE_actualizarVeterinarios(?, ?, ?, ?, ?, ?, ?)");
+
+            // Vincular los parámetros
+            $sentencia->bind_param(
+                "issssii", // Tipos de datos correspondientes a los parámetros
+                $Id,                  // p_Id (INT/BIGINT)
+                $NombreVeterinarios,  // p_NombreVeterinarios (STRING)
+                $Especialidad,        // p_Especialidad (STRING)
+                $Telefono,            // p_Telefono (STRING)
+                $Email,               // p_Email (STRING)
+                $Activo,              // p_Activo (INT)
+                $IdSession            // p_IdSession (INT)
+            );
+
+            // Ejecutar la consulta
+            $resultado = $sentencia->execute();
+
+            // Cerrar la conexión
+            CerrarBD($enlace);
+
+            return $resultado;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+
+
+    // -------------------------------------- Eliminar Mascotas ---------------------------------
+    function DesactivarVeterinario($Id, $IdSession) 
+    {
         $enlace = AbrirBD();
 
-        // Preparar la consulta para el procedimiento almacenado
-        $sentencia = $enlace->prepare("CALL sp_UPDATE_actualizarVeterinarios(?, ?, ?, ?, ?, ?, ?)");
+        try {
+            $sentencia = $enlace->prepare("CALL sp_DELETE_eliminarVeterinarioPorId(?, ?)");
+            $sentencia->bind_param("ii", $Id, $IdSession);
 
-        // Vincular los parámetros
-        $sentencia->bind_param(
-            "issssii", // Tipos de datos correspondientes a los parámetros
-            $Id,                  // p_Id (INT/BIGINT)
-            $NombreVeterinarios,  // p_NombreVeterinarios (STRING)
-            $Especialidad,        // p_Especialidad (STRING)
-            $Telefono,            // p_Telefono (STRING)
-            $Email,               // p_Email (STRING)
-            $Activo,              // p_Activo (INT)
-            $IdSession            // p_IdSession (INT)
-        );
+            if ($sentencia->execute()) {
+                return true; 
+            } else {
+                return false; 
+            }
 
-        // Ejecutar la consulta
-        $resultado = $sentencia->execute();
-
-        // Cerrar la conexión
-        CerrarBD($enlace);
-
-        return $resultado;
-    } catch (Exception $ex) {
-        return false;
+        } catch (Exception $e) {
+            die("Excepción: " . $e->getMessage());
+        } finally {
+            CerrarBD($enlace);
+        }
     }
-}
 
 ?>

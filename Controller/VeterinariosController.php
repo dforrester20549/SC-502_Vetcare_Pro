@@ -38,7 +38,7 @@
             $_SESSION["Error"] = "Ocurrió un error al registrar la información.";
         }
         
-        header('Location: ../Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
+        header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
         exit();
     }
 
@@ -77,7 +77,25 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizado la información.";
         }
         
-        header('Location: ../Mascotas/consultarMascotas.php?consultarMascotas=1'); 
+        header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
+        exit();
+    }
+
+
+    // -------------------------------------- Eliminar Veterinarios ---------------------------------
+
+    if (isset($_GET['desactivarVeterinario'])) {
+        $Id = $_GET['id'];
+        $IdSession = $_SESSION['IdSession'];  
+        $resultado = DesactivarVeterinario($Id, $IdSession);
+    
+        if ($resultado) {
+            $_SESSION['Success'] = "Veterinario desactivado correctamente.";
+        } else {
+            $_SESSION['Error'] = "Ocurrió un error al desactivar al Veterinario.";
+        }
+    
+        header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
         exit();
     }
 ?>

@@ -70,7 +70,7 @@
                                                                 <td><?php echo htmlspecialchars($veterinarios['Email']); ?></td>
                                                                 <td>
                                                                     <a href="actualizarVeterinarios.php?id=<?php echo $veterinarios['Id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                                                    <a href="../../Controller/VeterinariosController.php?eliminarVeterinarios=1&id=<?php echo $veterinarios['Id']; ?>" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
+                                                                    <a href="../../Controller/VeterinariosController.php?desactivarVeterinario=1&id=<?php echo $veterinarios['Id']; ?>" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; ?>
