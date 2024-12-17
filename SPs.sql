@@ -689,7 +689,7 @@ DELIMITER ;
 
 
 
--- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________31
+-- ________________________________________________sp_INSERT_registrarVeterinarios_______________________________________________________________31
 DELIMITER ;;
 CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
     IN p_NombreVeterinarios VARCHAR(100),
@@ -725,7 +725,7 @@ BEGIN
         'default', -- Contraseña temporal inicial
         p_Activo,
         3, -- Rol Veterinario
-        IFNULL(p_ImagePath, 'default-path'), -- Ruta de la imagen, valor por defecto si no se envía
+        IFNULL(p_ImagePath, '/SC-502_Vetcare_Pro/View/root/img/veterinario/noimage.jpg'), -- Ruta de la imagen, valor por defecto si no se envía
         IFNULL(p_Destacado, 0) -- Valor de destacado, por defecto 0 si no se envía
     );
 

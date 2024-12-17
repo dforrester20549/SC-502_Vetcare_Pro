@@ -56,7 +56,7 @@
                                                             <!-- Contenedor de la imagen -->
                                                             <div class="card-img-top text-center p-3">
                                                                 <img 
-                                                                    src="<?php echo !empty($veterinario['ImagePath']) ? htmlspecialchars($veterinario['ImagePath']) : '../../View/root/img/veterinario/noimage.jpg'; ?>" 
+                                                                    src="<?php echo !empty($veterinario['ImagePath']) ? htmlspecialchars($veterinario['ImagePath']) : '/SC-502_Vetcare_Pro/View/root/img/veterinario/noimage.jpg'; ?>" 
                                                                     alt="Imagen Veterinario" 
                                                                     class="rounded-circle img-fluid" 
                                                                     style="width: 150px; height: 150px; object-fit: cover;">
