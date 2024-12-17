@@ -5,6 +5,8 @@
     $title = "Registrar Usuarios ";
     $content = __FILE__;
 
+    $rolUsuario = $_SESSION['Rol']; 
+
     switch ($rolUsuario) {
         case 1:
             include('../../View/_Layout_System.php');

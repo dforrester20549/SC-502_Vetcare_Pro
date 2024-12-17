@@ -92,11 +92,12 @@ CREATE TABLE tTratamientos (
 -- Tabla: Veterinarios
 CREATE TABLE tVeterinarios (
     Id bigint(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
+    NombreVeterinarios VARCHAR(100) NOT NULL,
     Especialidad VARCHAR(50),
     Telefono VARCHAR(15),
     Email VARCHAR(100),
-    Activo bit(1) NOT NULL
+    Activo bit(1) NOT NULL,
+    RolId bigint(11) NOT NULL
 );
 
 -- Tabla: Medicamentos
@@ -168,3 +169,8 @@ FOREIGN KEY (tMedicamento_id) REFERENCES tMedicamentos(Id);
 ALTER TABLE tCitas
 ADD CONSTRAINT fk_tcitas_tveterinarios
 FOREIGN KEY (tVeterinario_id) REFERENCES tVeterinarios(Id);
+
+-- Crear la llave foránea de tVeterinarios hacia tRoles
+ALTER TABLE tVeterinarios
+ADD CONSTRAINT FK_Veterinarios_Roles
+FOREIGN KEY (RolId) REFERENCES tRoles(Id);

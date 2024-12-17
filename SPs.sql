@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_UPDATE_actualizarMascotas;
+DROP PROCEDURE IF EXISTS sp_INSERT_registrarVeterinarios;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
@@ -332,32 +332,7 @@ BEGIN
 END ;;
 DELIMITER ;
 
--- ________________________________________________sp_GET_consultarUsuariosTUSUARIOS________________________________________________________________16
-DELIMITER ;;
-CREATE PROCEDURE sp_GET_consultarUsuarios(
-    IN pIdSession BIGINT
-)
-BEGIN
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
-    -- Selección de la información del usuario y el nombre del rol
-    SELECT 
-        u.Id,
-        u.Identificacion,
-        u.Nombre,
-        u.Correo,
-        u.Activo,
-        u.tRol_id,
-        r.NombreRol
-    FROM 
-        tUsuarios u
-        JOIN tRoles r ON u.tRol_id = r.Id
-    WHERE 
-        u.Id = pIdSession;
-END ;;
-DELIMITER ;
 
 -- ________________________________________________sp_UPDATE_seguridad______________________________________________________________________________17
 DELIMITER $$
@@ -435,7 +410,7 @@ CREATE PROCEDURE sp_INSERT_RegistrarMascotas(
 BEGIN
 
  -- Convertir el valor de pActivo a 0 si es diferente de 1
-    SET pActivo = IF(pActivo = 1, 1, 0);
+    SET p_Activo = IF(p_Activo = 1, 1, 0);
     
     
     -- Insertar en la tabla tMascotas
@@ -635,9 +610,6 @@ DELIMITER ;
 DELIMITER // 
 CREATE PROCEDURE sp_GET_consultarMedicamentos()
 BEGIN
-    -- Registro de la acción en la tabla de Log
-    INSERT INTO Log (accion, descripcion, usuario_id)
-    VALUES ('Consultar Usuarios', CONCAT('Consulta realizada para el usuario con ID: ', pIdSession), pIdSession);
 
 	SELECT 
 	Nombre, 
@@ -670,11 +642,238 @@ BEGIN
 END // 
 DELIMITER ;
 
---________________________________________________spRegistrarDueno__________________________________________________________________
 
+-- ________________________________________________sp_GET_consultarVeterinarios___________________________________________________________________29
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarVeterinarios()
+BEGIN
+
+    SELECT 
+		u.Id,
+        u.NombreVeterinarios,
+        u.Especialidad,
+        u.Telefono,
+        u.Email,
+        u.RolId
+        
+     FROM 
+        tVeterinarios u
+        JOIN tRoles r ON u.RolId = r.Id
+    WHERE 
+        u.Activo = 1;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________30
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarVeterinariosInactivos()
+BEGIN
+
+    SELECT 
+		u.Id,
+        u.NombreVeterinarios,
+        u.Especialidad,
+        u.Telefono,
+        u.Email,
+        u.RolId
+        
+     FROM 
+        tVeterinarios u
+        JOIN tRoles r ON u.RolId = r.Id
+    WHERE 
+        u.Activo = 0;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_INSERT_RegistrarVeterinarios________________________________________________________________31
+DELIMITER ;;
+CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
+    IN p_NombreVeterinarios VARCHAR(100),
+    IN p_Especialidad VARCHAR(50),
+    IN p_Telefono VARCHAR(15),
+    IN p_Email VARCHAR(100),
+    IN p_Activo TINYINT(1),
+    IN p_IdSession INT
+)
+BEGIN
+    DECLARE v_NewVeterinarioId BIGINT;
+    DECLARE v_NewUsuarioId BIGINT;
+    DECLARE v_TemporaryPassword VARCHAR(10);
+
+    -- Validar que el valor de Activo sea 0 o 1
+    SET p_Activo = IF(p_Activo = 1, 1, 0);
+
+    -- Insertar en la tabla tVeterinarios
+    INSERT INTO tVeterinarios (NombreVeterinarios, Especialidad, Telefono, Email, Activo, RolId)
+    VALUES (p_NombreVeterinarios, p_Especialidad, p_Telefono, p_Email, p_Activo, 3);
+
+    -- Obtener el último ID generado para tVeterinarios
+    SET v_NewVeterinarioId = LAST_INSERT_ID();
+
+    -- Insertar en la tabla tUsuarios
+    INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id, ImagePath, Destacado)
+    VALUES (
+        v_NewVeterinarioId, -- Usar el ID del veterinario como Identificación
+        p_NombreVeterinarios,
+        p_Email,
+        'default', -- Contraseña temporal inicial
+        p_Activo,
+        3, -- Rol Veterinario
+        'default-path', -- Ruta por defecto para la imagen
+        0 -- No destacado por defecto
+    );
+
+    -- Obtener el último ID generado para tUsuarios
+    SET v_NewUsuarioId = LAST_INSERT_ID();
+
+    -- Generar un código de recuperación temporal
+    SET v_TemporaryPassword = LPAD(FLOOR(RAND() * 100000), 6, '0'); -- Código aleatorio de 6 dígitos
+
+    -- Actualizar la contraseña temporal usando el procedimiento sp_LOGIN_actualizarContrasenna
+    CALL sp_LOGIN_actualizarContrasenna(v_NewUsuarioId, v_TemporaryPassword);
+
+    -- Registrar la acción en la tabla Log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Registrar Veterinario',
+        CONCAT('Se registró el veterinario: ', p_NombreVeterinarios, ' con el ID de usuario: ', v_NewUsuarioId),
+        p_IdSession
+    );
+
+    -- Retornar el correo y la contraseña temporal
+    SELECT p_Email AS Correo, v_TemporaryPassword AS ContrasennaTemporal;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_GET_consultarVeterinariosPorId______________________________________________________________32
+DELIMITER ;;
+CREATE PROCEDURE sp_GET_consultarVeterinariosPorId(
+    IN p_Id BIGINT
+)
+BEGIN
+    SELECT 
+        m.Id,
+        m.NombreVeterinarios,
+        m.Especialidad,
+        m.Telefono,
+        m.Email,
+        m.RolId,
+        m.Activo
+        
+    FROM 
+        tVeterinarios m
+
+    WHERE 
+        m.Id = p_Id;
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_actualizarVeterinarios_______________________________________________________________33
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_actualizarVeterinarios(
+
+	IN p_Id bigint(11),
+	IN p_NombreVeterinarios VARCHAR(100),
+    IN p_Especialidad VARCHAR(50),
+    IN p_Telefono VARCHAR(15),
+    IN p_Email VARCHAR(100),
+    IN p_Activo TINYINT(1),
+    IN p_IdSession INT
+)
+BEGIN
+	
+    UPDATE tMascotas
+    SET 
+		Id = p_Id,
+        NombreVeterinarios = p_NombreVeterinarios,
+        Especialidad = p_Especialidad,
+        Telefono = p_Telefono,
+        Email = p_Email,
+        Activo = 1
+    WHERE 
+        Id = p_Id;
+    
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Actualizar Veterinario', 
+        CONCAT('Se actualizó al Veterinario: ', p_NombreVeterinarios, ' con ID: ', p_Id), 
+        p_IdSession
+    );
+END;;
+DELIMITER ;
+
+
+-- ________________________________________________sp_INSERT_registrarCita________________________________________________________________________34
 DELIMITER $$
+USE `vetcaredb`$$
+CREATE PROCEDURE `sp_INSERT_registrarCita` (pmascotaid bigint(11),pfecha datetime,pmotivo text, pveterinarioid bigint(11))
+BEGIN
+INSERT INTO `vetcaredb`.`tcitas`
+(
+`tMascota_id`,
+`Fecha_Cita`,
+`Motivo`,
+`Estado`,
+`Activo`,
+`tVeterinario_id`)
+VALUES
+(
+pmascotaid,
+pfecha,
+pmotivo,
+'pendiente',
+1,
+pveterinarioid);
+ 
+END$$
+ 
+DELIMITER ;
 
-CREATE PROCEDURE spRegistrarDueno(
+
+-- ________________________________________________sp_UPDATE_inhabilitarCita______________________________________________________________________35
+DELIMITER $$
+USE vetcaredb$$
+CREATE PROCEDURE sp_UPDATE_inhabilitarCita (pid bigint(11))
+BEGIN
+UPDATE vetcaredb.tcitas
+SET
+Activo = 0
+WHERE Id = pid;
+ 
+END$$
+ 
+DELIMITER ;
+
+
+-- ________________________________________________sp_UPDATE_actualizarCita______________________________________________________________________36
+DELIMITER $$
+USE vetcaredb$$
+CREATE PROCEDURE sp_UPDATE_actualizarCita (pid bigint(11),pmascotaid bigint(11),pfecha datetime,pmotivo text, pestado enum('pendiente','completada','cancelada'),pveterinarioid bigint(11))
+ 
+BEGIN
+UPDATE vetcaredb.tcitas
+SET
+tMascota_id = pmascotaid,
+Fecha_Cita = pfecha,
+Motivo = pmotivo,
+Estado = pestado,
+Activo = 1,
+tVeterinario_id = pveterinarioid
+WHERE Id = pid;
+ 
+ 
+END$$
+ 
+DELIMITER ;
+
+
+--________________________________________________sp_INSERT_registrarDueno________________________________________________________________________37
+DELIMITER $$
+CREATE PROCEDURE sp_INSERT_registrarDueno(
     IN pNombre VARCHAR(100),
     IN pTelefono VARCHAR(15),
     IN pEmail VARCHAR(100),
@@ -685,5 +884,4 @@ BEGIN
     INSERT INTO tDuenos (NombreDuenos, Telefono, Email, Direccion, Activo)
     VALUES (pNombre, pTelefono, pEmail, pDireccion, pActivo);
 END$$
-
 DELIMITER ;
