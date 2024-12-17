@@ -1047,3 +1047,26 @@ BEGIN
     );
 END;;
 DELIMITER ;;
+
+
+
+-- ___________________________________________sp_GET_consultarVeterinariosDestacados___________________________________________________44
+DELIMITER $$
+CREATE PROCEDURE sp_GET_consultarVeterinariosDestacados()
+BEGIN
+    SELECT 
+        Id, 
+        NombreVeterinarios AS Nombre, 
+        Especialidad, 
+        Telefono, 
+        Email, 
+        ImagePath
+    FROM 
+        tVeterinarios
+    WHERE 
+        Destacado = 1 AND Activo = 1
+    ORDER BY 
+        NombreVeterinarios ASC;
+END$$
+DELIMITER ;
+

@@ -134,4 +134,14 @@ if (isset($_POST["btnActualizarVeterinario"])) {
         header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
         exit();
     }
+
+
+    // -------------------------------------- Consultar Veterinarios ---------------------------------
+    if (isset($_GET["consultarVeterinariosDestacados"])) 
+    {
+        $consultarDestacados = consultarVeterinariosDestacados();
+        
+        $Destacados = $consultarDestacados;
+    }
+
 ?>

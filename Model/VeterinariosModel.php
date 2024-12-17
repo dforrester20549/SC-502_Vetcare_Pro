@@ -165,4 +165,21 @@
         }
     }
 
+
+     // -------------------------------------- Consultar Mascotas ---------------------------------
+     function consultarVeterinariosDestacados()
+     {
+         $enlace = AbrirBD();
+         $sentencia = "CALL sp_GET_consultarVeterinariosDestacados()";
+         $resultado = $enlace -> query($sentencia);
+ 
+         $destacados = [];
+         if ($resultado) {
+             while ($row = mysqli_fetch_assoc($resultado)) {
+                 $destacados[] = $row;
+             }
+         }
+         return $destacados;
+     }
+
 ?>
