@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_DELETE_eliminarVeterinarioPorId;
+DROP PROCEDURE IF EXISTS sp_INSERT_registrarVeterinarios;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
@@ -647,16 +647,16 @@ DELIMITER ;
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinarios()
 BEGIN
-
     SELECT 
-		u.Id,
+        u.Id,
         u.NombreVeterinarios,
         u.Especialidad,
         u.Telefono,
         u.Email,
-        u.RolId
-        
-     FROM 
+        u.ImagePath,       -- Agregar la columna de la imagen
+        u.Destacado,       -- Agregar la columna de destacado
+        r.NombreRol        -- Obtener el nombre del rol desde la tabla tRoles
+    FROM 
         tVeterinarios u
         JOIN tRoles r ON u.RolId = r.Id
     WHERE 
@@ -665,20 +665,21 @@ END;;
 DELIMITER ;
 
 
+
 -- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________30
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosInactivos()
 BEGIN
-
     SELECT 
-		u.Id,
+        u.Id,
         u.NombreVeterinarios,
         u.Especialidad,
         u.Telefono,
         u.Email,
-        u.RolId
-        
-     FROM 
+        u.ImagePath,       -- Agregar la columna de la imagen
+        u.Destacado,       -- Agregar la columna de destacado
+        r.NombreRol        -- Obtener el nombre del rol desde la tabla tRoles
+    FROM 
         tVeterinarios u
         JOIN tRoles r ON u.RolId = r.Id
     WHERE 
@@ -687,7 +688,8 @@ END;;
 DELIMITER ;
 
 
--- ________________________________________________sp_INSERT_RegistrarVeterinarios________________________________________________________________31
+
+-- ________________________________________________sp_GET_consultarVeterinariosInactivos__________________________________________________________31
 DELIMITER ;;
 CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
     IN p_NombreVeterinarios VARCHAR(100),
@@ -695,6 +697,8 @@ CREATE PROCEDURE sp_INSERT_registrarVeterinarios(
     IN p_Telefono VARCHAR(15),
     IN p_Email VARCHAR(100),
     IN p_Activo TINYINT(1),
+    IN p_ImagePath VARCHAR(255),
+    IN p_Destacado TINYINT(1),
     IN p_IdSession INT
 )
 BEGIN
@@ -712,7 +716,7 @@ BEGIN
     -- Obtener el último ID generado para tVeterinarios
     SET v_NewVeterinarioId = LAST_INSERT_ID();
 
-    -- Insertar en la tabla tUsuarios
+    -- Insertar en la tabla tUsuarios con ImagePath y Destacado
     INSERT INTO tUsuarios (Identificacion, Nombre, Correo, Contrasenna, Activo, tRol_id, ImagePath, Destacado)
     VALUES (
         v_NewVeterinarioId, -- Usar el ID del veterinario como Identificación
@@ -721,15 +725,15 @@ BEGIN
         'default', -- Contraseña temporal inicial
         p_Activo,
         3, -- Rol Veterinario
-        'default-path', -- Ruta por defecto para la imagen
-        0 -- No destacado por defecto
+        IFNULL(p_ImagePath, 'default-path'), -- Ruta de la imagen, valor por defecto si no se envía
+        IFNULL(p_Destacado, 0) -- Valor de destacado, por defecto 0 si no se envía
     );
 
     -- Obtener el último ID generado para tUsuarios
     SET v_NewUsuarioId = LAST_INSERT_ID();
 
     -- Generar un código de recuperación temporal
-    SET v_TemporaryPassword = LPAD(FLOOR(RAND() * 100000), 6, '0'); -- Código aleatorio de 6 dígitos
+    SET v_TemporaryPassword = LPAD(FLOOR(RAND() * 1000000), 6, '0'); -- Código aleatorio de 6 dígitos
 
     -- Actualizar la contraseña temporal usando el procedimiento sp_LOGIN_actualizarContrasenna
     CALL sp_LOGIN_actualizarContrasenna(v_NewUsuarioId, v_TemporaryPassword);
@@ -748,6 +752,7 @@ END;;
 DELIMITER ;
 
 
+
 -- ________________________________________________sp_GET_consultarVeterinariosPorId______________________________________________________________32
 DELIMITER ;;
 CREATE PROCEDURE sp_GET_consultarVeterinariosPorId(
@@ -761,50 +766,57 @@ BEGIN
         m.Telefono,
         m.Email,
         m.RolId,
-        m.Activo
-        
+        m.Activo,
+        m.ImagePath, -- Nueva columna para la ruta de la imagen
+        m.Destacado  -- Nueva columna para el estado de destacado
     FROM 
         tVeterinarios m
-
     WHERE 
         m.Id = p_Id;
 END;;
 DELIMITER ;
 
 
+
 -- ________________________________________________sp_UPDATE_actualizarVeterinarios_______________________________________________________________33
 DELIMITER ;;
 CREATE PROCEDURE sp_UPDATE_actualizarVeterinarios(
-
-	IN p_Id bigint(11),
-	IN p_NombreVeterinarios VARCHAR(100),
+    IN p_Id BIGINT(11),
+    IN p_NombreVeterinarios VARCHAR(100),
     IN p_Especialidad VARCHAR(50),
     IN p_Telefono VARCHAR(15),
     IN p_Email VARCHAR(100),
     IN p_Activo TINYINT(1),
+    IN p_ImagePath VARCHAR(400),
+    IN p_Destacado TINYINT(1),
     IN p_IdSession INT
 )
 BEGIN
-	
-    UPDATE tMascotas
+    -- Actualizar la tabla tVeterinarios
+    UPDATE tVeterinarios
     SET 
-		Id = p_Id,
         NombreVeterinarios = p_NombreVeterinarios,
         Especialidad = p_Especialidad,
         Telefono = p_Telefono,
         Email = p_Email,
-        Activo = 1
+        Activo = p_Activo,
+        ImagePath = p_ImagePath,
+        Destacado = p_Destacado
     WHERE 
         Id = p_Id;
-    
+
+    -- Insertar un registro en la tabla Log
     INSERT INTO Log (accion, descripcion, usuario_id)
     VALUES (
         'Actualizar Veterinario', 
-        CONCAT('Se actualizó al Veterinario: ', p_NombreVeterinarios, ' con ID: ', p_Id), 
+        CONCAT('Se actualizó al Veterinario: ', p_NombreVeterinarios, 
+               ' con ID: ', p_Id, 
+               ', Destacado: ', p_Destacado), 
         p_IdSession
     );
 END;;
 DELIMITER ;
+
 
 
 -- ________________________________________________sp_INSERT_registrarCita________________________________________________________________________34

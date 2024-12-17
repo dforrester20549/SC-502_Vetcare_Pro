@@ -96,7 +96,9 @@ CREATE TABLE tVeterinarios (
     Telefono VARCHAR(15),
     Email VARCHAR(100),
     Activo bit(1) NOT NULL,
-    RolId bigint(11) NOT NULL
+    RolId bigint(11) NOT NULL,
+    ImagePath VARCHAR(400) NOT NULL DEFAULT 'default-path',
+    Destacado BIT(1) NOT NULL DEFAULT 0
 );
 
 -- Tabla: Medicamentos
@@ -173,3 +175,5 @@ FOREIGN KEY (tVeterinario_id) REFERENCES tVeterinarios(Id);
 ALTER TABLE tVeterinarios
 ADD CONSTRAINT FK_Veterinarios_Roles
 FOREIGN KEY (RolId) REFERENCES tRoles(Id);
+
+

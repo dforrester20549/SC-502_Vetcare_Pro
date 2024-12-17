@@ -1,8 +1,7 @@
 <?php
     include_once '../../Controller/VeterinariosController.php';
 
-
-    $title = "Registrar Veterinarios ";
+    $title = "Registrar Veterinarios";
     $content = __FILE__;
 
     $rolUsuario = $_SESSION['Rol']; 
@@ -25,7 +24,6 @@
     }
 ?>
 
-<!-- Incluir el contenido específico de la vista -->
 <div class="container">
     <div class="row justify-content-center" style="margin-top:5%">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -39,18 +37,34 @@
                                     <h3 class="h4 text-gray-900 mb-4">Registrar Veterinarios</h3>
                                 </div>
 
-                                <form method="post" action="registrarVeterinarios.php">
+                                <form method="post" action="registrarVeterinarios.php" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="text" name="NombreVeterinarios" class="form-control form-control-user" placeholder="Nombre del Veterinario" required>
                                     </div><br>
+
                                     <div class="form-group">
                                         <input type="text" name="Especialidad" class="form-control form-control-user" placeholder="Especialidad" required>
                                     </div><br>
+
                                     <div class="form-group">
                                         <input type="text" name="Telefono" class="form-control form-control-user" placeholder="Teléfono" required>
                                     </div><br>
+
                                     <div class="form-group">
                                         <input type="email" name="Email" class="form-control form-control-user" placeholder="Correo Electrónico" required>
+                                    </div><br>
+
+                                    <div class="form-group">
+                                        <label for="ImagePath" class="form-label">Imagen del Veterinario</label>
+                                        <input type="file" name="ImagePath" class="form-control" accept="image/*" required>
+                                    </div><br>
+
+                                    <div class="form-group">
+                                        <label for="Destacado" class="form-label">¿Destacado?</label>
+                                        <select name="Destacado" class="form-control" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Sí</option>
+                                        </select>
                                     </div><br>
 
                                     <input type="hidden" name="Activo" value="1">
@@ -66,4 +80,3 @@
         </div>
     </div>
 </div>
-
