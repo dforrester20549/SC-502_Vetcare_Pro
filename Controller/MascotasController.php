@@ -55,7 +55,7 @@
             $_SESSION["Error"] = "Ocurrió un error al registrar la información.";
         }
         
-        header('Location: ../View/Mascotas/consultarMascotas.php?consultarMascotas=1'); 
+        header('Location: ../Mascotas/consultarMascotas.php?consultarMascotas=1'); 
         exit();
     }
 
@@ -97,7 +97,7 @@
             $_SESSION["Error"] = "Ocurrió un error al actualizar la información.";
         }
         
-        header('Location: ../View/Mascotas/consultarMascotas.php?consultarMascotas=1'); 
+        header('Location: ../Mascotas/consultarMascotas.php?consultarMascotas=1'); 
         exit();
     }
 
@@ -117,7 +117,7 @@
             $_SESSION["Error"] = "Ocurrió un error al inactivar la mascota.";
         }
         
-        header('Location: ../View/Mascotas/consultarMascotas.php?consultarMascotas=1');
+        header('Location: ../Mascotas/consultarMascotas.php?consultarMascotas=1');
         exit();
     }
 
@@ -137,7 +137,7 @@
             $_SESSION["Error"] = "Ocurrió un error al inactivar la mascota.";
         }
         
-        header('Location: ../View/Mascotas/consultarMascotas.php?consultarMascotas=1');
+        header('Location: ../Mascotas/consultarMascotas.php?consultarMascotas=1');
         exit();
     }
 ?>

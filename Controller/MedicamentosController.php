@@ -5,20 +5,24 @@
         session_start();
     }
 
-// -------------------------------------- Consultar Medicamentos ---------------------------------
-include_once '../../Model/MedicamentosModel.php';
 
-if (isset($_GET["btnconsultarMedicamentos"])) {
-    $Datos = ConsultarMedicamentosModel();
-}
 
-//include('../../View/consultarMedicamentos.php');
+    // -------------------------------------- Consultar Medicamentos ---------------------------------
+
+    if (isset($_GET["consultarMedicamentos"])) {
+        $Datos = ConsultarMedicamentosModel();
+    }
+
+
+
     // -------------------------------------- Registrar Medicamento ---------------------------------
 
     if (isset($_GET["btnRegistrarMedicamento"])) {
         $Datos = []; 
     }
 
+
+    
     if (isset($_POST["btnRegistrarMedicamento"])) {
         $Nombre = $_POST["Nombre"];
         $Descripcion = $_POST["Descripcion"];

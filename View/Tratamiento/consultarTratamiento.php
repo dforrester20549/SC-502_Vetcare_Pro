@@ -40,7 +40,11 @@ switch ($rolUsuario) {
                                     <?php if (!empty($Datos)) : ?>
                                         <?php foreach ($Datos as $tratamiento) : ?>
                                             <div class="col-md-6 col-lg-4 mb-4">
-                                                <div class="card h-100 shadow-sm">
+                                                
+                                                <!-- Card con evento onclick -->
+                                                <div class="card h-100 shadow-sm" 
+                                                    style="cursor: pointer;" 
+                                                    onclick="window.location.href='registrarTratamiento.php?id=<?php echo $tratamiento['MascotaId']; ?>'">
                                                     <div class="card-body">
                                                         <h5 class="card-title">
                                                             <?php echo htmlspecialchars($tratamiento['NombreMascota']); ?>
@@ -67,6 +71,7 @@ switch ($rolUsuario) {
                                                         </p>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                         <?php endforeach; ?>
                                     <?php else : ?>

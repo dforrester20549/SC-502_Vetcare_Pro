@@ -102,41 +102,52 @@
             </a>
           </li>
 
+          <!-- Mascotas -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+            <a href="*" class="nav-link">
+            <i class="bi bi-bug-fill"></i>
               <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
+                Mascotas
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+              <a href="../Mascotas/consultarMascotas.php?consultarMascotas=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Mascotas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
+                <a href="../Mascotas/registrarMascotas.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Mascotas</p>
                 </a>
               </li>
             </ul>
           </li>
+
+          <!-- Citas -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-calendar3"></i>
+              <p>Citas</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Citas/Citas.php?Citas=1" class="nav-link">
+                <i class="bi bi-calendar-check-fill"></i>
+                  <p>Consultar Citas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Citas/ModificaCitas.php?ModificaCitas=1" class="nav-link">
+                <i class="bi bi-calendar-plus-fill"></i>
+                  <p>Modificar Citas</p>
+                </a>
+              </li>
+            </ul>
+          </li>       
+
       </nav>
     </div>
   </aside>

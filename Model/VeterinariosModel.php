@@ -182,4 +182,27 @@
          return $destacados;
      }
 
+
+     // -------------------------------------- Activar Mascotas ---------------------------------
+    function ActivarVeterinario($Id, $IdSession) 
+    {
+        $enlace = AbrirBD();
+
+        try {
+            $sentencia = $enlace->prepare("CALL sp_UPDATE_activarVeterinarioPorId(?, ?)");
+            $sentencia->bind_param("ii", $Id, $IdSession);
+
+            if ($sentencia->execute()) {
+                return true; 
+            } else {
+                return false; 
+            }
+
+        } catch (Exception $e) {
+            die("Excepción: " . $e->getMessage());
+        } finally {
+            CerrarBD($enlace);
+        }
+    }
+
 ?>

@@ -1,4 +1,5 @@
 <?php
+
     include_once 'BaseDatos.php';
 
     // -------------------------------------- Consultar Medicamentos ---------------------------------
@@ -16,7 +17,6 @@
                 $medicamentos[] = $row;
             }
         }
-        CerrarBD($enlace);
         return $medicamentos;
     }
 

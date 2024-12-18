@@ -96,41 +96,169 @@
             </a>
           </li>
 
+          <!-- Usuarios -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+            <a href="*" class="nav-link">
+            <i class="bi bi-people"></i>
               <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
+                Usuarios
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                <a href="../Usuarios/consultarUsuarioActivo.php?consultarUsuarioActivo=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
+                <a href="../Usuarios/registrarUsuario.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Usuario</p>
                 </a>
               </li>
             </ul>
           </li>
+
+          <!-- Veterinarios -->
+          <li class="nav-item">
+            <a href="*" class="nav-link">
+            <i class="bi bi-people"></i>
+              <p>
+                Veterinarios
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Veterinarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Veterinarios/registrarVeterinarios.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Veterinarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Mascotas -->
+          <li class="nav-item">
+            <a href="*" class="nav-link">
+            <i class="bi bi-bug-fill"></i>
+              <p>
+                Mascotas
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="../Mascotas/consultarMascotas.php?consultarMascotas=1" class="nav-link">
+                <i class="bi bi-person-check"></i>
+                  <p>Consultar Mascotas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Mascotas/registrarMascotas.php" class="nav-link">
+                <i class="bi bi-person-plus"></i>
+                  <p>Registrar Mascotas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Dueños -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="bi bi-person-circle"></i>
+              <p>Dueños</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Duenos/consultarDuenos.php?consultarDuenos=1" class="nav-link">
+                  <i class="bi bi-person-badge"></i>
+                  <p>Consultar Dueños</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../Duenos/registrarDuenos.php" class="nav-link">
+                  <i class="bi bi-person-plus-fill"></i>
+                  <p>Registrar Dueños</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Citas -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-calendar3"></i>
+              <p>Citas</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Citas/Citas.php?Citas=1" class="nav-link">
+                <i class="bi bi-calendar-check-fill"></i>
+                  <p>Consultar Citas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Citas/ModificaCitas.php?ModificaCitas=1" class="nav-link">
+                <i class="bi bi-calendar-plus-fill"></i>
+                  <p>Modificar Citas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Medicamentos -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-capsule"></i>
+              <p>Medicamentos</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="../Medicamentos/ConsultarMedicamentos.php?consultarMedicamentos=1" class="nav-link">
+                <i class="bi bi-prescription2"></i>
+                  <p>Consultar Medicamentos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="../Medicamentos/registrarMedicamentos.php?registrarMedicamentos=1" class="nav-link">
+                <i class="bi bi-prescription"></i>
+                  <p>Registrar Medicamentos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+           <!-- Tratamiento -->
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="bi bi-hospital"></i>
+              <p>Tratamiento</p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../Tratamiento/consultarTratamiento.php?consultarTratamiento=1" class="nav-link">
+                <i class="bi bi-bandaid"></i>
+                  <p>Consultar Tratamiento</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="../Usuarios/consultarLogs.php?consultarLogs=1" class="nav-link">
+            <i class="bi bi-substack"></i>
+              <p>
+                Logs
+              </p>
+            </a>
+          </li>
+    
       </nav>
     </div>
   </aside>

@@ -12,7 +12,7 @@
         <div class="card-body p-4">
             <div class="text-center">
 
-                <h3 style="font-weight: bold; color: #3C8DBC; margin-bottom: 20px;">SYSTEMA</h3>
+                <h3 style="font-weight: bold; color: #3C8DBC; margin-bottom: 20px;">SISTEMA</h3>
 
                 <img src="../root/img/logo/logo.png" alt="Logo" style="max-width: 150px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); margin-bottom: 15px;">
                 

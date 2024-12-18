@@ -246,12 +246,6 @@
                   <p>Consultar Tratamiento</p>
                 </a>
               </li>
-              <li class="nav-item">
-              <a href="../Medicamentos/registrarMedicamentos.php?registrarMedicamentos=1" class="nav-link">
-                <i class="bi bi-prescription"></i>
-                  <p>Registrar Tratamiento</p>
-                </a>
-              </li>
             </ul>
           </li>
 

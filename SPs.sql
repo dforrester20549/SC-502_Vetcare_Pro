@@ -1,7 +1,7 @@
 USE VETCAREDB;
 
 -- Eliminar procedimientos
-DROP PROCEDURE IF EXISTS sp_INSERT_registrarVeterinarios;
+DROP PROCEDURE IF EXISTS sp_GET_consultarMedicamentos;
 
 -- ________________________________________________sp_LOGIN_insertarUsuario_________________________________________________________________________01
 DELIMITER //
@@ -607,17 +607,16 @@ DELIMITER ;
 
 
 -- ________________________________________________sp_GET_consultarMedicamentos_____________________________________________________________________27
-DELIMITER // 
+DELIMITER //
 CREATE PROCEDURE sp_GET_consultarMedicamentos()
 BEGIN
-
-	SELECT 
-	Nombre, 
-	Descripcion, 
-	Dosis 
-	FROM tmedicamentos; 
-END // 
-DELIMITER;
+    SELECT 
+        Nombre, 
+        Descripcion, 
+        Dosis 
+    FROM tmedicamentos;
+END //
+DELIMITER ;
 
 
 -- ________________________________________________sp_UPDATE_actualizarMedicamento__________________________________________________________________28
@@ -1069,4 +1068,105 @@ BEGIN
         NombreVeterinarios ASC;
 END$$
 DELIMITER ;
+
+
+
+-- ___________________________________________sp_GET_consultarTratamientoporID_______________________________________________________45
+DELIMITER $$
+CREATE PROCEDURE sp_GET_consultarTratamientoporID (
+    IN p_Id BIGINT
+)
+BEGIN
+    SELECT 
+        Id, 
+        tMascota_Id, 
+        Fecha_Tratamiento, 
+        Descripcion, 
+        Costo, 
+        Activo, 
+        tMedicamento_id
+    FROM 
+        tTratamientos
+    WHERE 
+        Id = p_Id;
+END $$
+DELIMITER ;
+
+
+
+-- ___________________________________________sp_INSERT_registrarTratamiento_______________________________________________________46
+DELIMITER $$
+CREATE PROCEDURE sp_INSERT_registrarTratamiento (
+    IN p_tMascota_Id BIGINT,
+    IN p_Fecha_Tratamiento DATE,
+    IN p_Descripcion TEXT,
+    IN p_Costo DECIMAL(10, 2),
+    IN p_Activo BIT,
+    IN p_tMedicamento_id BIGINT,
+    IN p_IdSession INT
+)
+BEGIN
+    DECLARE v_LastInsertId BIGINT;
+
+    -- Insertar en la tabla de tratamientos
+    INSERT INTO tTratamientos (
+        tMascota_Id,
+        Fecha_Tratamiento,
+        Descripcion,
+        Costo,
+        Activo,
+        tMedicamento_id
+    ) 
+    VALUES (
+        p_tMascota_Id,
+        p_Fecha_Tratamiento,
+        p_Descripcion,
+        p_Costo,
+        p_Activo,
+        p_tMedicamento_id
+    );
+
+    -- Obtener el ID del tratamiento recién insertado
+    SET v_LastInsertId = LAST_INSERT_ID();
+
+    -- Insertar en la tabla de Log
+    INSERT INTO Log (
+        accion,
+        descripcion,
+        usuario_id
+    ) 
+    VALUES (
+        'INSERT',
+        CONCAT('Se registró un nuevo tratamiento con ID: ', v_LastInsertId),
+        p_IdSession
+    );
+
+    -- Devolver el ID del tratamiento insertado
+    SELECT v_LastInsertId AS IdTratamiento;
+END$$
+DELIMITER ;
+
+
+-- ___________________________________________sp_UPDATE_activarVeterinarioPorId____________________________________________________47
+DELIMITER ;;
+CREATE PROCEDURE sp_UPDATE_activarVeterinarioPorId(
+    IN p_Id BIGINT,
+    IN p_IdSession INT
+)
+BEGIN
+     -- Actualizar el estado de activo a 0 para el dueño con el ID proporcionado
+    UPDATE tVeterinarios
+    SET Activo = 1
+    WHERE Id = p_Id;
+    
+    -- Registrar la acción en el log
+    INSERT INTO Log (accion, descripcion, usuario_id)
+    VALUES (
+        'Activar Mascota',
+        CONCAT('Se ha Activado el Veterinario con ID: ', p_Id),
+        p_IdSession
+    );
+END;;
+DELIMITER ;;
+
 

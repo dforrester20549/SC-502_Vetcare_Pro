@@ -118,7 +118,7 @@ if (isset($_POST["btnActualizarVeterinario"])) {
 }
 
 
-    // -------------------------------------- Eliminar Veterinarios ---------------------------------
+    // -------------------------------------- Desactivar Veterinarios ---------------------------------
 
     if (isset($_GET['desactivarVeterinario'])) {
         $Id = $_GET['id'];
@@ -129,6 +129,22 @@ if (isset($_POST["btnActualizarVeterinario"])) {
             $_SESSION['Success'] = "Veterinario desactivado correctamente.";
         } else {
             $_SESSION['Error'] = "Ocurrió un error al desactivar al Veterinario.";
+        }
+    
+        header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 
+        exit();
+    }
+
+
+    if (isset($_GET['activarVeterinario'])) {
+        $Id = $_GET['id'];
+        $IdSession = $_SESSION['IdSession'];  
+        $resultado = ActivarVeterinario($Id, $IdSession);
+    
+        if ($resultado) {
+            $_SESSION['Success'] = "Veterinario activado correctamente.";
+        } else {
+            $_SESSION['Error'] = "Ocurrió un error al activar al Veterinario.";
         }
     
         header('Location: ../View/Veterinarios/consultarVeterinarios.php?consultarVeterinarios=1'); 

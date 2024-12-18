@@ -39,9 +39,9 @@
                                             <?php if (!empty($DatosLogs)) : ?>
                                                 <?php foreach ($DatosLogs as $consultarLogs) : ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($consultarLogs['accion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($consultarLogs['descripcion']); ?></td>
-                                                        <td><?php echo htmlspecialchars($consultarLogs['usuario_id']); ?></td>
+                                                        <td><?php echo htmlspecialchars(isset($consultarLogs['accion']) ? $consultarLogs['accion'] : ''); ?></td>
+                                                        <td><?php echo htmlspecialchars(isset($consultarLogs['descripcion']) ? $consultarLogs['descripcion'] : ''); ?></td>
+                                                        <td><?php echo htmlspecialchars(isset($consultarLogs['usuario_id']) ? $consultarLogs['usuario_id'] : ''); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
